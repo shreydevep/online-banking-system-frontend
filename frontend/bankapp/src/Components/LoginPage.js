@@ -51,7 +51,7 @@ const FormComponent = () => {
         console.log(response);
         alert(response.data);
 
-        navigate("/UserDashboard");
+        navigate("/userdashboard");
       })
       .catch((error) => {
         alert("error===" + error);
@@ -60,7 +60,7 @@ const FormComponent = () => {
 
   return (
     <>
-      
+      <NavBar />
       <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid item align="center">

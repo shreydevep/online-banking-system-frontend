@@ -21,7 +21,7 @@ function App() {
             <Route exact path="/account" element={<AccountPage />} />
             <Route exact path="/login" element={<LoginPage />} />
             <Route exact path="/registration" element={<Registration />} />
-            <Route exact path="/withdrawal" element={<WithdrawalComponent />} />
+          
           </Routes>
         </BrowserRouter>
       
