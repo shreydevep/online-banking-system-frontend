@@ -4,6 +4,7 @@ import { Container, Row, Col, Card, Button, Table } from "react-bootstrap";
 import AccountDetails from "./AccountDetails";
 import { getAccountDetails } from "../../utils/GetRequests";
 import AccountDetailsModal from "./AccountDetailsModal";
+import { mockAccounts, mockRecentTransactions } from "../../utils/data";
 
 const DashboardContainer = styled(Container)`
   background-color: #f5f5f5;
@@ -62,6 +63,13 @@ const RecentTransactionsCard = styled(Card)`
     border-top-right-radius: 0;
   }
 `;
+
+
+const ScrollableTableContainer = styled.div`
+  max-height: 150px; /* Adjust the height as needed */
+  overflow-y: auto;
+`;
+
 const accountDetails = {
   accountNumber: 1234567890,
   accountType: "Savings",
@@ -70,11 +78,11 @@ const accountDetails = {
 
 const UserDashboard = () => {
   const [accountDetails, setAccountDetails] = useState({});
-  const [ showAccountDetails, setShowAccountDetails ] = useState(false);
+  const [showAccountDetails, setShowAccountDetails] = useState(false);
   useEffect(() => {
     getAccountDetails(2, setAccountDetails);
   }, []);
-  const handleToggle = () => {  
+  const handleToggle = () => {
     setShowAccountDetails(!showAccountDetails);
   };
   return (
@@ -87,7 +95,7 @@ const UserDashboard = () => {
       <DashboardContainer fluid>
         <Row>
           <Col md={3}>
-            <UserCard>
+            {/* <UserCard>
               <Card.Body>
                 <h5 className="mb-3">Welcome, User!</h5>
                 <p>
@@ -100,7 +108,7 @@ const UserDashboard = () => {
                   View Account Details
                 </Button>
               </Card.Body>
-            </UserCard>
+            </UserCard> */}
             {/* <QuickLinksCard>
             <Card.Body>
               <h6>Quick Links</h6>
@@ -112,26 +120,38 @@ const UserDashboard = () => {
             </Card.Body>
           </QuickLinksCard> */}
           </Col>
-          <Col md={9}>
+          <Col md={12}>
             <RecentTransactionsCard>
               <Card.Header className="bg-primary text-white">
                 Recent Transactions
               </Card.Header>
               <Card.Body>
-                <Table striped bordered hover responsive>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Description</th>
-                      <th>Amount</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* Map through recent transactions data and display here */}
-                  </tbody>
-                </Table>
+                <ScrollableTableContainer>
+                  <Table striped bordered hover responsive>
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Transaction ID</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {mockRecentTransactions.map((transaction, index) => (
+                        <tr key={index}>
+                          <td>{transaction.date}</td>
+                          <td>{transaction.transactionId}</td>
+                          <td>{transaction.description}</td>
+                          <td>${transaction.amount}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                </ScrollableTableContainer>
               </Card.Body>
             </RecentTransactionsCard>
+            <br></br>
+            <AccountDetails accounts={mockAccounts} />
           </Col>
         </Row>
       </DashboardContainer>
