@@ -1,14 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import { Nav, NavItem, NavLink } from "react-bootstrap";
+import { Card, Nav, NavItem, NavLink } from "react-bootstrap";
 import WithdrawalComponent from "./WithdrawalComponent";
 
-const StyledSidebar = styled(Nav)`
+const StyledSidebar = styled(Card)`
   height: 80vh;
   background: #f7f7f7;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   flex-direction: column;
   padding: 20px;
+  display: flex;
+  flex-grow: 1;
+  overflow-y: auto;
 
   .font-weight-bold {
     font-weight: bold;
@@ -25,34 +28,78 @@ const StyledSidebar = styled(Nav)`
   }
 `;
 
+const ProfileCardContainer = styled.div`
+  margin-top: 20px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+`;
+
+const ProfileCardTitle = styled.h4`
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+`;
+
+const ProfileCardLink = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+`;
+
+const ProfileInfo = styled.div`
+  margin-bottom: 10px;
+  color: #555;
+`;
+
+const SidebarNavItem = styled(NavItem)`
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
 const Sidebar = () => {
   const [showWithdrawalModal, setShowWithdrawalModal] = React.useState(false);
+
   return (
-    <StyledSidebar className="flex-column">
+    <StyledSidebar>
       <WithdrawalComponent
         show={showWithdrawalModal}
-        onHide={setShowWithdrawalModal}
+        onHide={() => setShowWithdrawalModal(false)}
       />
-      <NavItem>
-        <NavLink href="#" className="font-weight-bold">
-          Dashboard
+      <SidebarNavItem>
+        <Card.Title className="font-weight-bold">Dashboard</Card.Title>
+      </SidebarNavItem>
+      <SidebarNavItem>
+        <NavLink onClick={() => setShowWithdrawalModal(true)}>
+          Funds Transfer
         </NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink onClick={() => setShowWithdrawalModal(true)}>Funds Transfer</NavLink>
-      </NavItem>
-      <NavItem>
+      </SidebarNavItem>
+      <SidebarNavItem>
         <NavLink href="#">Transfer Money</NavLink>
-      </NavItem>
-      <NavItem>
+      </SidebarNavItem>
+      <SidebarNavItem>
         <NavLink href="#">Transaction History</NavLink>
-      </NavItem>
-      <NavItem>
+      </SidebarNavItem>
+      <SidebarNavItem>
         <NavLink href="/account">New Account</NavLink>
-      </NavItem>
-      <NavItem>
+      </SidebarNavItem>
+      <SidebarNavItem>
         <NavLink href="#">Account Details</NavLink>
-      </NavItem>
+      </SidebarNavItem>
+      <ProfileCardLink href="/profile">
+        <ProfileCardContainer>
+          <ProfileCardTitle>Profile</ProfileCardTitle>
+          <ProfileInfo>Name: John Doe</ProfileInfo>
+          <ProfileInfo>Email: john@example.com</ProfileInfo>
+          <ProfileInfo>Phone: 123-456-7890</ProfileInfo>
+          <ProfileInfo>Address: 123 Main St, City</ProfileInfo>
+        </ProfileCardContainer>
+      </ProfileCardLink>
     </StyledSidebar>
   );
 };
