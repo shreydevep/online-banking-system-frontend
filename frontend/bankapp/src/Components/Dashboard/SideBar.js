@@ -1,6 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Nav, NavItem, NavLink } from 'react-bootstrap';
+import React from "react";
+import styled from "styled-components";
+import { Nav, NavItem, NavLink } from "react-bootstrap";
+import WithdrawalComponent from "./WithdrawalComponent";
 
 const StyledSidebar = styled(Nav)`
   height: 80vh;
@@ -25,15 +26,20 @@ const StyledSidebar = styled(Nav)`
 `;
 
 const Sidebar = () => {
+  const [showWithdrawalModal, setShowWithdrawalModal] = React.useState(false);
   return (
     <StyledSidebar className="flex-column">
+      <WithdrawalComponent
+        show={showWithdrawalModal}
+        onHide={setShowWithdrawalModal}
+      />
       <NavItem>
         <NavLink href="#" className="font-weight-bold">
           Dashboard
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="/withdraw">Withdraw</NavLink>
+        <NavLink onClick={() => setShowWithdrawalModal(true)}>Funds Transfer</NavLink>
       </NavItem>
       <NavItem>
         <NavLink href="#">Transfer Money</NavLink>

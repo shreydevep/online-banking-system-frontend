@@ -7,6 +7,8 @@ const StyledModalContent = styled.div`
   padding: 20px;
 `;
 
+
+
 const AccountDetailsModal = ({ show, onHide, accountDetails }) => {
     
   return (

@@ -1,68 +1,130 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Modal, Button, Form, Tab, Tabs } from 'react-bootstrap';
 import styled from 'styled-components';
 
-// Define the styled components for the page
-const WithdrawalContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #f5f5f5;
-`;
-
-const WithdrawalForm = styled.form`
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+// Define the styled component for the modal content
+const StyledModalContent = styled.div`
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  width: 100%;
 `;
 
-const FormGroup = styled.div`
-  margin-bottom: 20px;
-`;
+// Define a custom CSS class for centering the buttons
+const centerButtonStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  marginTop: '20px', // Add some spacing above the buttons
+};
 
-const Label = styled.label`
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-`;
+const WithdrawalComponent = ({ show, onHide }) => {
+  const [withdrawalAmount, setWithdrawalAmount] = useState('');
+  const [withdrawalBankAccount, setWithdrawalBankAccount] = useState('');
+  const [selfTransferAmount, setSelfTransferAmount] = useState('');
+  const [selfTransferAccount, setSelfTransferAccount] = useState('');
+  const [activeTab, setActiveTab] = useState('withdrawal'); // Manage active tab
 
-const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-`;
+  // Mock data for the target account dropdown
+  const targetAccounts = [
+    'Account 1',
+    'Account 2',
+    'Account 3',
+    // Add more account options as needed
+  ];
 
-const Button = styled.button`
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
-`;
+  const handleWithdraw = () => {
+    // Handle the withdrawal logic here
+    // You can use the 'withdrawalAmount' and 'withdrawalBankAccount' state values
+    // to send the withdrawal request to your backend.
+    // Don't forget to close the modal when the withdrawal is complete.
+    onHide();
+  };
 
-const WithdrawalComponent = () => {
+  const handleSelfTransfer = () => {
+    // Handle self-transfer logic here
+    // You can use the 'selfTransferAmount' and 'selfTransferAccount' state values
+    // for the transfer amount and target account.
+    // Don't forget to close the modal when the transfer is complete.
+    onHide();
+  };
+
   return (
-    <WithdrawalContainer>
-      <WithdrawalForm>
-        <h2>Withdraw Funds</h2>
-        <FormGroup>
-          <Label>Amount:</Label>
-          <Input type="number" placeholder="Enter the amount to withdraw" />
-        </FormGroup>
-        <FormGroup>
-          <Label>Bank Account:</Label>
-          <Input type="text" placeholder="Enter your bank account number" />
-        </FormGroup>
-        <Button type="submit">Withdraw</Button>
-      </WithdrawalForm>
-    </WithdrawalContainer>
+    <Modal show={show} onHide={onHide} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Funds Transfer</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <StyledModalContent>
+          <Tabs
+            activeKey={activeTab}
+            onSelect={(key) => setActiveTab(key)} // Update active tab state
+          >
+            <Tab eventKey="withdrawal" title="Withdrawal">
+              <Form>
+                <Form.Group controlId="withdrawalAmount">
+                  <Form.Label>Amount:</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter the amount to withdraw"
+                    value={withdrawalAmount}
+                    onChange={(e) => setWithdrawalAmount(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="withdrawalBankAccount">
+                  <Form.Label>Bank Account:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your bank account number"
+                    value={withdrawalBankAccount}
+                    onChange={(e) => setWithdrawalBankAccount(e.target.value)}
+                  />
+                </Form.Group>
+              </Form>
+              <div style={centerButtonStyle}>
+                <Button variant="primary" onClick={handleWithdraw}>
+                  Withdraw
+                </Button>
+              </div>
+            </Tab>
+            <Tab eventKey="selfTransfer" title="Self Transfer">
+              <Form>
+                <Form.Group controlId="selfTransferAmount">
+                  <Form.Label>Amount:</Form.Label>
+                  <Form.Control
+                    type="number"
+                    placeholder="Enter the amount to transfer"
+                    value={selfTransferAmount}
+                    onChange={(e) => setSelfTransferAmount(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="selfTransferAccount">
+                  <Form.Label>Target Account Number:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={selfTransferAccount}
+                    onChange={(e) => setSelfTransferAccount(e.target.value)}
+                  >
+                    <option value="">Select an account</option>
+                    {targetAccounts.map((account, index) => (
+                      <option key={index} value={account}>
+                        {account}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+              </Form>
+              <div style={centerButtonStyle}>
+                <Button variant="primary" onClick={handleSelfTransfer}>
+                  Self Transfer
+                </Button>
+              </div>
+            </Tab>
+          </Tabs>
+        </StyledModalContent>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onHide}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
