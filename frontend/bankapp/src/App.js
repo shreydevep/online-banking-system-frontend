@@ -8,7 +8,8 @@ import UserDashboard from "./Components/Dashboard/UserDashboard";
 import NavBar from "./Components/NavBar";
 import Layout from "./Components/Dashboard/Layout";
 import WithdrawalComponent from "./Components/Dashboard/WithdrawalComponent";
-
+//import UserProfile from "./Components/Dashboard/UserProfile.js"
+import ForgotPassword from "./Components/ForgotPassword"
 function App() {
   return (
     <div>
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/account" element={<AccountPage />} />
             <Route exact path="/login" element={<LoginPage />} />
             <Route exact path="/registration" element={<Registration />} />
+            <Route exact path="/forgotpassword" element={<ForgotPassword />} />
           
           </Routes>
         </BrowserRouter>
