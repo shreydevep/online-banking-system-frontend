@@ -102,10 +102,10 @@ const FormComponent = () => {
             }}
           >
             <Typography>
-              <Link href="#">Forgot Password</Link>
+              <Link href="/forgotpassword">Forgot Password</Link>
             </Typography>
             <Typography>
-              Become Customer : <Link href="#">Sign Up</Link>
+              Become Customer : <Link href="/registration">Sign Up</Link>
             </Typography>
           </div>
         </Paper>
