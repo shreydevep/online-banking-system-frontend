@@ -6,6 +6,8 @@ import { getAccountDetails } from "../../utils/GetRequests";
 import AccountDetailsModal from "./AccountDetailsModal";
 import { mockAccounts, mockRecentTransactions } from "../../utils/data";
 
+import { mockAccountData } from '../../utils/data';
+
 const DashboardContainer = styled(Container)`
   background-color: #f5f5f5;
   padding: 20px;
@@ -64,7 +66,6 @@ const RecentTransactionsCard = styled(Card)`
   }
 `;
 
-
 const ScrollableTableContainer = styled.div`
   max-height: 150px; /* Adjust the height as needed */
   overflow-y: auto;
@@ -77,21 +78,11 @@ const accountDetails = {
 };
 
 const UserDashboard = () => {
-  const [accountDetails, setAccountDetails] = useState({});
-  const [showAccountDetails, setShowAccountDetails] = useState(false);
-  useEffect(() => {
-    getAccountDetails(2, setAccountDetails);
-  }, []);
-  const handleToggle = () => {
-    setShowAccountDetails(!showAccountDetails);
-  };
+  
   return (
     <>
-      <AccountDetailsModal
-        show={showAccountDetails}
-        onHide={setShowAccountDetails}
-        accountDetails={accountDetails}
-      />
+      
+      
       <DashboardContainer fluid>
         <Row>
           <Col md={3}>

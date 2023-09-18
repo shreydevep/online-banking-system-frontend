@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Card, Nav, NavItem, NavLink } from "react-bootstrap";
 import WithdrawalComponent from "./WithdrawalComponent";
+import FundsTransferComponent from "./FundsTransferComponent";
 
 const StyledSidebar = styled(Card)`
   height: 80vh;
@@ -64,12 +65,18 @@ const SidebarNavItem = styled(NavItem)`
 
 const Sidebar = () => {
   const [showWithdrawalModal, setShowWithdrawalModal] = React.useState(false);
+  const [showFundsTransferComponent, setShowFundsTransferComponent] =
+    React.useState(true);
 
   return (
     <StyledSidebar>
       <WithdrawalComponent
         show={showWithdrawalModal}
         onHide={() => setShowWithdrawalModal(false)}
+      />
+      <FundsTransferComponent
+        show={showFundsTransferComponent}
+        onHide={setShowFundsTransferComponent}
       />
       <SidebarNavItem>
         <Card.Title className="font-weight-bold">Dashboard</Card.Title>
@@ -80,7 +87,9 @@ const Sidebar = () => {
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
-        <NavLink href="#">Transfer Money</NavLink>
+        <NavLink onClick={() => setShowFundsTransferComponent(true)}>
+          Transfer Money
+        </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
         <NavLink href="#">Transaction History</NavLink>
