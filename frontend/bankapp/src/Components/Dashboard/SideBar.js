@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { Card, Nav, NavItem, NavLink } from "react-bootstrap";
 import WithdrawalComponent from "./WithdrawalComponent";
-
+import UserProfile from "./UserProfile";
+import PasswordChange from "./PasswordChange"
 const StyledSidebar = styled(Card)`
   height: 80vh;
   background: #f7f7f7;
@@ -64,16 +65,26 @@ const SidebarNavItem = styled(NavItem)`
 
 const Sidebar = () => {
   const [showWithdrawalModal, setShowWithdrawalModal] = React.useState(false);
-
+  const [showUserProfileModal, setShowUserProfileModal] = React.useState(false);
+  const [showPasswordChangeModal, setShowPasswordChangeModal] = React.useState(false);
   return (
     <StyledSidebar>
       <WithdrawalComponent
         show={showWithdrawalModal}
         onHide={() => setShowWithdrawalModal(false)}
       />
+      <UserProfile
+      show={showUserProfileModal}
+      onHide = {() => setShowUserProfileModal(false)}
+      />
+      <PasswordChange
+      show={showPasswordChangeModal}
+      onHide = {() => setShowPasswordChangeModal(false)}
+      />
       <SidebarNavItem>
         <Card.Title className="font-weight-bold">Dashboard</Card.Title>
       </SidebarNavItem>
+
       <SidebarNavItem>
         <NavLink onClick={() => setShowWithdrawalModal(true)}>
           Funds Transfer
@@ -91,7 +102,12 @@ const Sidebar = () => {
       <SidebarNavItem>
         <NavLink href="#">Account Details</NavLink>
       </SidebarNavItem>
-      <ProfileCardLink href="/profile">
+      <SidebarNavItem>
+        <NavLink onClick={() => setShowPasswordChangeModal(true)}>
+           Change Password
+        </NavLink>
+      </SidebarNavItem>
+      <ProfileCardLink onClick={() => setShowUserProfileModal(true)}>
         <ProfileCardContainer>
           <ProfileCardTitle>Profile</ProfileCardTitle>
           <ProfileInfo>Name: John Doe</ProfileInfo>
