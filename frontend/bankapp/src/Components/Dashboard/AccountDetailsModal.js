@@ -7,10 +7,7 @@ const StyledModalContent = styled.div`
   padding: 20px;
 `;
 
-
-
 const AccountDetailsModal = ({ show, onHide, accountDetails }) => {
-    
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
@@ -31,6 +28,19 @@ const AccountDetailsModal = ({ show, onHide, accountDetails }) => {
               </p>
               <p>
                 <strong>Branch:</strong> {accountDetails.branch}
+              </p>
+              <p>
+                <strong>IFSC:</strong> {accountDetails.ifsc}
+              </p>
+              <p>
+                <strong>Is Disabled:</strong>{" "}
+                {accountDetails.isDisabled ? "Yes" : "No"}
+              </p>
+              <p>
+                <strong>Opening Date:</strong> {accountDetails.openingDate}
+              </p>
+              <p>
+                <strong>Customer:</strong> {accountDetails.customer}
               </p>
             </div>
           ) : (

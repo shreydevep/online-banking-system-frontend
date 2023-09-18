@@ -58,5 +58,29 @@ export const mockRecentTransactions = [
     // Add more transaction objects as needed
   ];
   
-
+  export const mockAccountData = [
+    {
+      account_no: '12345678',
+      account_type: 'Savings',
+      balance: '$5,000.00',
+      branch: 'Main Branch',
+      ifsc: 'ABCD12345',
+      isdisabled: false,
+      opening_date: '2023-01-15',
+      customer: 'John Doe',
+    },
+    {
+      account_no: '98765432',
+      account_type: 'Checking',
+      balance: '$2,000.00',
+      branch: 'Downtown Branch',
+      ifsc: 'EFGH67890',
+      isdisabled: true,
+      opening_date: '2023-02-20',
+      customer: 'Jane Smith',
+    },
+    // Add more mock accounts here if needed
+  ];
+  
+  
   
