@@ -5,14 +5,14 @@ import UserDashboard from "./UserDashboard";
 import NavBar from "../NavBar";
 import Appbar from "./Appbar";
 
-import { getAccountDetails, getCustomerDetails, getTransactions } from "../../utils/GetRequests";
+import { getAccountDetails, getAllUserTransactions, getCustomerDetails, getTransactions } from "../../utils/GetRequests";
 
 const Layout = () => {
   const [customerDetails, setCustomerDetails] = useState({ account: [] });
   const [transactions, setTransactions] = useState([]);
   useEffect(() => {
-    getCustomerDetails(1, setCustomerDetails);
-    getTransactions("20040379527", setTransactions);
+    getCustomerDetails(sessionStorage.getItem("customerId"), setCustomerDetails);
+    getAllUserTransactions(sessionStorage.getItem("customerId"), setTransactions);
     console.log(transactions);
   }, []);
   return (

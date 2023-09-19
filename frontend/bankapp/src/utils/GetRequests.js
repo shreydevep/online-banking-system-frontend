@@ -29,37 +29,39 @@ export const getCustomerDetails = async (customerId, setCustomerDetails) => {
 
 export const updatePassword = (otp, customerId, password) => {
   const baseURL = `http://localhost:8080/changePassword/${otp}`;
-  try {
     axios
       .put(baseURL, {
         customerId,
         password,
       })
-      .then((response) => console.log(response));
+      .then((response) => console.log(response)).catch((error) => console.log(error));
+};
+export const getAllUserTransactions = async (customerId, setTransactions) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/allTransactions/${customerId}`
+    );
+    const data = await response.json();
+    console.log(data);
+    setTransactions(data);
   } catch (error) {
     console.log(error);
   }
-};
+}
 
 export const getTransactions = async (accountNumber, setTransactions) => {
-  try {
     axios
       .get(`http://localhost:8080/transactions/${accountNumber}`)
       .then((response) => {
         console.log(response.data);
         setTransactions(response.data);
-      });
-  } catch (error) {
-    console.log(error);
-  }
+      }).catch((error) => console.log(error));
+  
 };
 
 export const transferFunds = async (transferFundsObject) => {
-  try {
     axios.post(`http://localhost:8080/transact`,transferFundsObject).then((response) => {
       console.log(response.data);
-    });
-  } catch (error) {
-    console.log(error);
-  }
+    }).catch((error) => console.log(error));
+ 
 };

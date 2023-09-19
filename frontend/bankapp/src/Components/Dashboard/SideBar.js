@@ -83,7 +83,7 @@ const Sidebar = ({customerDetails}) => {
     <StyledSidebar>
       <WithdrawalComponent
         show={showWithdrawalModal}
-        onHide={() => setShowWithdrawalModal(false)}
+        onHide={() => setShowWithdrawalModal(!showWithdrawalModal)}
       />
 
       <FundsTransferComponent
@@ -93,16 +93,17 @@ const Sidebar = ({customerDetails}) => {
       />
       <TransactionHistory
         show={showTransactionHistoryModal}
-        onHide={()=>setShowTransactionHistoryModal(true)}
+        onHide={()=>setShowTransactionHistoryModal(!showTransactionHistoryModal)}
+        accounts={customerDetails.account}
       />
 
       <UserProfile
         show={showUserProfileModal}
-        onHide={() => setShowUserProfileModal(false)}
+        onHide={() => setShowUserProfileModal(!showUserProfileModal)}
       />
       <PasswordChange
         show={showPasswordChangeModal}
-        onHide={() => setShowPasswordChangeModal(false)}
+        onHide={() => setShowPasswordChangeModal(!showPasswordChangeModal)}
       />
       <SidebarNavItem>
         <Card.Title className="font-weight-bold">Dashboard</Card.Title>
