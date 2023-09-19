@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Card, Button, Table } from "react-bootstrap";
 import AccountDetails from "./AccountDetails";
-import { getAccountDetails } from "../../utils/GetRequests";
+import { getAccountDetails, getCustomerDetails } from "../../utils/GetRequests";
 import AccountDetailsModal from "./AccountDetailsModal";
 import { mockAccounts, mockRecentTransactions } from "../../utils/data";
 
-import { mockAccountData } from '../../utils/data';
+import { mockAccountData } from "../../utils/data";
 
 const DashboardContainer = styled(Container)`
   background-color: #f5f5f5;
@@ -78,11 +78,13 @@ const accountDetails = {
 };
 
 const UserDashboard = () => {
-  
+  const [customerDetails, setCustomerDetails] = useState({account: []});
+  useEffect(() => {
+    getCustomerDetails(1, setCustomerDetails);
+  }, []);
+
   return (
     <>
-      
-      
       <DashboardContainer fluid>
         <Row>
           <Col md={3}>
@@ -142,7 +144,7 @@ const UserDashboard = () => {
               </Card.Body>
             </RecentTransactionsCard>
             <br></br>
-            <AccountDetails accounts={mockAccounts} />
+            <AccountDetails accounts={customerDetails.account} />
           </Col>
         </Row>
       </DashboardContainer>
