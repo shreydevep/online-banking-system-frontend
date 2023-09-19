@@ -25,7 +25,7 @@ const navigate = useNavigate();
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Create Admin Account</Modal.Title>
+        <Modal.Title>Create Account</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -46,7 +46,7 @@ const navigate = useNavigate();
           Close
         </Button>
         <Button variant="primary" onClick={handleSubmit}>
-          Submit
+          Next
         </Button>
       </Modal.Footer>
     </Modal>

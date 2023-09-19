@@ -58,10 +58,10 @@ const AdminDashboard = () => {
             <Card sx={{ backgroundColor: 'lightblue', height: '200px' }}>
               <CardContent>
                 <Typography variant="h5" component="div">
-                  Card 2
+                  Create Account
                 </Typography>
                 <Typography variant="body2">
-                  This is the content of Card 2.
+                  Create a new account for a existing customer.
                 </Typography>
               </CardContent>
             </Card>
