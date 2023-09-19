@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Card, Nav, NavItem, NavLink } from "react-bootstrap";
 import WithdrawalComponent from "./WithdrawalComponent";
@@ -6,7 +6,8 @@ import WithdrawalComponent from "./WithdrawalComponent";
 import FundsTransferComponent from "./FundsTransferComponent";
 
 import UserProfile from "./UserProfile";
-import PasswordChange from "./PasswordChange"
+import PasswordChange from "./PasswordChange";
+import TransactionHistory from "./TransactionHistory";
 
 const StyledSidebar = styled(Card)`
   height: 80vh;
@@ -71,9 +72,12 @@ const Sidebar = () => {
   const [showWithdrawalModal, setShowWithdrawalModal] = React.useState(false);
 
   const [showFundsTransferComponent, setShowFundsTransferComponent] =
-    React.useState(true);
+    React.useState(false);
   const [showUserProfileModal, setShowUserProfileModal] = React.useState(false);
-  const [showPasswordChangeModal, setShowPasswordChangeModal] = React.useState(false);
+  const [showPasswordChangeModal, setShowPasswordChangeModal] =
+    React.useState(false);
+  const [showTransactionHistoryModal, setShowTransactionHistoryModal] =
+    useState(false);
 
   return (
     <StyledSidebar>
@@ -85,14 +89,19 @@ const Sidebar = () => {
       <FundsTransferComponent
         show={showFundsTransferComponent}
         onHide={setShowFundsTransferComponent}
+      />
+      <TransactionHistory
+        show={showTransactionHistoryModal}
+        onHide={()=>setShowTransactionHistoryModal(true)}
+      />
 
       <UserProfile
-      show={showUserProfileModal}
-      onHide = {() => setShowUserProfileModal(false)}
+        show={showUserProfileModal}
+        onHide={() => setShowUserProfileModal(false)}
       />
       <PasswordChange
-      show={showPasswordChangeModal}
-      onHide = {() => setShowPasswordChangeModal(false)}
+        show={showPasswordChangeModal}
+        onHide={() => setShowPasswordChangeModal(false)}
       />
       <SidebarNavItem>
         <Card.Title className="font-weight-bold">Dashboard</Card.Title>
@@ -109,7 +118,9 @@ const Sidebar = () => {
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
-        <NavLink href="#">Transaction History</NavLink>
+        <NavLink onClick={() => setShowTransactionHistoryModal(true)}>
+          Transaction History
+        </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
         <NavLink href="/account">New Account</NavLink>
@@ -119,7 +130,7 @@ const Sidebar = () => {
       </SidebarNavItem>
       <SidebarNavItem>
         <NavLink onClick={() => setShowPasswordChangeModal(true)}>
-           Change Password
+          Change Password
         </NavLink>
       </SidebarNavItem>
       <ProfileCardLink onClick={() => setShowUserProfileModal(true)}>

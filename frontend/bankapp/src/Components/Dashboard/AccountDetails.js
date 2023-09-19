@@ -30,21 +30,24 @@ const ClickableCell = styled.td`
 
 const AccountDetails = ({ accounts }) => {
   // Assuming 'accounts' is an array of account objects, each containing account details.
-  const [accountDetails, setAccountDetails] = useState({});
+  const [selectedAccount, setSelectedAccount] = useState("");
   const [showAccountDetails, setShowAccountDetails] = useState(false);
-  useEffect(() => {
-    getAccountDetails(2, setAccountDetails);
-  }, []);
   const handleToggle = () => {
     setShowAccountDetails(!showAccountDetails);
   };
+  const handleClick = (event) => {
+    const val = (event.target.innerText);
+    console.log(typeof(val)); 
+    setSelectedAccount(7940823821190967000);
+    setShowAccountDetails(!showAccountDetails);
+  }
 
   return (
     <>
       <AccountDetailsModal
         show={showAccountDetails}
         onHide={setShowAccountDetails}
-        accountDetails={mockAccountData[0]}
+        selectedAccount={selectedAccount}
       />
       <StyledAccountDetailsCard>
         <Card.Header className="bg-primary text-white">
@@ -55,18 +58,20 @@ const AccountDetails = ({ accounts }) => {
             <Table striped bordered hover responsive>
               <thead>
                 <tr>
-                  <th>Account Holder</th>
+                  <th>Account Type</th>
                   <th>Account Number</th>
+                  <th>Branch</th>
                   <th>Balance</th>
                 </tr>
               </thead>
               <tbody>
                 {accounts.map((account, index) => (
                   <tr key={index}>
-                    <td>{account.accountHolder}</td>
-                    <ClickableCell onClick={() => setShowAccountDetails(true)}>
-                      {account.accountNumber}
+                    <td>{account.accountType}</td>
+                    <ClickableCell onClick={(event)=>handleClick(event)}>
+                      {account.accountNo}
                     </ClickableCell>
+                    <td>{account.branch}</td>
                     <td>${account.balance}</td>
                   </tr>
                 ))}

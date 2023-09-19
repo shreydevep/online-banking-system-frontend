@@ -19,68 +19,120 @@ export const mockAccounts = [
 ];
 
 export const mockRecentTransactions = [
-    {
-      date: "2023-09-15",
-      transactionId: "12345",
-      description: "Online Purchase",
-      amount: 50.00,
-    },
-    {
-      date: "2023-09-14",
-      transactionId: "67890",
-      description: "Withdrawal",
-      amount: -100.00,
-    },
-    {
-      date: "2023-09-13",
-      transactionId: "54321",
-      description: "Deposit",
-      amount: 200.00,
-    },
-    {
-        date: "2023-09-15",
-        transactionId: "12345",
-        description: "Online Purchase",
-        amount: 50.00,
-      },
-      {
-        date: "2023-09-14",
-        transactionId: "67890",
-        description: "Withdrawal",
-        amount: -100.00,
-      },
-      {
-        date: "2023-09-13",
-        transactionId: "54321",
-        description: "Deposit",
-        amount: 200.00,
-      }
-    // Add more transaction objects as needed
-  ];
-  
-  export const mockAccountData = [
-    {
-      account_no: '12345678',
-      account_type: 'Savings',
-      balance: '$5,000.00',
-      branch: 'Main Branch',
-      ifsc: 'ABCD12345',
-      isdisabled: false,
-      opening_date: '2023-01-15',
-      customer: 'John Doe',
-    },
-    {
-      account_no: '98765432',
-      account_type: 'Checking',
-      balance: '$2,000.00',
-      branch: 'Downtown Branch',
-      ifsc: 'EFGH67890',
-      isdisabled: true,
-      opening_date: '2023-02-20',
-      customer: 'Jane Smith',
-    },
-    // Add more mock accounts here if needed
-  ];
-  
-  
-  
+  {
+    date: "2023-09-15",
+    transactionId: "12345",
+    description: "Online Purchase",
+    amount: 50.0,
+  },
+  {
+    date: "2023-09-14",
+    transactionId: "67890",
+    description: "Withdrawal",
+    amount: -100.0,
+  },
+  {
+    date: "2023-09-13",
+    transactionId: "54321",
+    description: "Deposit",
+    amount: 200.0,
+  },
+  {
+    date: "2023-09-15",
+    transactionId: "12345",
+    description: "Online Purchase",
+    amount: 50.0,
+  },
+  {
+    date: "2023-09-14",
+    transactionId: "67890",
+    description: "Withdrawal",
+    amount: -100.0,
+  },
+  {
+    date: "2023-09-13",
+    transactionId: "54321",
+    description: "Deposit",
+    amount: 200.0,
+  },
+  // Add more transaction objects as needed
+];
+
+export const mockAccountData = [
+  {
+    account_no: "12345678",
+    account_type: "Savings",
+    balance: "$5,000.00",
+    branch: "Main Branch",
+    ifsc: "ABCD12345",
+    isdisabled: false,
+    opening_date: "2023-01-15",
+    customer: "John Doe",
+  },
+  {
+    account_no: "98765432",
+    account_type: "Checking",
+    balance: "$2,000.00",
+    branch: "Downtown Branch",
+    ifsc: "EFGH67890",
+    isdisabled: true,
+    opening_date: "2023-02-20",
+    customer: "Jane Smith",
+  },
+  // Add more mock accounts here if needed
+];
+
+export const mockTransactionData = [
+  {
+    id: 1,
+    description: "Deposit",
+    amount: 1000.0,
+    date: "2023-09-18",
+  },
+  {
+    id: 2,
+    description: "Withdrawal",
+    amount: -500.0,
+    date: "2023-09-17",
+  },
+  {
+    id: 3,
+    description: "Transfer",
+    amount: -200.0,
+    date: "2023-09-15",
+  },
+  {
+    id: 4,
+    description: "Deposit",
+    amount: 750.0,
+    date: "2023-09-12",
+  },
+  {
+    id: 5,
+    description: "Withdrawal",
+    amount: -300.0,
+    date: "2023-09-10",
+  },
+  // Add more transaction objects as needed
+];
+
+export const mockAccounts2 = [
+  {
+    id: 1,
+    name: 'Savings Account',
+    balance: 5000.0,
+  },
+  {
+    id: 2,
+    name: 'Checking Account',
+    balance: 2500.0,
+  },
+  {
+    id: 3,
+    name: 'Investment Account',
+    balance: 10000.0,
+  },
+  // Add more accounts as needed
+];
+
+
