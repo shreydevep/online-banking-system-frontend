@@ -136,10 +136,10 @@ const Registration = () => {
           </Grid>
           <Grid item xs={12}>
             <InputComponent
-              _id={"Email"}
+              _id={"Mobile"}
               _value={mobile}
-              _placeholder={"Enter Email"}
-              _changeHandler={emailHandler}
+              _placeholder={"Enter Moblie"}
+              _changeHandler={mobileHandler}
             />
           </Grid>
           <Grid item xs={12}>
