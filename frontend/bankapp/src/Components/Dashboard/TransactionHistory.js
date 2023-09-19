@@ -1,7 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
-import styled from 'styled-components';
-import mockAccounts, { mockAccounts2, mockTransactionData } from '../../utils/data';
+import React, { useState, useEffect } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import styled from "styled-components";
+import mockAccounts, {
+  mockAccounts2,
+  mockTransactionData,
+} from "../../utils/data";
+import { getTransactions } from "../../utils/GetRequests";
+
+const CustomModal = styled(Modal)`
+  .custom-modal-content {
+    width: 1000px; /* Set a fixed width for the modal */
+  }
+`;
 
 // Define styled components for the elements
 const TransactionHistoryContainer = styled.div`
@@ -51,11 +61,14 @@ const TableData = styled.td`
 `;
 
 function TransactionHistory({ show, onHide, accounts }) {
-  const [selectedAccount, setSelectedAccount] = useState('');
+  const [selectedAccount, setSelectedAccount] = useState("");
   const [transactions, setTransactions] = useState([]);
-
+  const handleChange = (event) => {
+    setSelectedAccount(event.target.value);
+    getTransactions(event.target.value, setTransactions);
+  };
   return (
-    <Modal show={show} onHide={onHide} centered>
+    <CustomModal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
         <Modal.Title>Transaction History</Modal.Title>
       </Modal.Header>
@@ -65,34 +78,42 @@ function TransactionHistory({ show, onHide, accounts }) {
           <Form.Control
             as="select"
             value={selectedAccount}
-            onChange={(e) => setSelectedAccount(e.target.value)}
+            onChange={handleChange}
           >
             <option value="">Select an account</option>
-            {mockAccounts2.map((account) => (
-              <option key={account.id} value={account.id}>
-                {account.name}
+            {accounts.map((account, index) => (
+              <option key={index} value={account.accountNo}>
+                {account.accountNo}
               </option>
             ))}
           </Form.Control>
         </Form.Group>
         <TransactionHistoryContainer>
-          <TransactionHistoryHeader>Transaction History</TransactionHistoryHeader>
+          <TransactionHistoryHeader>
+            Transaction History
+          </TransactionHistoryHeader>
           <TransactionTable>
             <TableHead>
               <tr>
                 <TableHeader>Transaction ID</TableHeader>
-                <TableHeader>Description</TableHeader>
+                <TableHeader>Status</TableHeader>
+                <TableHeader>Account To</TableHeader>
+                <TableHeader>Account From</TableHeader>
+                <TableHeader>Type</TableHeader>
                 <TableHeader>Amount</TableHeader>
-                <TableHeader>Date</TableHeader>
+                
               </tr>
             </TableHead>
             <TableBody>
-              {mockTransactionData.map((transaction) => (
-                <TableRow key={transaction.id}>
-                  <TableData>{transaction.id}</TableData>
-                  <TableData>{transaction.description}</TableData>
+              {transactions.map((transaction) => (
+                <TableRow key={transaction.transactionId}>
+                  <TableData>{transaction.transactionId}</TableData>
+                  <TableData>{transaction.status}</TableData>
+                  <TableData>{transaction.accTo}</TableData>
+                  <TableData>{transaction.accFrom}</TableData>
+                  <TableData>{transaction.transType}</TableData>
                   <TableData>${transaction.amount.toFixed(2)}</TableData>
-                  <TableData>{transaction.date}</TableData>
+
                 </TableRow>
               ))}
             </TableBody>
@@ -104,7 +125,7 @@ function TransactionHistory({ show, onHide, accounts }) {
           Close
         </Button>
       </Modal.Footer>
-    </Modal>
+    </CustomModal>
   );
 }
 

@@ -68,7 +68,7 @@ const SidebarNavItem = styled(NavItem)`
   }
 `;
 
-const Sidebar = () => {
+const Sidebar = ({customerDetails}) => {
   const [showWithdrawalModal, setShowWithdrawalModal] = React.useState(false);
 
   const [showFundsTransferComponent, setShowFundsTransferComponent] =
@@ -87,25 +87,27 @@ const Sidebar = () => {
     <StyledSidebar>
       <WithdrawalComponent
         show={showWithdrawalModal}
-        onHide={() => setShowWithdrawalModal(false)}
+        onHide={() => setShowWithdrawalModal(!showWithdrawalModal)}
       />
 
       <FundsTransferComponent
         show={showFundsTransferComponent}
         onHide={setShowFundsTransferComponent}
+        targetAccounts={customerDetails.account}
       />
       <TransactionHistory
         show={showTransactionHistoryModal}
-        onHide={()=>setShowTransactionHistoryModal(true)}
+        onHide={()=>setShowTransactionHistoryModal(!showTransactionHistoryModal)}
+        accounts={customerDetails.account}
       />
 
       <UserProfile
         show={showUserProfileModal}
-        onHide={() => setShowUserProfileModal(false)}
+        onHide={() => setShowUserProfileModal(!showUserProfileModal)}
       />
       <PasswordChange
         show={showPasswordChangeModal}
-        onHide={() => setShowPasswordChangeModal(false)}
+        onHide={() => setShowPasswordChangeModal(!showPasswordChangeModal)}
       />
       <SidebarNavItem>
         <Card.Title className="font-weight-bold">Dashboard</Card.Title>

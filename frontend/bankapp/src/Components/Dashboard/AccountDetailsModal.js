@@ -44,10 +44,10 @@ const AccountDetailsModal = ({ show, onHide, selectedAccount }) => {
                 {accountDetails.isDisabled ? "Yes" : "No"}
               </p>
               <p>
-                <strong>Opening Date:</strong> {accountDetails.openingDate}
+                <strong>Opening Date:</strong> {accountDetails.openeingDate}
               </p>
               <p>
-                <strong>Customer:</strong> {accountDetails.customer}
+                <strong>Customer:</strong> {sessionStorage.getItem("customerId")}
               </p>
             </div>
           ) : (
