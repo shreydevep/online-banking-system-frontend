@@ -31,6 +31,10 @@ export const getCustomerDetails = async (customerId,setCustomerDetails) => {
 export const updatePassword = (otp, customerId, password) => {
     const baseURL=`http://localhost:8080/changePassword/${otp}`
   try {
+  console.log({
+                          customerId,
+                          password
+                        })
     axios
           .put(baseURL, {
             customerId,

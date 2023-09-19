@@ -77,11 +77,8 @@ const accountDetails = {
   balance: 1000,
 };
 
-const UserDashboard = () => {
-  const [customerDetails, setCustomerDetails] = useState({account: []});
-  useEffect(() => {
-    getCustomerDetails(1, setCustomerDetails);
-  }, []);
+const UserDashboard = ({customerDetails}) => {
+
 
   return (
     <>
