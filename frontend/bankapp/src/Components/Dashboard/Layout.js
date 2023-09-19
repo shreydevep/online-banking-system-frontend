@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React,{useEffect,useState} from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Sidebar from "./SideBar"; // Import your Sidebar component
 import UserDashboard from "./UserDashboard";
@@ -25,6 +25,7 @@ const Layout = () => {
             <Sidebar customerDetails={customerDetails}/>
           </Col>
           <Col md={9}>
+
             <UserDashboard
               customerDetails={customerDetails}
               setCustomerDetails={setCustomerDetails}

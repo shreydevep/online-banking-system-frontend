@@ -21,8 +21,9 @@ const AccountPage = () => {
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const btnstyle = { margin: "8px 0" };
+  const customerId=sessionStorage.getItem("customerId");
 
-  const baseURL = "http://localhost:8080/createAccount/2";
+  const baseURL = `http://localhost:8080/createAccount/${customerId}`;
   const navigate = useNavigate();
 
   const [accountType, setAccountType] = useState("");

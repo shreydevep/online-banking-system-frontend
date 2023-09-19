@@ -4,7 +4,7 @@ import { Card, Nav, NavItem, NavLink } from "react-bootstrap";
 import WithdrawalComponent from "./WithdrawalComponent";
 
 import FundsTransferComponent from "./FundsTransferComponent";
-
+import { getCustomerDetails } from "../../utils/GetRequests";
 import UserProfile from "./UserProfile";
 import PasswordChange from "./PasswordChange";
 import TransactionHistory from "./TransactionHistory";
@@ -79,6 +79,10 @@ const Sidebar = ({customerDetails}) => {
   const [showTransactionHistoryModal, setShowTransactionHistoryModal] =
     useState(false);
 
+  const customerId=sessionStorage.getItem("customerId");
+  getCustomerDetails("customerId");
+
+
   return (
     <StyledSidebar>
       <WithdrawalComponent
@@ -108,7 +112,14 @@ const Sidebar = ({customerDetails}) => {
       <SidebarNavItem>
         <Card.Title className="font-weight-bold">Dashboard</Card.Title>
       </SidebarNavItem>
-
+      <ProfileCardLink onClick={() => setShowUserProfileModal(true)}>
+              <ProfileCardContainer>
+                <ProfileCardTitle>Profile</ProfileCardTitle>
+                <ProfileInfo>Name: </ProfileInfo>
+                <ProfileInfo>Email: john@example.com</ProfileInfo>
+                <ProfileInfo>Mobile: 1234567890</ProfileInfo>
+              </ProfileCardContainer>
+      </ProfileCardLink>
       <SidebarNavItem>
         <NavLink onClick={() => setShowWithdrawalModal(true)}>
           Funds Transfer
@@ -135,15 +146,7 @@ const Sidebar = ({customerDetails}) => {
           Change Password
         </NavLink>
       </SidebarNavItem>
-      <ProfileCardLink onClick={() => setShowUserProfileModal(true)}>
-        <ProfileCardContainer>
-          <ProfileCardTitle>Profile</ProfileCardTitle>
-          <ProfileInfo>Name: John Doe</ProfileInfo>
-          <ProfileInfo>Email: john@example.com</ProfileInfo>
-          <ProfileInfo>Phone: 123-456-7890</ProfileInfo>
-          <ProfileInfo>Address: 123 Main St, City</ProfileInfo>
-        </ProfileCardContainer>
-      </ProfileCardLink>
+
     </StyledSidebar>
   );
 };

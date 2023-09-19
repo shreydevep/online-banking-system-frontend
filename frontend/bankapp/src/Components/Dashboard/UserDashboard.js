@@ -81,6 +81,7 @@ const accountDetails = {
   balance: 1000,
 };
 
+
 const UserDashboard = ({
   customerDetails,
   setCustomerDetails,

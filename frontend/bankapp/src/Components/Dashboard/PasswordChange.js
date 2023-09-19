@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Tab, Tabs } from 'react-bootstrap';
 import styled from 'styled-components';
+import { updatePassword } from "../../utils/GetRequests.js"
+
 
 // Define the styled component for the modal content
 const StyledModalContent = styled.div`
@@ -9,7 +11,7 @@ const StyledModalContent = styled.div`
 
 const PasswordChange = ({ show, onHide }) => {
   const [formData, setFormData] = useState({
-    otp: '',
+    otp: '101010',
     newPassword: '',
     confirmPassword: '',
   });
@@ -26,11 +28,13 @@ const PasswordChange = ({ show, onHide }) => {
     e.preventDefault();
 
     // Check if new password and confirm password match
+    const customerId=sessionStorage.getItem("customerId");
     if (formData.newPassword !== formData.confirmPassword) {
       alert('New password and confirm password do not match');
       return;
     }
 
+    updatePassword(formData.otp, customerId, formData.newPassword)
     // Here, you can send a request to your server to change the password
     // using formData.currentPassword and formData.newPassword
     // You can also add additional validation and error handling as needed
