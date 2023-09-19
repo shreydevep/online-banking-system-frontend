@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Card, Button, Table } from "react-bootstrap";
 import AccountDetails from "./AccountDetails";
-import { getAccountDetails, getCustomerDetails, getTransactions } from "../../utils/GetRequests";
+import {
+  getAccountDetails,
+  getCustomerDetails,
+  getTransactions,
+} from "../../utils/GetRequests";
 import AccountDetailsModal from "./AccountDetailsModal";
 import { mockAccounts, mockRecentTransactions } from "../../utils/data";
 
@@ -77,14 +81,12 @@ const accountDetails = {
   balance: 1000,
 };
 
-const UserDashboard = () => {
-  const [customerDetails, setCustomerDetails] = useState({account: []});
-  const [transactions, setTransactions] = useState([]);
-  useEffect(() => {
-    getCustomerDetails(1, setCustomerDetails);
-    getTransactions("3142715522978839641", setTransactions);
-    console.log(transactions);
-  }, []);
+const UserDashboard = ({
+  customerDetails,
+  setCustomerDetails,
+  transactions,
+  setTransactions,
+}) => {
 
   return (
     <>
@@ -139,7 +141,7 @@ const UserDashboard = () => {
                         <tr key={index}>
                           <td>{transaction.timestamp}</td>
                           <td>{transaction.transType}</td>
-                          
+
                           <td>{transaction.transactionId}</td>
                           <td>{transaction.accTo}</td>
                           <td>{transaction.status}</td>

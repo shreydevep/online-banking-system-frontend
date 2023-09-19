@@ -53,3 +53,13 @@ export const getTransactions = async (accountNumber, setTransactions) => {
     console.log(error);
   }
 };
+
+export const transferFunds = async (transferFundsObject) => {
+  try {
+    axios.post(`http://localhost:8080/transact`,transferFundsObject).then((response) => {
+      console.log(response.data);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

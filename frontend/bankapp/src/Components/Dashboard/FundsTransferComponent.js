@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form, Tab, Tabs } from 'react-bootstrap';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { Modal, Button, Form, Tab, Tabs } from "react-bootstrap";
+import styled from "styled-components";
+import { transferFunds } from "../../utils/GetRequests";
 
 // Define the styled component for the modal content
 const StyledModalContent = styled.div`
@@ -9,31 +10,32 @@ const StyledModalContent = styled.div`
 
 // Define a custom CSS class for centering the buttons
 const centerButtonStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: '20px', // Add some spacing above the buttons
+  display: "flex",
+  justifyContent: "center",
+  marginTop: "20px", // Add some spacing above the buttons
 };
 
-const FundsTransferComponent = ({ show, onHide }) => {
-  const [transferAmount, setTransferAmount] = useState('');
-  const [targetAccount, setTargetAccount] = useState('');
-  const [transferType, setTransferType] = useState('rtgs'); // Default to RTGS
-
-  // Mock data for the target account dropdown
-  const targetAccounts = [
-    'Account 1',
-    'Account 2',
-    'Account 3',
-    // Add more account options as needed
-  ];
+const FundsTransferComponent = ({ show, onHide, targetAccounts }) => {
+  const [transferAmount, setTransferAmount] = useState("");
+  const [targetAccount, setTargetAccount] = useState("");
+  const [transferType, setTransferType] = useState("rtgs"); // Default to RTGS
 
   const handleTransfer = () => {
     // Handle the transfer logic here based on the selected transfer type
-    if (transferType === 'rtgs') {
+    let transferData = {
+      amount: transferAmount,
+      accFrom: "20040379527",
+      accTo: targetAccount,
+    };
+    if (transferType === "rtgs") {
       // Perform RTGS transfer
-    } else if (transferType === 'neft') {
+      transferData = { ...transferData, transType: "RTGS" };
+    } else if (transferType === "neft") {
       // Perform NEFT transfer
+      transferData = { ...transferData, transType: "NEFT" };
     }
+    console.log(transferData);
+    transferFunds(transferData);
 
     // You can use the 'transferAmount' and 'targetAccount' state values
     // for the transfer amount and target account.
@@ -72,8 +74,8 @@ const FundsTransferComponent = ({ show, onHide }) => {
                   >
                     <option value="">Select an account</option>
                     {targetAccounts.map((account, index) => (
-                      <option key={index} value={account}>
-                        {account}
+                      <option key={index} value={account.accountNo}>
+                        {account.accountNo}
                       </option>
                     ))}
                   </Form.Control>
@@ -100,8 +102,8 @@ const FundsTransferComponent = ({ show, onHide }) => {
                   >
                     <option value="">Select an account</option>
                     {targetAccounts.map((account, index) => (
-                      <option key={index} value={account}>
-                        {account}
+                      <option key={index} value={account.accountNo}>
+                        {account.accountNo}
                       </option>
                     ))}
                   </Form.Control>

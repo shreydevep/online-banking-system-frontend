@@ -68,7 +68,7 @@ const SidebarNavItem = styled(NavItem)`
   }
 `;
 
-const Sidebar = () => {
+const Sidebar = ({customerDetails}) => {
   const [showWithdrawalModal, setShowWithdrawalModal] = React.useState(false);
 
   const [showFundsTransferComponent, setShowFundsTransferComponent] =
@@ -89,6 +89,7 @@ const Sidebar = () => {
       <FundsTransferComponent
         show={showFundsTransferComponent}
         onHide={setShowFundsTransferComponent}
+        targetAccounts={customerDetails.account}
       />
       <TransactionHistory
         show={showTransactionHistoryModal}
