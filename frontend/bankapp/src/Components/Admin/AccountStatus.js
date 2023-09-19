@@ -30,7 +30,7 @@ const AccountStatus = ({ show, onHide }) => {
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Modal Form</Modal.Title>
+        <Modal.Title>Account Status</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
