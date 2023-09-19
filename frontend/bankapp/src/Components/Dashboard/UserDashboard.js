@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Card, Button, Table } from "react-bootstrap";
 import AccountDetails from "./AccountDetails";
-import { getAccountDetails, getCustomerDetails } from "../../utils/GetRequests";
+import { getAccountDetails, getCustomerDetails, getTransactions } from "../../utils/GetRequests";
 import AccountDetailsModal from "./AccountDetailsModal";
 import { mockAccounts, mockRecentTransactions } from "../../utils/data";
 
@@ -79,8 +79,11 @@ const accountDetails = {
 
 const UserDashboard = () => {
   const [customerDetails, setCustomerDetails] = useState({account: []});
+  const [transactions, setTransactions] = useState([]);
   useEffect(() => {
     getCustomerDetails(1, setCustomerDetails);
+    getTransactions("3142715522978839641", setTransactions);
+    console.log(transactions);
   }, []);
 
   return (
@@ -124,17 +127,22 @@ const UserDashboard = () => {
                     <thead>
                       <tr>
                         <th>Date</th>
+                        <th>Transaction Type</th>
                         <th>Transaction ID</th>
-                        <th>Description</th>
+                        <th>Account To</th>
+                        <th>Status</th>
                         <th>Amount</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {mockRecentTransactions.map((transaction, index) => (
+                      {transactions.map((transaction, index) => (
                         <tr key={index}>
-                          <td>{transaction.date}</td>
+                          <td>{transaction.timestamp}</td>
+                          <td>{transaction.transType}</td>
+                          
                           <td>{transaction.transactionId}</td>
-                          <td>{transaction.description}</td>
+                          <td>{transaction.accTo}</td>
+                          <td>{transaction.status}</td>
                           <td>${transaction.amount}</td>
                         </tr>
                       ))}

@@ -38,7 +38,7 @@ const AccountDetails = ({ accounts }) => {
   const handleClick = (event) => {
     const val = (event.target.innerText);
     console.log(typeof(val)); 
-    setSelectedAccount(7940823821190967000);
+    setSelectedAccount(val);
     setShowAccountDetails(!showAccountDetails);
   }
 
