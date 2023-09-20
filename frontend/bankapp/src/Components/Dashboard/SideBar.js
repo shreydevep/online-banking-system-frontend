@@ -104,6 +104,7 @@ const Sidebar = ({customerDetails}) => {
       <UserProfile
         show={showUserProfileModal}
         onHide={() => setShowUserProfileModal(!showUserProfileModal)}
+        customerDetails={customerDetails}
       />
       <PasswordChange
         show={showPasswordChangeModal}
@@ -115,9 +116,10 @@ const Sidebar = ({customerDetails}) => {
       <ProfileCardLink onClick={() => setShowUserProfileModal(true)}>
               <ProfileCardContainer>
                 <ProfileCardTitle>Profile</ProfileCardTitle>
-                <ProfileInfo>Name: </ProfileInfo>
-                <ProfileInfo>Email: john@example.com</ProfileInfo>
-                <ProfileInfo>Mobile: 1234567890</ProfileInfo>
+                <ProfileInfo>Name: {customerDetails.name} </ProfileInfo>
+                <ProfileInfo>Email: {customerDetails.email}</ProfileInfo>
+                <ProfileInfo>Mobile: {customerDetails.mobile}</ProfileInfo>
+                <ProfileInfo>Aadhar: {customerDetails.aadhar}</ProfileInfo>
               </ProfileCardContainer>
       </ProfileCardLink>
       <SidebarNavItem>

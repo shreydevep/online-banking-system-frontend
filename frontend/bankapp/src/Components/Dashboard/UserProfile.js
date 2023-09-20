@@ -10,7 +10,7 @@ const StyledModalContent = styled.div`
   padding: 20px;
 `;
 
-const UserProfile = ({ show, onHide, user }) => {
+const UserProfile = ({ show, onHide, customerDetails }) => {
   return (
 
     <Modal show={show} onHide={onHide} centered>
@@ -22,16 +22,16 @@ const UserProfile = ({ show, onHide, user }) => {
           <Tabs defaultActiveKey="profile" id="user-profile-tabs">
             <Tab eventKey="profile" title="Profile">
               <div>
-                <strong>Name:</strong>
+                <strong>Name:</strong> {customerDetails.name}
               </div>
               <div>
-                <strong>Email:</strong>
+                <strong>Email:</strong> {customerDetails.email}
               </div>
               <div>
-                <strong>Phone:</strong>
+                <strong>Phone:</strong> {customerDetails.mobile}
               </div>
               <div>
-                <strong>Address:</strong>
+                <strong>Aadhar:</strong> {customerDetails.aadhar}
               </div>
             </Tab>
             {/* Add additional tabs for more user information if needed */}

@@ -51,7 +51,7 @@ const AdminLogin = () => {
         console.log(response);
         alert(response.data);
 
-//        navigate("/userdashboard");
+        navigate("/admindashboard");
       })
       .catch((error) => {
         alert("error===" + error);
