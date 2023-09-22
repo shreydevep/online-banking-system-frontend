@@ -85,36 +85,31 @@ export const mockAccountData = [
 export const mockTransactionData = [
   {
     id: 1,
-    description: "Deposit",
-    amount: 1000.0,
-    date: "2023-09-18",
+    customerId: 'Cust123',
+    amount: 100.0,
+    // Add more transaction details as needed
   },
   {
     id: 2,
-    description: "Withdrawal",
-    amount: -500.0,
-    date: "2023-09-17",
+    customerId: 'Cust456',
+    amount: 200.0,
+    // Add more transaction details as needed
   },
   {
     id: 3,
-    description: "Transfer",
-    amount: -200.0,
-    date: "2023-09-15",
+    customerId: 'Cust123',
+    amount: 50.0,
+    // Add more transaction details as needed
   },
   {
     id: 4,
-    description: "Deposit",
-    amount: 750.0,
-    date: "2023-09-12",
+    customerId: 'Cust789',
+    amount: 75.0,
+    // Add more transaction details as needed
   },
-  {
-    id: 5,
-    description: "Withdrawal",
-    amount: -300.0,
-    date: "2023-09-10",
-  },
-  // Add more transaction objects as needed
+  // Add more transactions as needed
 ];
+
 
 export const mockAccounts2 = [
   {

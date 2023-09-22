@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, Button, Card, CardContent, Grid } from '@mui/material';
 import AccountStatus from './AccountStatus';
 import AdminCreateAccount from './AdminCreateAccount';
+import TransactionTable from './TransactionTable';
 import styled, { css } from 'styled-components';
+import { mockTransactionData } from '../../utils/data';
 
 const StyledAppBar = styled(AppBar)`
   background-color: #333;
@@ -122,6 +124,7 @@ const AdminDashboard = () => {
           </CardContainer>
         </Grid>
       </Grid>
+      <TransactionTable />
     </div>
   );
 };
