@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import styled from "styled-components";
 import { getAccountDetails } from "../../utils/GetRequests";
@@ -11,9 +11,8 @@ const StyledModalContent = styled.div`
 const AccountDetailsModal = ({ show, onHide, selectedAccount }) => {
   const [accountDetails, setAccountDetails] = useState(null);
   useEffect(() => {
-    console.log(selectedAccount);
-    
-    getAccountDetails(selectedAccount, setAccountDetails);
+   
+    if (selectedAccount !== "") getAccountDetails(selectedAccount, setAccountDetails);
   }, [selectedAccount]);
   return (
     <Modal show={show} onHide={onHide} centered>
@@ -47,7 +46,8 @@ const AccountDetailsModal = ({ show, onHide, selectedAccount }) => {
                 <strong>Opening Date:</strong> {accountDetails.openeingDate}
               </p>
               <p>
-                <strong>Customer:</strong> {sessionStorage.getItem("customerId")}
+                <strong>Customer:</strong>{" "}
+                {sessionStorage.getItem("customerId")}
               </p>
             </div>
           ) : (

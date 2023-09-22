@@ -79,8 +79,7 @@ const Sidebar = ({customerDetails}) => {
   const [showTransactionHistoryModal, setShowTransactionHistoryModal] =
     useState(false);
 
-  const customerId=sessionStorage.getItem("customerId");
-  getCustomerDetails("customerId");
+  
 
 
   return (

@@ -2,8 +2,9 @@ import axios from "axios";
 
 export const getAccountDetails = async (accountNumber, setAccountDetails) => {
   try {
-    console.log(`http://localhost:8080/getAccountDetails/${accountNumber}`);
+    
     const response = await fetch(
+      
       `http://localhost:8080/getAccountDetails/${accountNumber}`
     );
     const data = await response.json();

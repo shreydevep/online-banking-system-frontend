@@ -23,7 +23,7 @@ const AccountPage = () => {
   const btnstyle = { margin: "8px 0" };
   const customerId=sessionStorage.getItem("customerId");
 
-  const baseURL = `http://localhost:8080/createAccount/${customerId}`;
+  const baseURL = `http://localhost:8080/account/${customerId}`;
   const navigate = useNavigate();
 
   const [accountType, setAccountType] = useState("");

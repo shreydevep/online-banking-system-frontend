@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
-import { getAccountDetails } from "../../utils/GetRequests";
 import AccountDetailsModal from "./AccountDetailsModal";
 import { mockAccountData } from "../../utils/data";
 
@@ -16,7 +15,7 @@ const StyledAccountDetailsCard = styled(Card)`
 `;
 
 const ScrollableTableContainer = styled.div`
-  max-height: 150px; /* Adjust the height as needed */
+  max-height: 62vh; /* Adjust the height as needed */
   overflow-y: auto;
 `;
 
