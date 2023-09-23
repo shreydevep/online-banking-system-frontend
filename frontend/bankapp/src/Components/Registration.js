@@ -85,7 +85,7 @@ const Registration = () => {
         console.log(response);
         alert(response.data.message);
 
-        //navigate("/account");
+        navigate("/login");
       })
       .catch((error) => {
         alert("error===" + error);
