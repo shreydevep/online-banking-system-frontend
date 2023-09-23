@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Card, Nav, NavItem, NavLink } from "react-bootstrap";
 import WithdrawalComponent from "./WithdrawalComponent";
-
 import FundsTransferComponent from "./FundsTransferComponent";
-import { getCustomerDetails } from "../../utils/GetRequests";
 import UserProfile from "./UserProfile";
 import PasswordChange from "./PasswordChange";
 import TransactionHistory from "./TransactionHistory";
+import CheckBalanceCard from "./CheckBalanceCard";
 
 const StyledSidebar = styled(Card)`
   height: 80vh;
@@ -27,6 +26,7 @@ const StyledSidebar = styled(Card)`
     text-decoration: none;
     color: #333;
     transition: color 0.3s;
+    font-weight: bold; /* Added this line to make links bold */
 
     &:hover {
       color: #007bff;
@@ -34,18 +34,17 @@ const StyledSidebar = styled(Card)`
   }
 `;
 
-const ProfileCardContainer = styled.div`
-  margin-top: 20px;
-  padding: 20px;
-  background: #fff;
+const ProfileCardContainer = styled(Card)`
+  background-color: #fff;
   border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  padding: 20px;
 `;
 
 const ProfileCardTitle = styled.h4`
-  font-size: 18px;
+  font-size: 24px;
   margin-bottom: 20px;
   color: #333;
 `;
@@ -55,8 +54,14 @@ const ProfileCardLink = styled.a`
   cursor: pointer;
 `;
 
-const ProfileInfo = styled.div`
+const ProfileName = styled.div`
+  font-size: 24px; /* Bigger font size for name */
+  color: #007bff; /* Same color as the balance */
   margin-bottom: 10px;
+`;
+
+const ProfileEmail = styled.div`
+  font-size: 16px; /* Smaller font size for email */
   color: #555;
 `;
 
@@ -68,27 +73,26 @@ const SidebarNavItem = styled(NavItem)`
   }
 `;
 
-const Sidebar = ({customerDetails}) => {
+const Sidebar = ({ customerDetails }) => {
   const [showWithdrawalModal, setShowWithdrawalModal] = React.useState(false);
-
   const [showFundsTransferComponent, setShowFundsTransferComponent] =
     React.useState(false);
   const [showUserProfileModal, setShowUserProfileModal] = React.useState(false);
   const [showPasswordChangeModal, setShowPasswordChangeModal] =
     React.useState(false);
   const [showTransactionHistoryModal, setShowTransactionHistoryModal] =
-    useState(false);
-
-  
-
+    React.useState(false);
 
   return (
     <StyledSidebar>
+      <SidebarNavItem>
+        <Card.Title className="font-weight-bold">Dashboard</Card.Title>
+      </SidebarNavItem>
+      <CheckBalanceCard accounts={customerDetails.account} />
       <WithdrawalComponent
         show={showWithdrawalModal}
         onHide={() => setShowWithdrawalModal(!showWithdrawalModal)}
       />
-
       <FundsTransferComponent
         show={showFundsTransferComponent}
         onHide={setShowFundsTransferComponent}
@@ -96,10 +100,11 @@ const Sidebar = ({customerDetails}) => {
       />
       <TransactionHistory
         show={showTransactionHistoryModal}
-        onHide={()=>setShowTransactionHistoryModal(!showTransactionHistoryModal)}
+        onHide={() =>
+          setShowTransactionHistoryModal(!showTransactionHistoryModal)
+        }
         accounts={customerDetails.account}
       />
-
       <UserProfile
         show={showUserProfileModal}
         onHide={() => setShowUserProfileModal(!showUserProfileModal)}
@@ -109,26 +114,20 @@ const Sidebar = ({customerDetails}) => {
         show={showPasswordChangeModal}
         onHide={() => setShowPasswordChangeModal(!showPasswordChangeModal)}
       />
-      <SidebarNavItem>
-        <Card.Title className="font-weight-bold">Dashboard</Card.Title>
-      </SidebarNavItem>
       <ProfileCardLink onClick={() => setShowUserProfileModal(true)}>
-              <ProfileCardContainer>
-                <ProfileCardTitle>Profile</ProfileCardTitle>
-                <ProfileInfo>Name: {customerDetails.name} </ProfileInfo>
-                <ProfileInfo>Email: {customerDetails.email}</ProfileInfo>
-                <ProfileInfo>Mobile: {customerDetails.mobile}</ProfileInfo>
-                <ProfileInfo>Aadhar: {customerDetails.aadhar}</ProfileInfo>
-              </ProfileCardContainer>
+        <ProfileCardContainer>
+          <ProfileName>{customerDetails.name}</ProfileName>
+          <ProfileEmail>{customerDetails.email}</ProfileEmail>
+        </ProfileCardContainer>
       </ProfileCardLink>
       <SidebarNavItem>
         <NavLink onClick={() => setShowWithdrawalModal(true)}>
-          Funds Transfer
+          Transfer Money
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
         <NavLink onClick={() => setShowFundsTransferComponent(true)}>
-          Transfer Money
+          Funds Transfer
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
@@ -147,7 +146,6 @@ const Sidebar = ({customerDetails}) => {
           Change Password
         </NavLink>
       </SidebarNavItem>
-
     </StyledSidebar>
   );
 };

@@ -13,6 +13,10 @@ import {
 import InputComponent from "./InputComponent";
 import NavBar from "./NavBar";
 
+function reverseString(str) {
+  return str.split("").reverse().join("");
+}
+
 const Registration = () => {
   const paperStyle = {
     padding: 20,
@@ -26,19 +30,13 @@ const Registration = () => {
   const baseURL = "http://localhost:8080/register";
   const navigate = useNavigate();
 
-  const [customerId, setCustomerId] = useState("");
+  const [toggleButton, setToggleButton] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mobile, setmobile] = useState("");
   const [aadhar, setAadhar] = useState("");
   const [dob, setDob] = useState("");
-
-  const customerIdChangeHandler = (event) => {
-    //alert(event.target.value);
-    //console.log(regno);
-    setCustomerId(event.target.value);
-  };
 
   const passwordHandler = (event) => {
     setPassword(event.target.value);
@@ -57,7 +55,7 @@ const Registration = () => {
   };
 
   const dobHandler = (event) => {
-    setDob(event.target.value);
+    setDob(reverseString(event.target.value));
   };
 
   const emailHandler = (event) => {
@@ -94,13 +92,6 @@ const Registration = () => {
       });
   };
 
-  const cancelHandler = () => {
-    //reset the values of input fields
-    setCustomerId("");
-    setPassword("");
-    setAadhar("");
-    // navigate("/read");
-  };
   return (
     <>
       <NavBar />
@@ -110,48 +101,72 @@ const Registration = () => {
             <Avatar style={avatarStyle}></Avatar>
             <h2>Customer Sign Up</h2>
           </Grid>
-          <Grid item xs={12}>
-            <InputComponent
-              _id={"Customer Name"}
-              _value={name}
-              _placeholder={"Enter Customer Name"}
-              _changeHandler={nameHandler}
-            />
+          {!toggleButton ? (
+            <>
+              <Grid item xs={12}>
+                <InputComponent
+                  _id={"Customer Name"}
+                  _value={name}
+                  _placeholder={"Enter Customer Name"}
+                  _changeHandler={nameHandler}
+                />
+                <InputComponent
+                  _id={"Email"}
+                  _value={email}
+                  _placeholder={"Enter Email"}
+                  _changeHandler={emailHandler}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <InputComponent
+                  _id={"Password"}
+                  _value={password}
+                  _placeholder={"Enter Password"}
+                  _changeHandler={passwordHandler}
+                />
+              </Grid>
+            </>
+          ) : (
+            <>
+              <Grid item xs={12}>
+                <InputComponent
+                  _id={"Aadhar Number"}
+                  _value={aadhar}
+                  _placeholder={"Enter Aadhar Number"}
+                  _changeHandler={aadharHandler}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <InputComponent
+                  _id={"Mobile"}
+                  _value={mobile}
+                  _placeholder={"Enter Moblie"}
+                  _changeHandler={mobileHandler}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <InputComponent
+                  _id={""}
+                  _value={dob}
+                  _placeholder={"Enter DOB"}
+                  _changeHandler={dobHandler}
+                  _type={"date"}
+                />
+              </Grid>
+            </>
+          )}
+
+          <Grid item xs={12} style={{display: "flex",justifyContent: "center", alignItems:"center" }}>
+            {toggleButton ? (
+              <Button color="warning" onClick={() => setToggleButton(!toggleButton)}>
+                Back
+              </Button>
+            ) : (
+              <Button color="success"  onClick={() => setToggleButton(!toggleButton)}>
+                Next
+              </Button>
+            )}
           </Grid>
-          <Grid item xs={12}>
-            <InputComponent
-              _id={"Password"}
-              _value={password}
-              _placeholder={"Enter Password"}
-              _changeHandler={passwordHandler}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <InputComponent
-              _id={"Aadhar Number"}
-              _value={aadhar}
-              _placeholder={"Enter Aadhar Number"}
-              _changeHandler={aadharHandler}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <InputComponent
-              _id={"Mobile"}
-              _value={mobile}
-              _placeholder={"Enter Moblie"}
-              _changeHandler={mobileHandler}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <InputComponent
-              _id={"DOB"}
-              _value={dob}
-              _placeholder={"Enter DOB"}
-              _changeHandler={dobHandler}
-            />
-          </Grid>
-         
-          
 
           <Button
             type="submit"
@@ -160,6 +175,7 @@ const Registration = () => {
             style={btnstyle}
             fullWidth
             onClick={submitActionHandler}
+            
           >
             Sign Up
           </Button>
