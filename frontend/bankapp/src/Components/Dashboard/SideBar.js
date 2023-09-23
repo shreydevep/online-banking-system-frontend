@@ -122,12 +122,12 @@ const Sidebar = ({ customerDetails }) => {
       </ProfileCardLink>
       <SidebarNavItem>
         <NavLink onClick={() => setShowWithdrawalModal(true)}>
-          Funds Transfer
+          Transfer Money
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
         <NavLink onClick={() => setShowFundsTransferComponent(true)}>
-          Transfer Money
+          Funds Transfer
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
