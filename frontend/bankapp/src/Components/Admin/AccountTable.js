@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import axios from "axios";
+import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
 
@@ -11,7 +12,7 @@ const Container = styled.div`
   overflow-y: auto; /* Enable vertical scrolling */
 `;
 
-// Styled component for AccountTable
+// Styled component for TransactionTable
 const StyledAccountTable = styled(Table)`
   background-color: #fff;
   border: 1px solid #ddd;
@@ -30,30 +31,89 @@ const StyledAccountTable = styled(Table)`
   }
 `;
 
-const AccountTable = ({ accountDetails }) => {
+const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+`;
+
+const SearchInput = styled.input`
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  flex: 1;
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+`;
+
+const SearchButton = styled.button`
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
+const AccountTable = () => {
+  const [customerId, setCustomerId] = useState(""); // State for customer ID input
+  const [account, setAccount] = useState([]); // State for transactions [
+
+  const handleSearch = () => {
+    // Call the searchTransactions function with the customerId
+    setAccount([]);
+    axios
+        .get(`http://localhost:8080/customer/${customerId}`)
+        .then((res) => {
+          setAccount(res.data.account);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  };
+
   return (
-    <Container>
-      <StyledAccountTable striped bordered hover responsive>
-        <thead>
+      <Container>
+        <SearchContainer>
+          <SearchInput
+              type="text"
+              placeholder="Customer ID"
+              value={customerId}
+              onChange={(e) => setCustomerId(e.target.value)}
+          />
+          <SearchButton onClick={handleSearch}>Search</SearchButton>
+        </SearchContainer>
+        <StyledAccountTable striped bordered hover responsive>
+          <thead>
           <tr>
             <th>Account Type</th>
-            <th>Account Number</th>
+            <th>Account No</th>
             <th>Branch</th>
             <th>Balance</th>
+            <th>Status</th>
           </tr>
-        </thead>
-        <tbody>
-          {accountDetails.map((account, index) => (
-            <tr key={index}>
-              <td>{account.accountType}</td>
-              <td>{account.accountNumber}</td>
-              <td>{account.branch}</td>
-              <td>${account.balance}</td>
-            </tr>
+          </thead>
+          <tbody>
+          {account.map((account, index) => (
+              <tr key={index}>
+                <td>{account.accountType}</td>
+                <td>{account.accountNo}</td>
+                <td>{account.branch}</td>
+                <td>{account.balance}</td>
+                <td>{account.isdisabled}</td>
+              </tr>
           ))}
-        </tbody>
-      </StyledAccountTable>
-    </Container>
+          </tbody>
+        </StyledAccountTable>
+      </Container>
   );
 };
 
