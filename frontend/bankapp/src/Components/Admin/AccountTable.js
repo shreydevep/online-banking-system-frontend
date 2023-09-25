@@ -29,6 +29,13 @@ const StyledAccountTable = styled(Table)`
     text-align: left;
     border: 1px solid #ddd;
   }
+
+  td.fail{
+    color: green;
+  }
+  td.success{
+    color: red;
+  }
 `;
 
 const SearchContainer = styled.div`
@@ -74,6 +81,7 @@ const AccountTable = () => {
         .get(`http://localhost:8080/customer/${customerId}`)
         .then((res) => {
           setAccount(res.data.account);
+          console.log(res.data.account)
         })
         .catch((err) => {
           console.log(err);
@@ -108,7 +116,7 @@ const AccountTable = () => {
                 <td>{account.accountNo}</td>
                 <td>{account.branch}</td>
                 <td>{account.balance}</td>
-                <td>{account.isdisabled}</td>
+                <td className={account.disabled ? 'success' : 'fail'}>{account.disabled ? "Disabled" : "Active"}</td>
               </tr>
           ))}
           </tbody>

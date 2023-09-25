@@ -40,7 +40,7 @@ const AccountDetailsModal = ({ show, onHide, selectedAccount }) => {
               </p>
               <p>
                 <strong>Is Disabled:</strong>{" "}
-                {accountDetails.isDisabled ? "Yes" : "No"}
+                {accountDetails.disabled ? "Yes" : "No"}
               </p>
               <p>
                 <strong>Opening Date:</strong> {accountDetails.openeingDate}

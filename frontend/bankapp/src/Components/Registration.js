@@ -146,7 +146,7 @@ const Registration = () => {
               </Grid>
               <Grid item xs={12}>
                 <InputComponent
-                  _id={""}
+                  _id={"DOB"}
                   _value={dob}
                   _placeholder={"Enter DOB"}
                   _changeHandler={dobHandler}
