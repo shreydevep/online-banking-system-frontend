@@ -50,10 +50,6 @@ const AccountPage = () => {
   const submitActionHandler = (event) => {
     event.preventDefault();
     axios
-      .get("http://localhost:8080/accountHello")
-      .then((res) => console.log(res.data));
-    console.log(event);
-    axios
       .post(baseURL, {
         accountType,
         ifsc,

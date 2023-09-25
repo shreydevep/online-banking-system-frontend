@@ -14,6 +14,10 @@ import InputComponent from "./InputComponent";
 import NavBar from "./NavBar";
 
 function reverseString(str) {
+  //dd-mm-yyyy
+  //21-07-2023
+  //2023-07-21
+  //yyyy-mm-dd
   return str.split("").reverse().join("");
 }
 
@@ -88,6 +92,7 @@ const Registration = () => {
         navigate("/login");
       })
       .catch((error) => {
+        console.log(error)
         alert("error===" + error);
       });
   };

@@ -84,7 +84,7 @@ const AccountTable = () => {
           console.log(res.data.account)
         })
         .catch((err) => {
-          console.log(err);
+          console.log(err.response.data);
         });
   };
 
