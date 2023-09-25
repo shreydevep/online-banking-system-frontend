@@ -92,6 +92,7 @@ const Sidebar = ({ customerDetails }) => {
       <WithdrawalComponent
         show={showWithdrawalModal}
         onHide={() => setShowWithdrawalModal(!showWithdrawalModal)}
+        accounts={customerDetails.account}
       />
       <FundsTransferComponent
         show={showFundsTransferComponent}
@@ -122,7 +123,7 @@ const Sidebar = ({ customerDetails }) => {
       </ProfileCardLink>
       <SidebarNavItem>
         <NavLink onClick={() => setShowWithdrawalModal(true)}>
-          Transfer Money
+          Transfer Money (Within Bank)
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
