@@ -19,12 +19,13 @@ const FundsTransferComponent = ({ show, onHide, targetAccounts }) => {
   const [transferAmount, setTransferAmount] = useState("");
   const [targetAccount, setTargetAccount] = useState("");
   const [transferType, setTransferType] = useState("rtgs"); // Default to RTGS
+  const [sourceAccount, setSourceAccount] = useState("");
 
   const handleTransfer = () => {
     // Handle the transfer logic here based on the selected transfer type
     let transferData = {
       amount: transferAmount,
-      accFrom: "20040379527",
+      accFrom: sourceAccount,
       accTo: targetAccount,
     };
     if (transferType === "rtgs") {
@@ -65,12 +66,13 @@ const FundsTransferComponent = ({ show, onHide, targetAccounts }) => {
                     onChange={(e) => setTransferAmount(e.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="rtgsTargetAccount">
-                  <Form.Label>Target Account Number:</Form.Label>
+
+                <Form.Group controlId="rtgsSourceAccount">
+                  <Form.Label>Source Account Number:</Form.Label>
                   <Form.Control
                     as="select"
-                    value={targetAccount}
-                    onChange={(e) => setTargetAccount(e.target.value)}
+                    value={sourceAccount}
+                    onChange={(e) => setSourceAccount(e.target.value)}
                   >
                     <option value="">Select an account</option>
                     {targetAccounts.map((account, index) => (
@@ -79,6 +81,15 @@ const FundsTransferComponent = ({ show, onHide, targetAccounts }) => {
                       </option>
                     ))}
                   </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="rtgsTargetAccount">
+                  <Form.Label> Target Bank Account:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your bank account number"
+                    value={targetAccount}
+                    onChange={(e) => setTargetAccount(e.target.value)}
+                  />
                 </Form.Group>
               </Form>
             </Tab>
@@ -94,11 +105,11 @@ const FundsTransferComponent = ({ show, onHide, targetAccounts }) => {
                   />
                 </Form.Group>
                 <Form.Group controlId="neftTargetAccount">
-                  <Form.Label>Target Account Number:</Form.Label>
+                  <Form.Label>Source Account Number:</Form.Label>
                   <Form.Control
                     as="select"
-                    value={targetAccount}
-                    onChange={(e) => setTargetAccount(e.target.value)}
+                    value={sourceAccount}
+                    onChange={(e) => setSourceAccount(e.target.value)}
                   >
                     <option value="">Select an account</option>
                     {targetAccounts.map((account, index) => (
@@ -107,6 +118,15 @@ const FundsTransferComponent = ({ show, onHide, targetAccounts }) => {
                       </option>
                     ))}
                   </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="neftTargetAccount">
+                  <Form.Label> Target Bank Account:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your bank account number"
+                    value={targetAccount}
+                    onChange={(e) => setTargetAccount(e.target.value)}
+                  />
                 </Form.Group>
               </Form>
             </Tab>

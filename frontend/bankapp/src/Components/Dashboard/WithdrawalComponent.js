@@ -14,20 +14,13 @@ const centerButtonStyle = {
   marginTop: '20px', // Add some spacing above the buttons
 };
 
-const WithdrawalComponent = ({ show, onHide }) => {
+const WithdrawalComponent = ({ show, onHide, accounts }) => {
   const [withdrawalAmount, setWithdrawalAmount] = useState('');
-  const [withdrawalBankAccount, setWithdrawalBankAccount] = useState('');
   const [selfTransferAmount, setSelfTransferAmount] = useState('');
-  const [selfTransferAccount, setSelfTransferAccount] = useState('');
+  const [sourceAccount, setSourceAccount] = useState(''); // Manage source account
+  const [targetAccount, setTargetAccount] = useState(''); // Manage target account
   const [activeTab, setActiveTab] = useState('withdrawal'); // Manage active tab
 
-  // Mock data for the target account dropdown
-  const targetAccounts = [
-    'Account 1',
-    'Account 2',
-    'Account 3',
-    // Add more account options as needed
-  ];
 
   const handleWithdraw = () => {
     // Handle the withdrawal logic here
@@ -48,7 +41,7 @@ const WithdrawalComponent = ({ show, onHide }) => {
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Funds Transfer</Modal.Title>
+        <Modal.Title>Transfer Money</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <StyledModalContent>
@@ -67,14 +60,20 @@ const WithdrawalComponent = ({ show, onHide }) => {
                     onChange={(e) => setWithdrawalAmount(e.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="withdrawalBankAccount">
+                <Form.Group controlId="sourceWithdrawalBankAccount">
                   <Form.Label>Bank Account:</Form.Label>
                   <Form.Control
-                    type="text"
-                    placeholder="Enter your bank account number"
-                    value={withdrawalBankAccount}
-                    onChange={(e) => setWithdrawalBankAccount(e.target.value)}
-                  />
+                    as="select"
+                    value={sourceAccount}
+                    onChange={(e) => setSourceAccount(e.target.value)}
+                  >
+                    <option value="">Select an account</option>
+                    {accounts.map((account, index) => (
+                      <option key={index} value={account.accountNo}>
+                        {account.accountNo}
+                      </option>
+                    ))}
+                  </Form.Control>
                 </Form.Group>
               </Form>
               <div style={centerButtonStyle}>
@@ -94,22 +93,37 @@ const WithdrawalComponent = ({ show, onHide }) => {
                     onChange={(e) => setSelfTransferAmount(e.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="selfTransferAccount">
-                  <Form.Label>Target Account Number:</Form.Label>
+                <Form.Group controlId="sourceWithdrawalBankAccount">
+                  <Form.Label>Bank Account:</Form.Label>
                   <Form.Control
                     as="select"
-                    value={selfTransferAccount}
-                    onChange={(e) => setSelfTransferAccount(e.target.value)}
+                    value={sourceAccount}
+                    onChange={(e) => setSourceAccount(e.target.value)}
                   >
                     <option value="">Select an account</option>
-                    {targetAccounts.map((account, index) => (
-                      <option key={index} value={account}>
-                        {account}
+                    {accounts.map((account, index) => (
+                      <option key={index} value={account.accountNo}>
+                        {account.accountNo}
                       </option>
                     ))}
                   </Form.Control>
                 </Form.Group>
-              </Form>
+                <Form.Group controlId="targetWithdrawalBankAccount">
+                  <Form.Label>Bank Account:</Form.Label>
+                  <Form.Control
+                    as="select"
+                    value={targetAccount}
+                    onChange={(e) => setTargetAccount(e.target.value)}
+                  >
+                    <option value="">Select an account</option>
+                    {accounts.map((account, index) => (
+                      <option key={index} value={account.accountNo}>
+                        {account.accountNo}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+                </Form>
               <div style={centerButtonStyle}>
                 <Button variant="primary" onClick={handleSelfTransfer}>
                   Self Transfer
