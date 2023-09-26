@@ -70,6 +70,7 @@ const FormComponent = () => {
               _value={password}
               _placeholder={"Enter Password"}
               _changeHandler={passwordHandler}
+              _type={"password"}
             />
           </Grid>
 

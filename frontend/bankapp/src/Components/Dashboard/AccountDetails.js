@@ -81,7 +81,7 @@ const AccountDetails = ({ accounts }) => {
                     <ClickableCell onClick={(event) => handleClick(event)}>
                       <td
                         className={
-                          account.disabled  ? "success" : "fail"
+                          account.disabled  ? "fail" : "success"
                         }
                       >
                         {account.accountNo}
