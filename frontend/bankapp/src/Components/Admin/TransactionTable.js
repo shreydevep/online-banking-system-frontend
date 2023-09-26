@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
+import notifySuccess from "../../utils/toastify-services/notifySuccess";
+import notifyError from "../../utils/toastify-services/notifyError";
 
 // Styled component for the outer container
 const Container = styled.div`
@@ -74,9 +76,11 @@ const TransactionTable = () => {
       .get(`http://localhost:8080/allTransactions/${customerId}`)
       .then((res) => {
         setTransactions(res.data);
+        notifySuccess("Transactions fetched successfully");
       })
       .catch((err) => {
         console.log(err);
+        notifyError(err.response.data.message);
       });
   };
 

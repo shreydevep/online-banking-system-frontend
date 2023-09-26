@@ -1,4 +1,6 @@
 import axios from "axios";
+import notifySuccess from "./toastify-services/notifySuccess";
+import notifyError from "./toastify-services/notifyError";
 
 export const getAccountDetails = async (accountNumber, setAccountDetails) => {
   try {
@@ -10,6 +12,7 @@ export const getAccountDetails = async (accountNumber, setAccountDetails) => {
     setAccountDetails(data);
   } catch (error) {
     console.log(error);
+    notifyError(error.response.data.message);
   }
 };
 
@@ -23,6 +26,7 @@ export const getCustomerDetails = async (customerId, setCustomerDetails) => {
     setCustomerDetails(data);
   } catch (error) {
     console.log(error);
+    notifyError(error.response.data.message);
   }
 };
 
@@ -34,7 +38,10 @@ export const updatePassword = (otp, customerId, password) => {
       password,
     })
     .then((response) => console.log(response))
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      notifyError(error.response.data.message);
+    });
 };
 export const getAllUserTransactions = async (customerId, setTransactions) => {
   try {
@@ -46,6 +53,7 @@ export const getAllUserTransactions = async (customerId, setTransactions) => {
     setTransactions(data);
   } catch (error) {
     console.log(error);
+    notifyError(error.response.data.message);
   }
 };
 
@@ -56,7 +64,10 @@ export const getTransactions = async (accountNumber, setTransactions) => {
       console.log(response.data);
       setTransactions(response.data);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      notifyError(error.response.data.message);
+    });
 };
 
 export const getAllAccountsBalance = async (customerId, setTotalBalance) => {
@@ -68,8 +79,10 @@ export const getAllAccountsBalance = async (customerId, setTotalBalance) => {
     const data = await response.json();
     console.log(data);
     setTotalBalance(data);
+    notifySuccess(response.data);
   } catch (error) {
     console.log(error);
+    notifyError(error.response.data.message);
   }
 };
 
@@ -78,10 +91,32 @@ export const transferFunds = async (transferFundsObject) => {
     .post(`http://localhost:8080/transact`, transferFundsObject)
     .then((response) => {
       console.log(response);
-      alert(response.data, response.status);
+      //alert(response.data, response.status);
+      notifySuccess(response.data);
     })
     .catch((error) => {
       console.log(error.response);
-      alert(error.response.data.message);
+      //alert(error.response.data.message);
+      notifyError(error.response.data.message);
     });
 };
+
+export const loginCustomer = async (loginObject, navigate) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:8080/login`,
+      loginObject
+    );
+    if (response.status == 200) {
+      notifySuccess(response.data);
+      sessionStorage.setItem("customerId", loginObject.customerId);
+      navigate("/userdashboard");
+    } else {
+      notifyError(response.data);
+    }
+  } catch (error) {
+    console.log(error);
+    notifyError(error.response.data.message);
+  }
+};
+

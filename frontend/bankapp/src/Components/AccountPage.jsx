@@ -11,7 +11,7 @@ import {
   Link,
 } from "@mui/material";
 import InputComponent from "./InputComponent";
-import InputComponent2 from "./InputComponent2";
+import InputComponentAccounts from "./InputComponentAccounts";
 
 const AccountPage = () => {
   const paperStyle = {
@@ -73,8 +73,8 @@ const AccountPage = () => {
           <Avatar style={avatarStyle}></Avatar>
           <h2>Create Account</h2>
         </Grid>
-        <Grid item xs={12}>
-          <InputComponent2
+        <Grid item xs={12} mt={2}>
+          <InputComponentAccounts
             _id={"Account Type"}
             _value={accountType}
             _changeHandler={accountTypeHandler}

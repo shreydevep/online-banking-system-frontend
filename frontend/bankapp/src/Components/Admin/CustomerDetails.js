@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
+import notifySuccess from "../../utils/toastify-services/notifySuccess";
+import notifyError from "../../utils/toastify-services/notifyError";
 
 // Styled component for the outer container
 const Container = styled.div`
@@ -116,9 +118,11 @@ const CustomerDetails = () => {
       .then((res) => {
         setCustomerData(res.data);
         console.log(res.data); // Set customer data when available
+        notifySuccess("Customer details fetched successfully")
       })
       .catch((err) => {
         console.log(err.response.data);
+        notifyError(err.response.data.message)
         setCustomerData(null); // Clear customer data on error
       });
   };
