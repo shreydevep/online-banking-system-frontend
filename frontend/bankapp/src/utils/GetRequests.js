@@ -77,7 +77,11 @@ export const transferFunds = async (transferFundsObject) => {
   axios
     .post(`http://localhost:8080/transact`, transferFundsObject)
     .then((response) => {
-      console.log(response.data);
+      console.log(response);
+      alert(response.data, response.status);
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error.response);
+      alert(error.response.data.message);
+    });
 };

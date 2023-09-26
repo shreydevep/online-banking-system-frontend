@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import RecentTransactionsCard from './RecentTransactionsCard'; // Assuming you have a TransactionTable component
-import AccountDetails from './AccountDetails';
+import React, { useState } from "react";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import RecentTransactionsCard from "./RecentTransactionsCard"; // Assuming you have a TransactionTable component
+import AccountDetails from "./AccountDetails";
+import TransactionHistoryCard from "./TransactionHistoryCard";
 
-const UserDashboard = ({ customerDetails, setCustomerDetails, transactions, setTransactions }) => {
+const UserDashboard = ({
+  customerDetails,
+  setCustomerDetails,
+  transactions,
+  setTransactions,
+}) => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   const handleTabChange = (event, newValue) => {
@@ -16,10 +22,21 @@ const UserDashboard = ({ customerDetails, setCustomerDetails, transactions, setT
       <Tabs value={selectedTab} onChange={handleTabChange} centered>
         <Tab label="Account Details" />
         <Tab label="Recent Transactions" />
+        <Tab label="Transactions History" />
       </Tabs>
-      
-      {selectedTab === 0 && <AccountDetails accounts={customerDetails.account} />}
-      {selectedTab === 1 && <RecentTransactionsCard transactions={transactions} />}
+
+      {selectedTab === 0 && (
+        <AccountDetails accounts={customerDetails.account} />
+      )}
+      {selectedTab === 1 && (
+        <RecentTransactionsCard transactions={transactions} />
+      )}
+      {selectedTab === 2 && (
+        <TransactionHistoryCard
+          transactions={transactions}
+          accounts={customerDetails.account}
+        />
+      )}
     </>
   );
 };
