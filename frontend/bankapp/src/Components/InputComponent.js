@@ -5,7 +5,7 @@ export default function InputComponent({
   _id,
   _changeHandler,
   _placeholder,
-  _type,
+  _type
 }) {
   return (
     <div>
