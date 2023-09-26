@@ -13,13 +13,33 @@ import {
 import InputComponent from "./InputComponent";
 import NavBar from "./NavBar";
 
-function reverseString(str) {
-  //dd-mm-yyyy
-  //21-07-2023
-  //2023-07-21
-  //yyyy-mm-dd
-  return str.split("").reverse().join("");
+function reverseString(inputDate) {
+  // Split the input date by '-' to get day, month, and year
+  console.log(inputDate);
+  const dateParts = inputDate.split('-');
+  console.log(dateParts);
+  // Check if the dateParts array has exactly 3 elements
+  if (dateParts.length !== 3) {
+    return "Invalid date format. Please use 'dd-mm-yyyy'.";
+  }
+
+  // Rearrange the date parts to the 'yyyy-mm-dd' format
+  const year = dateParts[2];
+  const month = dateParts[1];
+  const day = dateParts[0];
+  console.log(year, month, day);
+  // Create the formatted date string
+  const formattedDate = `${year}-${month}-${day}`;
+  console.log(formattedDate);
+
+  return formattedDate;
 }
+
+
+
+
+
+
 
 const Registration = () => {
   const paperStyle = {
@@ -59,7 +79,7 @@ const Registration = () => {
   };
 
   const dobHandler = (event) => {
-    setDob(reverseString(event.target.value));
+    setDob((event.target.value));
   };
 
   const emailHandler = (event) => {
@@ -68,13 +88,13 @@ const Registration = () => {
 
   const submitActionHandler = (event) => {
     event.preventDefault();
-    console.log(event, {
+    console.log({
       password: password,
       name: name,
       mobile,
       aadhar,
       email,
-      dob,
+      dob: dob
     });
     axios
       .post(baseURL, {
@@ -83,17 +103,17 @@ const Registration = () => {
         mobile,
         aadhar,
         email,
-        dob,
+        dob: dob
       })
       .then((response) => {
         console.log(response);
-        alert(response.data.message);
-
+        //alert(response.data.message);
+        setDob("");
         navigate("/login");
       })
       .catch((error) => {
         console.log(error)
-        alert("error===" + error);
+        //alert("error===" + error);
       });
   };
 
@@ -151,7 +171,7 @@ const Registration = () => {
               </Grid>
               <Grid item xs={12}>
                 <InputComponent
-                  _id={"DOB"}
+                  _id={""}
                   _value={dob}
                   _placeholder={"Enter DOB"}
                   _changeHandler={dobHandler}

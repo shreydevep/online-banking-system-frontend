@@ -2,9 +2,7 @@ import axios from "axios";
 
 export const getAccountDetails = async (accountNumber, setAccountDetails) => {
   try {
-    
     const response = await fetch(
-      
       `http://localhost:8080/getAccountDetails/${accountNumber}`
     );
     const data = await response.json();
@@ -30,12 +28,13 @@ export const getCustomerDetails = async (customerId, setCustomerDetails) => {
 
 export const updatePassword = (otp, customerId, password) => {
   const baseURL = `http://localhost:8080/changePassword/${otp}`;
-    axios
-      .put(baseURL, {
-        customerId,
-        password,
-      })
-      .then((response) => console.log(response)).catch((error) => console.log(error));
+  axios
+    .put(baseURL, {
+      customerId,
+      password,
+    })
+    .then((response) => console.log(response))
+    .catch((error) => console.log(error));
 };
 export const getAllUserTransactions = async (customerId, setTransactions) => {
   try {
@@ -48,21 +47,37 @@ export const getAllUserTransactions = async (customerId, setTransactions) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const getTransactions = async (accountNumber, setTransactions) => {
-    axios
-      .get(`http://localhost:8080/transactions/${accountNumber}`)
-      .then((response) => {
-        console.log(response.data);
-        setTransactions(response.data);
-      }).catch((error) => console.log(error));
-  
+  axios
+    .get(`http://localhost:8080/transactions/${accountNumber}`)
+    .then((response) => {
+      console.log(response.data);
+      setTransactions(response.data);
+    })
+    .catch((error) => console.log(error));
+};
+
+export const getAllAccountsBalance = async (customerId, setTotalBalance) => {
+  try {
+    const response = await fetch(
+      `http://localhost:8080/allAccountBalance/${customerId}`
+    );
+
+    const data = await response.json();
+    console.log(data);
+    setTotalBalance(data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const transferFunds = async (transferFundsObject) => {
-    axios.post(`http://localhost:8080/transact`,transferFundsObject).then((response) => {
+  axios
+    .post(`http://localhost:8080/transact`, transferFundsObject)
+    .then((response) => {
       console.log(response.data);
-    }).catch((error) => console.log(error));
- 
+    })
+    .catch((error) => console.log(error));
 };

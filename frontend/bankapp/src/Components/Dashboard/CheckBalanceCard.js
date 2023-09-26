@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Card } from "react-bootstrap";
+import { getAllAccountsBalance } from "../../utils/GetRequests";
 
 const CheckBalanceCardContainer = styled(Card)`
   background-color: #f9f9f9;
@@ -23,11 +24,14 @@ const CheckBalanceCardInfo = styled.div`
   color: #555;
 `;
 
-const CheckBalanceCard = ({ accounts }) => {
-  const totalBalance = accounts.reduce(
-    (sum, account) => sum + account.balance,
-    0
-  );
+const CheckBalanceCard = () => {
+  const [totalBalance, setTotalBalance] = useState(0);
+  useEffect(() => {
+    getAllAccountsBalance(
+      sessionStorage.getItem("customerId"),
+      setTotalBalance
+    );
+  }, []);
 
   return (
     <CheckBalanceCardContainer>
