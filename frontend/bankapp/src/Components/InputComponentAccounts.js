@@ -1,7 +1,7 @@
 import React from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
-export default function InputComponent({
+export default function InputComponentAccounts({
   _value,
   _id,
   _changeHandler,

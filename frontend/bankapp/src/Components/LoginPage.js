@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import {
   Grid,
   Paper,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import InputComponent from "./InputComponent";
 import NavBar from "./NavBar";
+import { loginCustomer } from "../utils/GetRequests";
 
 const FormComponent = () => {
   const [customerId, setCustomerId] = useState("");
@@ -39,23 +40,11 @@ const FormComponent = () => {
 
   const submitActionHandler = (event) => {
     event.preventDefault();
-    const baseURL = "http://localhost:8080/login";
-    console.log(event);
-    sessionStorage.setItem("customerId", customerId);
-    axios
-      .post(baseURL, {
-        customerId: customerId,
-        password: password,
-      })
-      .then((response) => {
-        console.log(response);
-        alert(response.data);
-
-        navigate("/userdashboard");
-      })
-      .catch((error) => {
-        alert("error===" + error);
-      });
+    const loginObject = {
+      customerId,
+      password,
+    };
+    loginCustomer(loginObject, navigate);
   };
 
   return (
