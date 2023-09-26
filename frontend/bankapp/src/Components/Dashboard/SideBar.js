@@ -132,8 +132,8 @@ const Sidebar = ({ customerDetails }) => {
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
-        <NavLink onClick={() => setShowTransactionHistoryModal(true)}>
-          Transaction History
+        <NavLink >
+          Customer Details
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
