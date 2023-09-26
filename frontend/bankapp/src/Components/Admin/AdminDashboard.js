@@ -11,7 +11,7 @@ import {
   Tab,
   Box,
 } from '@mui/material';
-import AccountStatus from './AccountStatus';
+
 import AdminCreateAccount from './AdminCreateAccount';
 import TransactionTable from './TransactionTable';
 import AccountTable from "./AccountTable";
@@ -69,7 +69,6 @@ const AdminDashboard = () => {
 
   return (
       <div>
-        <AccountStatus show={showAccountStatusModal} onHide={() => setShowAccountStatusModal(false)} />
         <AdminCreateAccount
             show={showAdminCreateAccountModal}
             onHide={() => setShowAdminCreateAccountModal(false)}
@@ -85,20 +84,6 @@ const AdminDashboard = () => {
           </Toolbar>
         </StyledAppBar>
         <Grid container spacing={3} sx={{ marginTop: '5px' }}>
-          <Grid item xs={12} sm={6} md={3}>
-            <CardContainer onClick={() => setShowAccountStatusModal(true)}>
-              <Card sx={{ backgroundColor: 'lightblue', height: '100px' }}>
-                <CardContent>
-                  <CardTitle variant="h5" component="div">
-                    Account Status
-                  </CardTitle>
-                  <CardDescription variant="body2">
-                    Toggle the status of an account.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </CardContainer>
-          </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <CardContainer onClick={() => setShowAdminCreateAccountModal(true)}>
               <Card sx={{ backgroundColor: 'lightblue', height: '100px' }}>
