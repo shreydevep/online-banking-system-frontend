@@ -27,6 +27,16 @@ const ClickableCell = styled.td`
   }
 `;
 
+const AccountTable = styled(Table)`
+  td.success {
+    color: green;
+  }
+
+  td.fail {
+    color: red;
+  }
+`;
+
 const AccountDetails = ({ accounts }) => {
   // Assuming 'accounts' is an array of account objects, each containing account details.
   const [selectedAccount, setSelectedAccount] = useState("");
@@ -35,11 +45,11 @@ const AccountDetails = ({ accounts }) => {
     setShowAccountDetails(!showAccountDetails);
   };
   const handleClick = (event) => {
-    const val = (event.target.innerText);
-    console.log(typeof(val)); 
+    const val = event.target.innerText;
+    console.log(typeof val);
     setSelectedAccount(val);
     setShowAccountDetails(!showAccountDetails);
-  }
+  };
 
   return (
     <>
@@ -54,7 +64,7 @@ const AccountDetails = ({ accounts }) => {
         </Card.Header>
         <Card.Body>
           <ScrollableTableContainer>
-            <Table striped bordered hover responsive>
+            <AccountTable striped bordered hover responsive>
               <thead>
                 <tr>
                   <th>Account Type</th>
@@ -67,15 +77,22 @@ const AccountDetails = ({ accounts }) => {
                 {accounts.map((account, index) => (
                   <tr key={index}>
                     <td>{account.accountType}</td>
-                    <ClickableCell onClick={(event)=>handleClick(event)}>
-                      {account.accountNo}
+
+                    <ClickableCell onClick={(event) => handleClick(event)}>
+                      <td
+                        className={
+                          account.disabled  ? "success" : "fail"
+                        }
+                      >
+                        {account.accountNo}
+                      </td>
                     </ClickableCell>
                     <td>{account.branch}</td>
                     <td>${account.balance}</td>
                   </tr>
                 ))}
               </tbody>
-            </Table>
+            </AccountTable>
           </ScrollableTableContainer>
         </Card.Body>
       </StyledAccountDetailsCard>
