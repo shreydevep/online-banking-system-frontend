@@ -15,6 +15,7 @@ import AccountStatus from './AccountStatus';
 import AdminCreateAccount from './AdminCreateAccount';
 import TransactionTable from './TransactionTable';
 import AccountTable from "./AccountTable";
+import CustomerDetails from "./CustomerDetails";
 import styled, { css } from 'styled-components';
 import { mockTransactionData } from '../../utils/data';
 
@@ -116,14 +117,18 @@ const AdminDashboard = () => {
 
         {/* Tabs Panel */}
         <Tabs value={activeTab} onChange={handleTabChange}>
+          <Tab label="Customer" />
           <Tab label="Accounts" />
           <Tab label="Transactions" />
         </Tabs>
         <TabPanel value={activeTab} index={0}>
+            <CustomerDetails />
+        </TabPanel>
+        <TabPanel value={activeTab} index={1}>
           {/* Content for Tab 1 */}
           <AccountTable />
         </TabPanel>
-        <TabPanel value={activeTab} index={1}>
+        <TabPanel value={activeTab} index={2}>
           {/* Content for Tab 2 */}
           <TransactionTable />
         </TabPanel>
@@ -145,7 +150,7 @@ function TabPanel(props) {
           {...other}
       >
         {value === index && (
-            <Box p={2}>
+            <Box p={3}>
               {children}
             </Box>
         )}
