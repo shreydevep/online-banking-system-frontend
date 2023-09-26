@@ -79,7 +79,7 @@ export const getAllAccountsBalance = async (customerId, setTotalBalance) => {
     const data = await response.json();
     console.log(data);
     setTotalBalance(data);
-    notifySuccess(response.data);
+    notifySuccess("Balance refreshed successfully")
   } catch (error) {
     console.log(error);
     notifyError(error.response.data.message);
