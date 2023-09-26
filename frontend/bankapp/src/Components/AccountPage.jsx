@@ -11,6 +11,7 @@ import {
   Link,
 } from "@mui/material";
 import InputComponent from "./InputComponent";
+import InputComponent2 from "./InputComponent2";
 
 const AccountPage = () => {
   const paperStyle = {
@@ -21,27 +22,27 @@ const AccountPage = () => {
   };
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const btnstyle = { margin: "8px 0" };
-  const customerId=sessionStorage.getItem("customerId");
+  const customerId = sessionStorage.getItem("customerId");
 
   const baseURL = `http://localhost:8080/account/${customerId}`;
   const navigate = useNavigate();
 
   const [accountType, setAccountType] = useState("");
-  const [openingDate, setOpeningDate] = useState("");
-  const [ifsc, setIfsc] = useState("");
+  //const [openingDate, setOpeningDate] = useState("");
+  //const [ifsc, setIfsc] = useState("");
   const [branch, setBranch] = useState("");
 
   const accountTypeHandler = (event) => {
     setAccountType(event.target.value);
   };
 
-  const openingDateHandler = (event) => {
+ /* const openingDateHandler = (event) => {
     setOpeningDate(event.target.value);
   };
 
   const ifscHandler = (event) => {
     setIfsc(event.target.value);
-  };
+  };*/
 
   const branchHandler = (event) => {
     setBranch(event.target.value);
@@ -52,8 +53,6 @@ const AccountPage = () => {
     axios
       .post(baseURL, {
         accountType,
-        ifsc,
-        openingDate,
         branch,
       })
       .then((response) => {
@@ -75,38 +74,24 @@ const AccountPage = () => {
           <h2>Create Account</h2>
         </Grid>
         <Grid item xs={12}>
-          <InputComponent
+          <InputComponent2
             _id={"Account Type"}
             _value={accountType}
-            _placeholder={"Account Type"}
             _changeHandler={accountTypeHandler}
           />
+         
         </Grid>
-        <Grid item xs={12}>
-          <InputComponent
-            _id={"IFSC"}
-            _value={ifsc}
-            _placeholder={"IFSC"}
-            _changeHandler={ifscHandler}
-          />
-        </Grid>
+        
         <Grid item xs={12}>
           <InputComponent
             _id={"Branch"}
             _value={branch}
-            _placeholder={"Brancg"}
+            _placeholder={"Branch"}
             _changeHandler={branchHandler}
           />
         </Grid>
 
-        <Grid item xs={12}>
-          <InputComponent
-            _id={"Account Opening Date"}
-            _value={openingDate}
-            _placeholder={"Opening Date"}
-            _changeHandler={openingDateHandler}
-          />
-        </Grid>
+       
 
         <Button
           type="submit"

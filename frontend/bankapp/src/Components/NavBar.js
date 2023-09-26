@@ -23,6 +23,9 @@ export default function NavBar() {
             <Button color="inherit" onClick={() => navigate("/registration")}>
               Register
             </Button>
+            <Button color="inherit" onClick={() => navigate("/admin")}>
+              Admin
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
