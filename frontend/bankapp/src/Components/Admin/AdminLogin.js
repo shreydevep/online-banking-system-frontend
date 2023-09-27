@@ -11,6 +11,8 @@ import {
   Link,
 } from "@mui/material";
 import InputComponent from "../InputComponent";
+import notifySuccess from "../../utils/toastify-services/notifySuccess";
+import notifyError from "../../utils/toastify-services/notifyError";
 
 
 const AdminLogin = () => {
@@ -48,13 +50,16 @@ const AdminLogin = () => {
         password: password,
       })
       .then((response) => {
-        console.log(response);
-        alert(response.data);
-
-        navigate("/admindashboard");
+        if(response.data === "Login success"){
+          notifySuccess(response.data);
+          navigate("/admindashboard");
+        }else{
+          notifyError(response.data)
+        }
+        
       })
       .catch((error) => {
-        alert("error===" + error);
+        notifyError(error.response.data.message)
       });
   };
 
@@ -80,6 +85,7 @@ const AdminLogin = () => {
               _value={password}
               _placeholder={"Enter Password"}
               _changeHandler={passwordHandler}
+              _type={"password"}
             />
           </Grid>
 

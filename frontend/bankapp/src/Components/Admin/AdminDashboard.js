@@ -19,9 +19,12 @@ import TransactionTable from './TransactionTable';
 import AccountTable from "./AccountTable";
 import CustomerDetails from "./CustomerDetails";
 import styled, { css } from 'styled-components';
+
+import { useNavigate } from 'react-router';
+
 import UpdateBalanceModal from './UpdateBalanceModal';
-import { mockTransactionData } from '../../utils/data';
 import {useNavigate} from 'react-router-dom';
+
 
 const StyledAppBar = styled(AppBar)`
   background-color: #333;
@@ -58,11 +61,14 @@ const AdminDashboard = () => {
   const [showUpdateBalanceModal, setUpdateBalanceModal] = useState(false);
   const [showAdminCreateAccountModal, setShowAdminCreateAccountModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0); // State to manage active tab
+
   const [menuAnchorEl, setMenuAnchorEl] = useState(null); // State for the Menu dropdown
   const navigate = useNavigate();
 
   const handleLogout = () => {
     console.log('Logged out');
+    sessionStorage.clear();
+
     navigate("/");
   };
 

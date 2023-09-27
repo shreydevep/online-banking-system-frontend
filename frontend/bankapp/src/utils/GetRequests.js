@@ -107,7 +107,7 @@ export const loginCustomer = async (loginObject, navigate) => {
       `http://localhost:8080/login`,
       loginObject
     );
-    if (response.status == 200) {
+    if (response.data === "Login success") {
       notifySuccess(response.data);
       sessionStorage.setItem("customerId", loginObject.customerId);
       navigate("/userdashboard");

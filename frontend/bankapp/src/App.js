@@ -15,6 +15,7 @@ import AdminDashboard from "./Components/Admin/AdminDashboard"
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ErrorPage from "./Components/ErrorPage";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
       
         <BrowserRouter>
           <Routes>
+            <Route exact path="*" element={<ErrorPage/>}/>
             <Route exact path="/" element={<HomePage />} />
             <Route exact path="/userdashboard" element={<Layout />} />
 
