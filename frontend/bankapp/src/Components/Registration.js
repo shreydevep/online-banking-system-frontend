@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import InputComponent from "./InputComponent";
 import NavBar from "./NavBar";
-
+import notifyError from "../utils/toastify-services/notifyError";
 function reverseString(inputDate) {
   // Split the input date by '-' to get day, month, and year
   console.log(inputDate);
@@ -88,14 +88,55 @@ const Registration = () => {
 
   const submitActionHandler = (event) => {
     event.preventDefault();
-    console.log({
-      password: password,
-      name: name,
-      mobile,
-      aadhar,
-      email,
-      dob: dob
-    });
+  
+    // Check for empty fields
+    if (!name || !email || !password || !mobile || !aadhar || !dob) {
+      notifyError('Please fill in all fields.');
+      return;
+    }
+  
+    // Validate email format
+    const isValidEmail = (email) => {
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      return emailRegex.test(email);
+    };
+  
+    if (!isValidEmail(email)) {
+      notifyError('Please enter a valid email address.');
+      return;
+    }
+  
+    // Validate Aadhar number format
+    const isValidAadhar = (aadhar) => {
+      const aadharRegex = /^\d{12}$/;
+      return aadharRegex.test(aadhar);
+    };
+  
+    if (!isValidAadhar(aadhar)) {
+      notifyError('Please enter a valid Aadhar number.');
+      return;
+    }
+  
+    // Validate mobile number format
+    const isValidMobileNumber = (mobileNumber) => {
+      // Define a regular expression for a 10-digit mobile number
+      const mobileNumberRegex = /^\d{10}$/;
+      return mobileNumberRegex.test(mobileNumber);
+    };
+  
+    if (!isValidMobileNumber(mobile)) {
+      notifyError('Please enter a valid mobile number.');
+      return;
+    }
+  
+    // Additional validation for date of birth (DOB)
+  
+    if (dob === "Invalid date format. Please use 'dd-mm-yyyy'.") {
+      notifyError('Invalid date format for DOB. Please use "dd-mm-yyyy".');
+      return;
+    }
+  
+    // Continue with the axios POST request
     axios
       .post(baseURL, {
         password: password,
@@ -103,7 +144,7 @@ const Registration = () => {
         mobile,
         aadhar,
         email,
-        dob: dob
+        dob: dob // Use the formatted DOB
       })
       .then((response) => {
         console.log(response);
@@ -112,7 +153,7 @@ const Registration = () => {
         navigate("/login");
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         //alert(error.response.data.message);
         //alert("error===" + error);
       });

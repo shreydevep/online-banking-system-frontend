@@ -23,7 +23,7 @@ import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router';
 
 import UpdateBalanceModal from './UpdateBalanceModal';
-import {useNavigate} from 'react-router-dom';
+
 
 
 const StyledAppBar = styled(AppBar)`
