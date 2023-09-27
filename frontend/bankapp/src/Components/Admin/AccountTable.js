@@ -72,6 +72,16 @@ const SearchButton = styled.button`
   }
 `;
 
+// Styled component for the status button
+const StatusButton = styled.button`
+  background-color: ${(props) => (props.status ? "red" : "green")};
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+`;
+
 const AccountTable = () => {
   const [customerId, setCustomerId] = useState(""); // State for customer ID input
   const [account, setAccount] = useState([]); // State for transactions [
@@ -90,7 +100,26 @@ const AccountTable = () => {
           console.log(err.response.data);
           notifyError(err.response.data.message);
         });
-    else notifyError("Please enter a valid customer ID")
+    else notifyError("Please enter a valid customer ID");
+  };
+
+  const handleStatusButtonClick = (accountNo) => {
+
+  const baseURL = `http://localhost:8080/admin/toggleAccountStatus/${accountNo}`;
+      axios
+        .post(baseURL)
+        .then((response) => {
+          console.log(response);
+          notifySuccess(response.data);
+        })
+        .catch((error) => {
+
+          console.log(error);
+        });
+
+    // Handle status button click with corresponding account number
+    console.log(`Status button clicked for Account No: ${accountNo}`);
+    // You can perform further actions with the account number here
   };
 
   return (
@@ -121,8 +150,14 @@ const AccountTable = () => {
               <td>{account.accountNo}</td>
               <td>{account.branch}</td>
               <td>{account.balance}</td>
-              <td className={account.disabled ? "success" : "fail"}>
-                {account.disabled ? "Disabled" : "Active"}
+              <td>
+                <StatusButton
+                  onClick={() => handleStatusButtonClick(account.accountNo)}
+                  status={account.disabled}
+                  title="Change Account Status"
+                >
+                  {account.disabled ? "Disabled" : "Active"}
+                </StatusButton>
               </td>
             </tr>
           ))}

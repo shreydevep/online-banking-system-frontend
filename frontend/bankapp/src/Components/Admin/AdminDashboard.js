@@ -7,17 +7,21 @@ import {
   Card,
   CardContent,
   Grid,
+  Menu,
+  MenuItem,
   Tabs,
   Tab,
   Box,
 } from '@mui/material';
-import AccountStatus from './AccountStatus';
+
 import AdminCreateAccount from './AdminCreateAccount';
 import TransactionTable from './TransactionTable';
 import AccountTable from "./AccountTable";
 import CustomerDetails from "./CustomerDetails";
 import styled, { css } from 'styled-components';
+import UpdateBalanceModal from './UpdateBalanceModal';
 import { mockTransactionData } from '../../utils/data';
+import {useNavigate} from 'react-router-dom';
 
 const StyledAppBar = styled(AppBar)`
   background-color: #333;
@@ -51,12 +55,15 @@ const CardDescription = styled(Typography)`
 `;
 
 const AdminDashboard = () => {
-  const [showAccountStatusModal, setShowAccountStatusModal] = useState(false);
+  const [showUpdateBalanceModal, setUpdateBalanceModal] = useState(false);
   const [showAdminCreateAccountModal, setShowAdminCreateAccountModal] = useState(false);
   const [activeTab, setActiveTab] = useState(0); // State to manage active tab
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null); // State for the Menu dropdown
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     console.log('Logged out');
+    navigate("/");
   };
 
   const handleCardClick = (cardNumber) => {
@@ -67,53 +74,52 @@ const AdminDashboard = () => {
     setActiveTab(newValue);
   };
 
+  const handleMenuOpen = (event) => {
+    setMenuAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchorEl(null);
+  };
+
   return (
       <div>
-        <AccountStatus show={showAccountStatusModal} onHide={() => setShowAccountStatusModal(false)} />
         <AdminCreateAccount
             show={showAdminCreateAccountModal}
             onHide={() => setShowAdminCreateAccountModal(false)}
+        />
+        <UpdateBalanceModal
+            show={showUpdateBalanceModal}
+            onHide={() => setUpdateBalanceModal(false)}
         />
         <StyledAppBar position="static">
           <Toolbar>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Admin Dashboard
             </Typography>
-            <StyledButton color="inherit" onClick={handleLogout}>
-              Logout
-            </StyledButton>
+            <Button color="inherit"
+                    aria-controls="menu-dropdown"
+                    aria-haspopup="true"
+                    onClick={handleMenuOpen}
+                    >
+                        Menu
+            </Button>
+            <Menu
+                    id="menu-dropdown"
+                    anchorEl={menuAnchorEl}
+                    keepMounted
+                    open={Boolean(menuAnchorEl)}
+                    onClose={handleMenuClose}
+                    >
+                        <MenuItem onClick={() => setShowAdminCreateAccountModal(true)}>Create Account</MenuItem>
+                        <MenuItem onClick={() => setUpdateBalanceModal(true)}>Update Balance</MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                        {/* Add more MenuItem components for other menu options */}
+            </Menu>
+
           </Toolbar>
         </StyledAppBar>
-        <Grid container spacing={3} sx={{ marginTop: '5px' }}>
-          <Grid item xs={12} sm={6} md={3}>
-            <CardContainer onClick={() => setShowAccountStatusModal(true)}>
-              <Card sx={{ backgroundColor: 'lightblue', height: '100px' }}>
-                <CardContent>
-                  <CardTitle variant="h5" component="div">
-                    Account Status
-                  </CardTitle>
-                  <CardDescription variant="body2">
-                    Toggle the status of an account.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </CardContainer>
-          </Grid>
-          <Grid item xs={12} sm={6} md={3}>
-            <CardContainer onClick={() => setShowAdminCreateAccountModal(true)}>
-              <Card sx={{ backgroundColor: 'lightblue', height: '100px' }}>
-                <CardContent>
-                  <CardTitle variant="h5" component="div">
-                    Create Account
-                  </CardTitle>
-                  <CardDescription variant="body2">
-                    Create a new account for an existing customer.
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </CardContainer>
-          </Grid>
-        </Grid>
+
 
         {/* Tabs Panel */}
         <Tabs value={activeTab} onChange={handleTabChange}>
