@@ -120,3 +120,16 @@ export const loginCustomer = async (loginObject, navigate) => {
   }
 };
 
+export const withdrawRequest = async (withdrawObject) => { 
+  try {
+    const response = await axios.post(
+      `http://localhost:8080/transact`,
+      withdrawObject
+    );
+    console.log(response);
+    notifySuccess(response.data);
+  } catch (error) {
+    console.log(error);
+    notifyError(error.response.data.message);
+  }
+ };

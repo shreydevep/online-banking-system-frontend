@@ -140,7 +140,7 @@ const Sidebar = ({ customerDetails }) => {
         <NavLink href="/account">New Account</NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
-        <NavLink href="#">Account Details</NavLink>
+        <NavLink href="#">Account Statement</NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
         <NavLink onClick={() => setShowPasswordChangeModal(true)}>

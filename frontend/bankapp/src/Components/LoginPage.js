@@ -13,6 +13,7 @@ import {
 import InputComponent from "./InputComponent";
 import NavBar from "./NavBar";
 import { loginCustomer } from "../utils/GetRequests";
+import notifyError from "../utils/toastify-services/notifyError";
 
 const FormComponent = () => {
   const [customerId, setCustomerId] = useState("");
@@ -29,8 +30,6 @@ const FormComponent = () => {
   const navigate = useNavigate();
 
   const customerIdChangeHandler = (event) => {
-    //alert(event.target.value);
-    //console.log(regno);
     setCustomerId(event.target.value);
   };
 
@@ -38,8 +37,27 @@ const FormComponent = () => {
     setPassword(event.target.value);
   };
 
+
+
   const submitActionHandler = (event) => {
     event.preventDefault();
+
+    if (!customerId.trim()) {
+      notifyError("CustomerID cannot be empty.");
+      return;
+    }
+    
+    if (isNaN(customerId)) {
+      notifyError("CustomerID must be a number.");
+      return;
+    }
+
+    // Check if the password length is between 8 and 15 characters
+    if (password.length < 8 || password.length > 15) {
+      notifyError("Password must be between 8 and 15 characters.");
+      return;
+    }
+
     const loginObject = {
       customerId,
       password,
