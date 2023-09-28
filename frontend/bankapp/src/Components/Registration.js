@@ -13,6 +13,8 @@ import {
 import InputComponent from "./InputComponent";
 import NavBar from "./NavBar";
 import notifyError from "../utils/toastify-services/notifyError";
+import notifySuccess from "../utils/toastify-services/notifySuccess";
+
 function reverseString(inputDate) {
   // Split the input date by '-' to get day, month, and year
   console.log(inputDate);
@@ -182,10 +184,22 @@ const Registration = () => {
         dob: dob // Use the formatted DOB
       })
       .then((response) => {
-        console.log(response);
-        //alert(response.data.message);
-        setDob("");
-        navigate("/login");
+
+        if(response.data.message === 'Customer created successfully!'){
+          notifySuccess(response.data.message + "\n Customer Id: " + response.data.id)
+          navigate("/login");
+        }else{    
+          notifyError(response.data.message)
+          setToggleButton(!toggleButton)
+          setAadhar("")
+          setName("")
+          setPassword("")
+          setmobile("")
+          setEmail("")
+          setDob("")
+          
+        }
+        
       })
       .catch((error) => {
         console.log(error);
