@@ -13,6 +13,7 @@ import {
 import InputComponent from "../InputComponent";
 import notifySuccess from "../../utils/toastify-services/notifySuccess";
 import notifyError from "../../utils/toastify-services/notifyError";
+import NavBar from "../NavBar";
 
 
 const AdminLogin = () => {
@@ -65,6 +66,7 @@ const AdminLogin = () => {
 
   return (
     <>
+      <NavBar />
       <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid item align="center">
