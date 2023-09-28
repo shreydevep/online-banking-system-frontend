@@ -79,7 +79,7 @@ export const getAllAccountsBalance = async (customerId, setTotalBalance) => {
     const data = await response.json();
     console.log(data);
     setTotalBalance(data);
-    notifySuccess("Balance refreshed successfully")
+    notifySuccess("Balance refreshed successfully");
   } catch (error) {
     console.log(error);
     notifyError(error.response.data.message);
@@ -120,7 +120,7 @@ export const loginCustomer = async (loginObject, navigate) => {
   }
 };
 
-export const withdrawRequest = async (withdrawObject) => { 
+export const withdrawRequest = async (withdrawObject) => {
   try {
     const response = await axios.post(
       `http://localhost:8080/transact`,
@@ -132,4 +132,34 @@ export const withdrawRequest = async (withdrawObject) => {
     console.log(error);
     notifyError(error.response.data.message);
   }
- };
+};
+const formatDate = (dateString) => {
+  const [year, month, day] = dateString.split("-");
+  return `${year}-${month}-${day}`;
+};
+
+export const postAccountStatements = async (
+  selectedAccount,
+  startDate,
+  endDate,
+  setTransactions
+) => {
+  try {
+    const formatDateStart = formatDate(startDate);
+    const formatDateEnd =  formatDate(endDate);
+    console.log(`http://localhost:8080/accountStatement/${selectedAccount}`,
+    {
+      startDate,
+      endDate
+    });
+    
+    const response = await axios.post(
+      `http://localhost:8080/accountStatement/${selectedAccount}`,  { startDate:"2023-09-19", endDate:"2023-09-26"}
+    );
+    console.log(response);
+    setTransactions(response.data);
+  } catch (error) {
+    console.log(error);
+    notifyError(error.response.data.message);
+  }
+};
