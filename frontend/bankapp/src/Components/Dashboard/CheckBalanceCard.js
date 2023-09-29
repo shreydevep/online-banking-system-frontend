@@ -37,14 +37,23 @@ const CheckBalanceCard = () => {
   const [totalBalance, setTotalBalance] = useState(0);
 
   const refreshBalance = () => {
-    getAllAccountsBalance(
-      sessionStorage.getItem("customerId"),
-      setTotalBalance
-    );
+    if (sessionStorage.getItem("customerId") !== null) {
+      getAllAccountsBalance(
+        sessionStorage.getItem("customerId"),
+        setTotalBalance
+      );
+    }
   };
 
   useEffect(() => {
-    refreshBalance();
+    const timerId = setTimeout(() => {
+      refreshBalance();
+    }, 1000);
+
+    // Return a cleanup function to cancel the timeout
+    return () => {
+      clearTimeout(timerId);
+    };
   }, []);
 
   return (
@@ -56,7 +65,7 @@ const CheckBalanceCard = () => {
           style={{ fontSize: "24px", fontWeight: "bold", color: "#007bff" }}
         >
           ${totalBalance}
-          <RefreshIcon onClick={() => refreshBalance()}>
+          <RefreshIcon onClick={refreshBalance}>
             <FontAwesomeIcon icon={faSync} />
           </RefreshIcon>
         </CheckBalanceCardInfo>

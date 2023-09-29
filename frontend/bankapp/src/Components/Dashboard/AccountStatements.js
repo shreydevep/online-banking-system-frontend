@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Card, Form, Table, Button } from "react-bootstrap";
+import { Card, Form, Table, Button, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import {
   getTransactions,
   postAccountStatements,
 } from "../../utils/GetRequests";
+import notifyError from "../../utils/toastify-services/notifyError";
 
 const TransactionHistory = styled(Card)`
   .bg-primary.text-white {
@@ -29,13 +30,20 @@ const ScrollableTableContainer = styled.div`
   overflow-y: auto;
   margin-top: 20px;
 `;
+const FormRow = styled(Row)`
+  display: flex;
+  align-items: flex-end;
+`;
 
 const SubmitButton = styled(Button)`
   background-color: #007bff;
   color: #fff;
-  margin: 10px;
-`;
 
+  @media (max-width: 576px) {
+    margin-top: 20px;
+  }
+  
+`;
 
 const AccountStatements = ({ accounts }) => {
   const [selectedAccount, setSelectedAccount] = useState("");
@@ -57,7 +65,16 @@ const AccountStatements = ({ accounts }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    postAccountStatements(selectedAccount, startDate, endDate, setTransactions);
+    if (selectedAccount !== "" && startDate !== "" && endDate !== "") {
+      postAccountStatements(
+        selectedAccount,
+        startDate,
+        endDate,
+        setTransactions
+      );
+    } else {
+      notifyError("Please fill in all the fields");
+    }
   };
 
   return (
@@ -67,41 +84,52 @@ const AccountStatements = ({ accounts }) => {
       </Card.Header>
       <Card.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="accountSelect">
-            <Form.Label>Select Account:</Form.Label>
-            <Form.Control
-              as="select"
-              value={selectedAccount}
-              onChange={handleChange}
-            >
-              <option value="">Select an account</option>
-              {accounts.map((account, index) => (
-                <option key={index} value={account.accountNo}>
-                  {account.accountNo}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <Form.Group controlId="startDate">
-            <Form.Label>Start Date:</Form.Label>
-            <Form.Control
-              type="date"
-              value={startDate}
-              onChange={handleStartDateChange}
-            />
-          </Form.Group>
-          <Form.Group controlId="endDate">
-            <Form.Label>End Date:</Form.Label>
-            <Form.Control
-              type="date"
-              value={endDate}
-              onChange={handleEndDateChange}
-            />
-          </Form.Group>
-          <SubmitButton variant="primary" type="submit">
-            Submit
-          </SubmitButton>
+          <FormRow>
+            <Col md={3}>
+              <Form.Group controlId="accountSelect">
+                <Form.Label>Select Account:</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={selectedAccount}
+                  onChange={handleChange}
+                >
+                  <option value="">Select an account</option>
+                  {accounts.map((account, index) => (
+                    <option key={index} value={account.accountNo}>
+                      {account.accountNo}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col md={3}>
+              <Form.Group controlId="startDate">
+                <Form.Label>Start Date:</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={startDate}
+                  onChange={handleStartDateChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={3}>
+              <Form.Group controlId="endDate">
+                <Form.Label>End Date:</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={endDate}
+                  onChange={handleEndDateChange}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={3}>
+              <SubmitButton variant="primary" type="submit">
+                Submit
+              </SubmitButton>
+            </Col>
+          </FormRow>
         </Form>
+
         <ScrollableTableContainer>
           <TransactionTable striped bordered hover responsive>
             <thead>

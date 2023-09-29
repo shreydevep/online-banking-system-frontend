@@ -5,9 +5,18 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import MenuComponent from './MenuComponent';
+import styled from "styled-components";
 
+const MenuIcon = styled.div`
+  /* Menu icon styles for mobile screens (max-width: 767px) */
+  @media (max-width: 767px) {
+    display: none; /* Show the menu icon on mobile screens */
+    /* Add your menu icon styling here */
+  }
+`;
 
-export default function Appbar() {
+export default function Appbar({customerDetails}) {
   const navigate = useNavigate();
   const customerId = sessionStorage.getItem("customerId");
   const handleLogout = () => {
@@ -19,7 +28,6 @@ export default function Appbar() {
     <Box sx={{m:2, flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-         
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Wells Fargo
           </Typography>

@@ -5,14 +5,27 @@ import UserDashboard from "./UserDashboard";
 import NavBar from "../NavBar";
 import Appbar from "./Appbar";
 
-
-
 import {
   getAccountDetails,
   getAllUserTransactions,
   getCustomerDetails,
   getTransactions,
 } from "../../utils/GetRequests";
+import styled from "styled-components";
+
+const SidebarContainer = styled.div`
+  /* Sidebar styles for non-mobile screens (min-width: 768px) */
+  @media (min-width: 768px) {
+   
+  }
+
+  /* Sidebar styles for mobile screens (max-width: 767px) */
+  @media (max-width: 767px) {
+    display: none; /* Hide the sidebar by default on mobile screens */
+  }
+`;
+
+
 
 const Layout = () => {
   const [customerDetails, setCustomerDetails] = useState({ account: [] });
@@ -30,12 +43,13 @@ const Layout = () => {
   }, []);
   return (
     <>
-      <Appbar />
-
+      <Appbar/>
       <Container fluid>
         <Row>
           <Col md={3}>
-            <Sidebar customerDetails={customerDetails} />
+            <SidebarContainer>
+              <Sidebar customerDetails={customerDetails} />
+            </SidebarContainer>
           </Col>
           <Col md={9}>
             <UserDashboard

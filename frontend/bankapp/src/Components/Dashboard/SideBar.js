@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Card, Nav, NavItem, NavLink } from "react-bootstrap";
+import { Button, Card, Nav, NavItem, NavLink } from "react-bootstrap";
 import WithdrawalComponent from "./WithdrawalComponent";
 import FundsTransferComponent from "./FundsTransferComponent";
 import UserProfile from "./UserProfile";
@@ -83,11 +83,14 @@ const Sidebar = ({ customerDetails }) => {
   const [showTransactionHistoryModal, setShowTransactionHistoryModal] =
     React.useState(false);
 
+ 
+
   return (
     <StyledSidebar>
       <SidebarNavItem>
         <Card.Title className="font-weight-bold">Dashboard</Card.Title>
       </SidebarNavItem>
+      
       <CheckBalanceCard accounts={customerDetails.account} />
       <WithdrawalComponent
         show={showWithdrawalModal}
@@ -132,9 +135,7 @@ const Sidebar = ({ customerDetails }) => {
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
-        <NavLink >
-          Customer Details
-        </NavLink>
+        <NavLink>Customer Details</NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
         <NavLink href="/account">New Account</NavLink>
