@@ -154,7 +154,7 @@ export const postAccountStatements = async (
     });
     
     const response = await axios.post(
-      `http://localhost:8080/accountStatement/${selectedAccount}`,  { startDate:"2023-09-19", endDate:"2023-09-26"}
+      `http://localhost:8080/accountStatement/${selectedAccount}`,  { startDate:formatDateStart, endDate:formatDateEnd}
     );
     console.log(response);
     setTransactions(response.data);

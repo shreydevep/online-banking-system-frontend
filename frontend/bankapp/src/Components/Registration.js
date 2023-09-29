@@ -13,6 +13,8 @@ import {
 import InputComponent from "./InputComponent";
 import NavBar from "./NavBar";
 import notifyError from "../utils/toastify-services/notifyError";
+import notifySuccess from "../utils/toastify-services/notifySuccess";
+
 function reverseString(inputDate) {
   // Split the input date by '-' to get day, month, and year
   console.log(inputDate);
@@ -86,15 +88,18 @@ const Registration = () => {
     setEmail(event.target.value);
   };
 
-  const submitActionHandler = (event) => {
-    event.preventDefault();
-  
-    // Check for empty fields
-    if (!name || !email || !password || !mobile || !aadhar || !dob) {
+  const handleToggleButton = () =>{
+    if (!name || !email || !password ) {
       notifyError('Please fill in all fields.');
       return;
     }
-  
+
+    // Check if the password length is between 8 and 15 characters
+    if (password.length < 8 || password.length > 15) {
+      notifyError("Password must be between 8 and 15 characters.");
+      return;
+    }
+
     // Validate email format
     const isValidEmail = (email) => {
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -105,6 +110,19 @@ const Registration = () => {
       notifyError('Please enter a valid email address.');
       return;
     }
+
+    setToggleButton(!toggleButton)
+
+  }
+
+  const submitActionHandler = (event) => {
+    event.preventDefault();
+  
+    // Check for empty fields
+    if (!name || !email || !password || !mobile || !aadhar || !dob) {
+      notifyError('Please fill in all fields.');
+      return;
+    }   
   
     // Validate Aadhar number format
     const isValidAadhar = (aadhar) => {
@@ -135,6 +153,25 @@ const Registration = () => {
       notifyError('Invalid date format for DOB. Please use "dd-mm-yyyy".');
       return;
     }
+
+    const isAgeGreaterThan18 = (dateOfBirth) => {
+      const today = new Date();
+      const birthDate = new Date(dateOfBirth);
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+      const dayDifference = today.getDate() - birthDate.getDate();
+    
+      if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+        return age - 1 >= 18;
+      }
+    
+      return age >= 18;
+    }
+
+    if(!isAgeGreaterThan18(dob)){
+        notifyError("Customer's age should be greater than 18")
+        return
+    }
   
     // Continue with the axios POST request
     axios
@@ -147,10 +184,22 @@ const Registration = () => {
         dob: dob // Use the formatted DOB
       })
       .then((response) => {
-        console.log(response);
-        //alert(response.data.message);
-        setDob("");
-        navigate("/login");
+
+        if(response.data.message === 'Customer created successfully!'){
+          notifySuccess(response.data.message + "\n Customer Id: " + response.data.id)
+          navigate("/login");
+        }else{    
+          notifyError(response.data.message)
+          setToggleButton(!toggleButton)
+          setAadhar("")
+          setName("")
+          setPassword("")
+          setmobile("")
+          setEmail("")
+          setDob("")
+          
+        }
+        
       })
       .catch((error) => {
         console.log(error);
@@ -176,6 +225,7 @@ const Registration = () => {
                   _value={name}
                   _placeholder={"Enter Customer Name"}
                   _changeHandler={nameHandler}
+                  requi
                 />
                 <InputComponent
                   _id={"Email"}
@@ -190,6 +240,7 @@ const Registration = () => {
                   _value={password}
                   _placeholder={"Enter Password"}
                   _changeHandler={passwordHandler}
+                  _type={"password"}
                 />
               </Grid>
             </>
@@ -225,11 +276,11 @@ const Registration = () => {
 
           <Grid item xs={12} style={{display: "flex",justifyContent: "center", alignItems:"center" }}>
             {toggleButton ? (
-              <Button color="warning" onClick={() => setToggleButton(!toggleButton)}>
+              <Button color="warning" onClick={handleToggleButton}>
                 Back
               </Button>
             ) : (
-              <Button color="success"  onClick={() => setToggleButton(!toggleButton)}>
+              <Button color="success"  onClick={handleToggleButton}>
                 Next
               </Button>
             )}
