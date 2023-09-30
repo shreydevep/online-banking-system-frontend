@@ -16,7 +16,6 @@ import styled from "styled-components";
 const SidebarContainer = styled.div`
   /* Sidebar styles for non-mobile screens (min-width: 768px) */
   @media (min-width: 768px) {
-   
   }
 
   /* Sidebar styles for mobile screens (max-width: 767px) */
@@ -25,11 +24,10 @@ const SidebarContainer = styled.div`
   }
 `;
 
-
-
-const Layout = ({globalRefresh, setGlobalRefresh}) => {
+const Layout = ({ globalRefresh, setGlobalRefresh }) => {
   const [customerDetails, setCustomerDetails] = useState({ account: [] });
   const [transactions, setTransactions] = useState([]);
+  
   useEffect(() => {
     getCustomerDetails(
       sessionStorage.getItem("customerId"),
@@ -40,15 +38,20 @@ const Layout = ({globalRefresh, setGlobalRefresh}) => {
       setTransactions
     );
     console.log(transactions);
+    console.log("Refreshing");
   }, [globalRefresh]);
   return (
     <>
-      <Appbar/>
+      <Appbar />
       <Container fluid>
         <Row>
           <Col md={3}>
             <SidebarContainer>
-              <Sidebar customerDetails={customerDetails} setGlobalRefresh={setGlobalRefresh} />
+              <Sidebar
+                customerDetails={customerDetails}
+                globalRefresh={globalRefresh}
+                setGlobalRefresh={setGlobalRefresh}
+              />
             </SidebarContainer>
           </Col>
           <Col md={9}>

@@ -73,7 +73,7 @@ const SidebarNavItem = styled(NavItem)`
   }
 `;
 
-const Sidebar = ({ customerDetails,setGlobalRefresh }) => {
+const Sidebar = ({ customerDetails,globalRefresh,setGlobalRefresh }) => {
   const [showWithdrawalModal, setShowWithdrawalModal] = React.useState(false);
   const [showFundsTransferComponent, setShowFundsTransferComponent] =
     React.useState(false);
@@ -96,12 +96,14 @@ const Sidebar = ({ customerDetails,setGlobalRefresh }) => {
         show={showWithdrawalModal}
         onHide={() => setShowWithdrawalModal(!showWithdrawalModal)}
         accounts={customerDetails.account}
+        globalRefresh={globalRefresh}
         setGlobalRefresh={setGlobalRefresh}
       />
       <FundsTransferComponent
         show={showFundsTransferComponent}
         onHide={setShowFundsTransferComponent}
         targetAccounts={customerDetails.account}
+        globalRefresh={globalRefresh}
         setGlobalRefresh={setGlobalRefresh}
       />
       <TransactionHistory
