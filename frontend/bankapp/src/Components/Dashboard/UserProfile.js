@@ -1,41 +1,47 @@
-import React, { useState } from 'react';
-import { Modal, Button, Tab, Tabs } from 'react-bootstrap';
+import React from 'react';
+import { Modal, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
-
-
-
-// Define the styled component for the modal content
 const StyledModalContent = styled.div`
   padding: 20px;
 `;
 
+const StyledDiv = styled.div`
+  margin-bottom: 15px;
+`;
+
 const UserProfile = ({ show, onHide, customerDetails }) => {
   return (
-
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>
         <Modal.Title>User Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <StyledModalContent>
-          <Tabs defaultActiveKey="profile" id="user-profile-tabs">
-            <Tab eventKey="profile" title="Profile">
-              <div>
-                <strong>Name:</strong> {customerDetails.name}
-              </div>
-              <div>
-                <strong>Email:</strong> {customerDetails.email}
-              </div>
-              <div>
-                <strong>Phone:</strong> {customerDetails.mobile}
-              </div>
-              <div>
-                <strong>Aadhar:</strong> {customerDetails.aadhar}
-              </div>
-            </Tab>
-            {/* Add additional tabs for more user information if needed */}
-          </Tabs>
+          <StyledDiv>
+            <strong>Name:</strong> {customerDetails.name}
+          </StyledDiv>
+          <StyledDiv>
+            <strong>Email:</strong> {customerDetails.email}
+          </StyledDiv>
+          <StyledDiv>
+            <strong>Phone:</strong> {customerDetails.mobile}
+          </StyledDiv>
+          <StyledDiv>
+            <strong>Aadhar:</strong> {customerDetails.aadhar}
+          </StyledDiv>
+          <StyledDiv>
+            <strong>Date of Birth:</strong> {customerDetails.dob}
+          </StyledDiv>
+          <StyledDiv>
+            <strong>Address:</strong> {customerDetails.address}
+          </StyledDiv>
+          <StyledDiv>
+            <strong>Fathername:</strong> {customerDetails.fathername}
+          </StyledDiv>
+          <StyledDiv>
+            <strong>Mothername:</strong> {customerDetails.mothername}
+          </StyledDiv>
         </StyledModalContent>
       </Modal.Body>
       <Modal.Footer>
@@ -44,7 +50,6 @@ const UserProfile = ({ show, onHide, customerDetails }) => {
         </Button>
       </Modal.Footer>
     </Modal>
-
   );
 };
 
