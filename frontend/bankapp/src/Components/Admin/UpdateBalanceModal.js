@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import axios from "axios";
+import { updateBalance } from '../../utils/adminRequests.js'
 
 const UpdateBalanceModal = ({ show, onHide, onUpdateBalance }) => {
   const [amount, setAmount] = useState('');
@@ -15,11 +15,12 @@ const UpdateBalanceModal = ({ show, onHide, onUpdateBalance }) => {
   };
 
   const handleSubmit = () => {
-    const updateObject={accno, amount}
 
-    axios
-        .post(`http://localhost:8080/admin/updateBalance`,
-        updateObject);
+    const updateObject={accno, amount};
+    updateBalance(updateObject);
+
+
+
 
     // You can perform validation and update the balance here
     // For this example, we'll just call the provided onUpdateBalance function

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import notifySuccess from "../../utils/toastify-services/notifySuccess";
 import notifyError from "../../utils/toastify-services/notifyError";
+import { getCustomerDetails } from "../../utils/adminRequests";
 
 // Styled component for the outer container
 const Container = styled.div`
@@ -113,18 +114,7 @@ const CustomerDetails = () => {
 
   const handleSearch = () => {
     // Call the searchTransactions function with the customerId
-    axios
-      .get(`http://localhost:8080/customer/${customerId}`)
-      .then((res) => {
-        setCustomerData(res.data);
-        console.log(res.data); // Set customer data when available
-        notifySuccess("Customer details fetched successfully")
-      })
-      .catch((err) => {
-        console.log(err.response.data);
-        notifyError(err.response.data.message)
-        setCustomerData(null); // Clear customer data on error
-      });
+    getCustomerDetails(customerId, setCustomerData);
   };
 
   return (
