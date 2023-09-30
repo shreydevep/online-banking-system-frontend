@@ -15,7 +15,7 @@ const centerButtonStyle = {
   marginTop: "20px", // Add some spacing above the buttons
 };
 
-const FundsTransferComponent = ({ show, onHide, targetAccounts }) => {
+const FundsTransferComponent = ({ show, onHide, targetAccounts,globalRefresh,setGlobalRefresh }) => {
   const [transferAmount, setTransferAmount] = useState("");
   const [targetAccount, setTargetAccount] = useState("");
   const [transferType, setTransferType] = useState("rtgs"); // Default to RTGS
@@ -36,7 +36,7 @@ const FundsTransferComponent = ({ show, onHide, targetAccounts }) => {
       transferData = { ...transferData, transType: "NEFT" };
     }
     console.log(transferData);
-    transferFunds(transferData);
+    transferFunds(transferData,globalRefresh,setGlobalRefresh);
 
     // You can use the 'transferAmount' and 'targetAccount' state values
     // for the transfer amount and target account.
