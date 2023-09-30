@@ -15,7 +15,7 @@ const centerButtonStyle = {
   marginTop: "20px", // Add some spacing above the buttons
 };
 
-const WithdrawalComponent = ({ show, onHide, accounts, setGlobalRefresh }) => {
+const WithdrawalComponent = ({ show, onHide, accounts,globalRefresh, setGlobalRefresh }) => {
   const [withdrawalAmount, setWithdrawalAmount] = useState("");
   const [selfTransferAmount, setSelfTransferAmount] = useState("");
   const [sourceAccount, setSourceAccount] = useState(""); // Manage source account
@@ -32,7 +32,7 @@ const WithdrawalComponent = ({ show, onHide, accounts, setGlobalRefresh }) => {
       amount: withdrawalAmount,
       accFrom: sourceAccount,
       accTo: sourceAccount,
-    });
+    },globalRefresh,setGlobalRefresh);
     onHide();
   };
 
@@ -46,7 +46,7 @@ const WithdrawalComponent = ({ show, onHide, accounts, setGlobalRefresh }) => {
       amount: withdrawalAmount,
       accFrom: sourceAccount,
       accTo: targetAccount,
-    });
+    },globalRefresh,setGlobalRefresh);
     onHide();
   };
 

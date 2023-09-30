@@ -33,7 +33,7 @@ const RefreshIcon = styled.div`
   cursor: pointer;
 `;
 
-const CheckBalanceCard = () => {
+const CheckBalanceCard = ({globalRefresh}) => {
   const [totalBalance, setTotalBalance] = useState(0);
 
   const refreshBalance = () => {
@@ -54,7 +54,7 @@ const CheckBalanceCard = () => {
     return () => {
       clearTimeout(timerId);
     };
-  }, []);
+  }, [globalRefresh]);
 
   return (
     <CheckBalanceCardContainer>

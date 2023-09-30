@@ -13,7 +13,6 @@ export const getAccountDetails = async (accountNumber, setAccountDetails) => {
   } catch (error) {
     console.log(error);
     if (error && error.response && error.response.data) {
-      
       notifyError(error.response.data.message);
     } else notifyError("Server is down");
   }
@@ -30,7 +29,6 @@ export const getCustomerDetails = async (customerId, setCustomerDetails) => {
   } catch (error) {
     console.log(error);
     if (error && error.response && error.response.data) {
-      
       notifyError(error.response.data.message);
     } else notifyError("Server is down");
   }
@@ -47,7 +45,6 @@ export const updatePassword = (otp, customerId, password) => {
     .catch((error) => {
       console.log(error);
       if (error && error.response && error.response.data) {
-      
         notifyError(error.response.data.message);
       } else notifyError("Server is down");
     });
@@ -63,7 +60,6 @@ export const getAllUserTransactions = async (customerId, setTransactions) => {
   } catch (error) {
     console.log(error);
     if (error && error.response && error.response.data) {
-      
       notifyError(error.response.data.message);
     } else notifyError("Server is down");
   }
@@ -79,7 +75,6 @@ export const getTransactions = async (accountNumber, setTransactions) => {
     .catch((error) => {
       console.log(error);
       if (error && error.response && error.response.data) {
-      
         notifyError(error.response.data.message);
       } else notifyError("Server is down");
     });
@@ -98,13 +93,16 @@ export const getAllAccountsBalance = async (customerId, setTotalBalance) => {
   } catch (error) {
     console.log(error);
     if (error && error.response && error.response.data) {
-      
       notifyError(error.response.data.message);
     } else notifyError("Server is down");
   }
 };
 
-export const transferFunds = async (transferFundsObject,globalRefresh,setGlobalRefresh) => {
+export const transferFunds = async (
+  transferFundsObject,
+  globalRefresh,
+  setGlobalRefresh
+) => {
   axios
     .post(`http://localhost:8080/transact`, transferFundsObject)
     .then((response) => {
@@ -114,10 +112,9 @@ export const transferFunds = async (transferFundsObject,globalRefresh,setGlobalR
       setGlobalRefresh(!globalRefresh);
     })
     .catch((error) => {
-      console.log(error.response);
+      console.log(error);
       //alert(error.response.data.message);
       if (error && error.response && error.response.data) {
-      
         notifyError(error.response.data.message);
       } else notifyError("Server is down");
     });
@@ -144,25 +141,28 @@ export const loginCustomer = async (loginObject, navigate) => {
   } catch (error) {
     console.log(error);
     if (error && error.response && error.response.data) {
-      
       notifyError(error.response.data.message);
     } else notifyError("Server is down");
   }
 };
 
-export const withdrawRequest = async (withdrawObject,globalRefresh,setGlobalRefresh) => {
+export const withdrawRequest = async (
+  withdrawObject,
+  globalRefresh,
+  setGlobalRefresh
+) => {
   try {
     const response = await axios.post(
       `http://localhost:8080/transact`,
       withdrawObject
     );
     console.log(response);
-    //notifySuccess(response.data);
+    console.log(setGlobalRefresh)
+    notifySuccess(response.data);
     setGlobalRefresh(!globalRefresh);
   } catch (error) {
     console.log(error);
     if (error && error.response && error.response.data) {
-      
       notifyError(error.response.data.message);
     } else notifyError("Server is down");
   }
@@ -195,7 +195,6 @@ export const postAccountStatements = async (
   } catch (error) {
     console.log(error);
     if (error && error.response && error.response.data) {
-      
       notifyError(error.response.data.message);
     } else notifyError("Server is down");
   }
