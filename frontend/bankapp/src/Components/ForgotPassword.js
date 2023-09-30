@@ -55,7 +55,6 @@ const ForgotPasswordForm = () => {
     updatePassword(otp, customerId, newPassword)
 
     // Simulate sending a password reset request to your backend
-    setMessage('Password reset successful.');
     setIsSubmitted(true);
   };
 

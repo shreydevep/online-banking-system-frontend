@@ -145,9 +145,7 @@ const Sidebar = ({ customerDetails, globalRefresh, setGlobalRefresh }) => {
       <SidebarNavItem>
         <NavLink href="/account">New Account</NavLink>
       </SidebarNavItem>
-      <SidebarNavItem>
-        <NavLink href="#">Account Statement</NavLink>
-      </SidebarNavItem>
+
       <SidebarNavItem>
         <NavLink onClick={() => setShowPasswordChangeModal(true)}>
           Change Password

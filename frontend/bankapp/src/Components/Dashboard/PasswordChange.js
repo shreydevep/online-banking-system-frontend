@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Modal, Button, Form, Tab, Tabs } from 'react-bootstrap';
 import styled from 'styled-components';
 import { updatePassword } from "../../utils/GetRequests.js"
-
+import notifySuccess from "../../utils/toastify-services/notifySuccess";
+import notifyError from "../../utils/toastify-services/notifyError";
 
 // Define the styled component for the modal content
 const StyledModalContent = styled.div`
@@ -30,7 +31,7 @@ const PasswordChange = ({ show, onHide }) => {
     // Check if new password and confirm password match
     const customerId=sessionStorage.getItem("customerId");
     if (formData.newPassword !== formData.confirmPassword) {
-      alert('New password and confirm password do not match');
+      notifyError('New password and confirm password do not match');
       return;
     }
 
@@ -46,7 +47,7 @@ const PasswordChange = ({ show, onHide }) => {
       confirmPassword: '',
     });
 
-    alert('Password changed successfully!');
+
     onHide(); // Close the modal
   };
 
