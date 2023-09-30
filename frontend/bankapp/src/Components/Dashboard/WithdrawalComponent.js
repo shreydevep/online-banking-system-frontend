@@ -15,7 +15,7 @@ const centerButtonStyle = {
   marginTop: "20px", // Add some spacing above the buttons
 };
 
-const WithdrawalComponent = ({ show, onHide, accounts }) => {
+const WithdrawalComponent = ({ show, onHide, accounts, setGlobalRefresh }) => {
   const [withdrawalAmount, setWithdrawalAmount] = useState("");
   const [selfTransferAmount, setSelfTransferAmount] = useState("");
   const [sourceAccount, setSourceAccount] = useState(""); // Manage source account

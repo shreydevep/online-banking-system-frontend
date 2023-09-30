@@ -27,7 +27,7 @@ const SidebarContainer = styled.div`
 
 
 
-const Layout = () => {
+const Layout = ({globalRefresh, setGlobalRefresh}) => {
   const [customerDetails, setCustomerDetails] = useState({ account: [] });
   const [transactions, setTransactions] = useState([]);
   useEffect(() => {
@@ -40,7 +40,7 @@ const Layout = () => {
       setTransactions
     );
     console.log(transactions);
-  }, []);
+  }, [globalRefresh]);
   return (
     <>
       <Appbar/>
@@ -48,7 +48,7 @@ const Layout = () => {
         <Row>
           <Col md={3}>
             <SidebarContainer>
-              <Sidebar customerDetails={customerDetails} />
+              <Sidebar customerDetails={customerDetails} setGlobalRefresh={setGlobalRefresh} />
             </SidebarContainer>
           </Col>
           <Col md={9}>

@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ErrorPage from "./Components/ErrorPage";
 
 function App() {
+  const [globalRefresh, setGlobalRefresh] = React.useState(false);
   return (
     <div>
       <ToastContainer
@@ -38,7 +39,7 @@ function App() {
           <Routes>
             <Route exact path="*" element={<ErrorPage/>}/>
             <Route exact path="/" element={<HomePage />} />
-            <Route exact path="/userdashboard" element={<Layout />} />
+            <Route exact path="/userdashboard" element={<Layout globalRefresh={globalRefresh} setGlobalRefresh={setGlobalRefresh} />} />
 
             <Route exact path="/account" element={<AccountPage />} />
             <Route exact path="/login" element={<LoginPage />} />
