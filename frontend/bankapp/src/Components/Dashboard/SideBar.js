@@ -9,6 +9,7 @@ import TransactionHistory from "./TransactionHistory";
 import CheckBalanceCard from "./CheckBalanceCard";
 import CustomerDetailModal from "./CustomerDetailModal";
 
+
 const StyledSidebar = styled(Card)`
   height: 80vh;
   background: #f7f7f7;

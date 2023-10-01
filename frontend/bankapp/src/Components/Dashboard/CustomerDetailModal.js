@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -27,6 +27,7 @@ const FieldInput = styled(Form.Control)`
 `;
 
 const CustomerDetailModal = ({ show, onHide, customerDetails }) => {
+  
   const [editableName, setEditableName] = useState(customerDetails.name);
   const [editableEmail, setEditableEmail] = useState(customerDetails.email);
   const [editablePassword, setEditablePassword] = useState(customerDetails.password);
@@ -36,6 +37,19 @@ const CustomerDetailModal = ({ show, onHide, customerDetails }) => {
   const [editableAddress, setEditableAddress] = useState(customerDetails.address);
   const [editableFathername, setEditableFathername] = useState(customerDetails.fathername);
   const [editableMothername, setEditableMothername] = useState(customerDetails.mothername);
+  
+  useEffect(() => {
+    setEditableName(customerDetails.name);
+    setEditableEmail(customerDetails.email);
+    setEditablePassword(customerDetails.password);
+    setEditableMobile(customerDetails.mobile);
+    setEditableAadhar(customerDetails.aadhar);
+    setEditableDob(customerDetails.dob);
+    setEditableAddress(customerDetails.address);
+    setEditableFathername(customerDetails.fathername);
+    setEditableMothername(customerDetails.mothername);
+
+  },[customerDetails]);
 
   const handleNameChange = (e) => {
     setEditableName(e.target.value);
