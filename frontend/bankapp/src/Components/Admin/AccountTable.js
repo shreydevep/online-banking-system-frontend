@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
 import { getAccounts } from "../../utils/adminRequests";
@@ -83,14 +83,30 @@ const StatusButton = styled.button`
 const AccountTable = () => {
   const [customerId, setCustomerId] = useState("");
   const [account, setAccount] = useState([]);
-
+  const [toggleStatus, setToggleStatus] = useState(account.disabled);
+  
+  useEffect(() => {
+    setToggleStatus(account.disabled);
+  },[account])
   const handleSearch = () => {
     setAccount([]);
     getAccounts(customerId, setAccount);
   };
+  useEffect(() => {
+    
+    const timerId = setTimeout(() => {
+      if(customerId !== ""){
+        getAccounts(customerId, setAccount);
+      }
+    }, 1000);
 
+    // Return a cleanup function to cancel the timeout
+    return () => {
+      clearTimeout(timerId);
+    };
+  },[toggleStatus])
   const handleStatusButtonClick = (accountNo) => {
-
+  setToggleStatus(!toggleStatus);
   const baseURL = `http://localhost:8080/admin/toggleAccountStatus/${accountNo}`;
       axios
         .post(baseURL)
