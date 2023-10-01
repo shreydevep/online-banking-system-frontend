@@ -7,6 +7,7 @@ import UserProfile from "./UserProfile";
 import PasswordChange from "./PasswordChange";
 import TransactionHistory from "./TransactionHistory";
 import CheckBalanceCard from "./CheckBalanceCard";
+import CustomerDetailModal from "./CustomerDetailModal";
 
 const StyledSidebar = styled(Card)`
   height: 80vh;
@@ -83,6 +84,9 @@ const Sidebar = ({ customerDetails, globalRefresh, setGlobalRefresh }) => {
   const [showTransactionHistoryModal, setShowTransactionHistoryModal] =
     React.useState(false);
 
+  const [showCustomerDetailModal, setShowCustomerDetailModal] =
+    React.useState(false);
+
   return (
     <StyledSidebar>
       <SidebarNavItem>
@@ -123,6 +127,11 @@ const Sidebar = ({ customerDetails, globalRefresh, setGlobalRefresh }) => {
         show={showPasswordChangeModal}
         onHide={() => setShowPasswordChangeModal(!showPasswordChangeModal)}
       />
+      <CustomerDetailModal
+        show={showCustomerDetailModal}
+        onHide={() => setShowCustomerDetailModal(!showCustomerDetailModal)}
+        customerDetails={customerDetails}
+      />
       <ProfileCardLink onClick={() => setShowUserProfileModal(true)}>
         <ProfileCardContainer>
           <ProfileName>{customerDetails.name}</ProfileName>
@@ -140,12 +149,13 @@ const Sidebar = ({ customerDetails, globalRefresh, setGlobalRefresh }) => {
         </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
-        <NavLink>Customer Details</NavLink>
+        <NavLink onClick={() => setShowCustomerDetailModal(true)}>
+          Customer Details
+        </NavLink>
       </SidebarNavItem>
       <SidebarNavItem>
         <NavLink href="/account">New Account</NavLink>
       </SidebarNavItem>
-
       <SidebarNavItem>
         <NavLink onClick={() => setShowPasswordChangeModal(true)}>
           Change Password
