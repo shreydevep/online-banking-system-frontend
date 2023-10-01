@@ -27,7 +27,7 @@ import UpdateBalanceModal from './UpdateBalanceModal';
 
 
 const StyledAppBar = styled(AppBar)`
-  background-color: #333;
+  background-color: #0F053D;
    /* Add margin to the bottom */
 `;
 

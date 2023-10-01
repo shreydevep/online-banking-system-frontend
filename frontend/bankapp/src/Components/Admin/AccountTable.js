@@ -2,19 +2,18 @@ import axios from "axios";
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import styled from "styled-components";
+import { getAccounts } from "../../utils/adminRequests";
 import notifyError from "../../utils/toastify-services/notifyError";
 import notifySuccess from "../../utils/toastify-services/notifySuccess";
 
-// Styled component for the outer container
 const Container = styled.div`
   background-color: #f5f5f5;
   padding: 20px;
-  margin: 20px; /* Add margin to the container */
-  max-height: 400px; /* Add max-height for scrolling */
-  overflow-y: auto; /* Enable vertical scrolling */
+  margin: 20px;
+  max-height: 400px;
+  overflow-y: auto;
 `;
 
-// Styled component for TransactionTable
 const StyledAccountTable = styled(Table)`
   background-color: #fff;
   border: 1px solid #ddd;
@@ -72,7 +71,6 @@ const SearchButton = styled.button`
   }
 `;
 
-// Styled component for the status button
 const StatusButton = styled.button`
   background-color: ${(props) => (props.status ? "red" : "green")};
   color: #fff;
@@ -83,24 +81,12 @@ const StatusButton = styled.button`
 `;
 
 const AccountTable = () => {
-  const [customerId, setCustomerId] = useState(""); // State for customer ID input
-  const [account, setAccount] = useState([]); // State for transactions [
+  const [customerId, setCustomerId] = useState("");
+  const [account, setAccount] = useState([]);
 
   const handleSearch = () => {
-    // Call the searchTransactions function with the customerId
     setAccount([]);
-    if (customerId !== "")
-      axios
-        .get(`http://localhost:8080/customer/${customerId}`)
-        .then((res) => {
-          setAccount(res.data.account);
-          notifySuccess("Account details fetched successfully");
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-          notifyError(err.response.data.message);
-        });
-    else notifyError("Please enter a valid customer ID");
+    getAccounts(customerId, setAccount);
   };
 
   const handleStatusButtonClick = (accountNo) => {
@@ -117,9 +103,7 @@ const AccountTable = () => {
           console.log(error);
         });
 
-    // Handle status button click with corresponding account number
     console.log(`Status button clicked for Account No: ${accountNo}`);
-    // You can perform further actions with the account number here
   };
 
   return (

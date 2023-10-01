@@ -41,7 +41,11 @@ export const updatePassword = (otp, customerId, password) => {
       customerId,
       password,
     })
-    .then((response) => console.log(response))
+    .then((response) => {
+        console.log(response)
+        notifySuccess(response.data)
+        }
+    )
     .catch((error) => {
       console.log(error);
       if (error && error.response && error.response.data) {
