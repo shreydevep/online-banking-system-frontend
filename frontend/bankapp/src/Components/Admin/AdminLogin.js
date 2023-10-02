@@ -53,6 +53,7 @@ const AdminLogin = () => {
       .then((response) => {
         if(response.data === "Login success"){
           notifySuccess(response.data);
+          sessionStorage.setItem("adminId", userId);
           navigate("/admindashboard");
         }else{
           notifyError(response.data)
