@@ -132,6 +132,8 @@ const Sidebar = ({ customerDetails, globalRefresh, setGlobalRefresh }) => {
         show={showCustomerDetailModal}
         onHide={() => setShowCustomerDetailModal(!showCustomerDetailModal)}
         customerDetails={customerDetails}
+        globalRefresh={globalRefresh}
+        setGlobalRefresh={setGlobalRefresh}
       />
       <ProfileCardLink onClick={() => setShowUserProfileModal(true)}>
         <ProfileCardContainer>

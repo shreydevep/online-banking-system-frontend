@@ -11,7 +11,7 @@ import styled from "styled-components";
 const MenuIcon = styled.div`
   /* Menu icon styles for mobile screens (max-width: 767px) */
   @media (max-width: 767px) {
-    display: none; /* Show the menu icon on mobile screens */
+   
     /* Add your menu icon styling here */
   }
 `;

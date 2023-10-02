@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import InputComponent from "./InputComponent";
 import InputComponentAccounts from "./InputComponentAccounts";
+import notifySuccess from "../utils/toastify-services/notifySuccess";
+import notifyError from "../utils/toastify-services/notifyError";
 
 const AccountPage = () => {
   const paperStyle = {
@@ -57,12 +59,15 @@ const AccountPage = () => {
       })
       .then((response) => {
         console.log(response);
-        alert(response.data.message);
+        //alert(response.data.message);
+        
+        notifySuccess(response.data);
 
-        //navigate("/account");
+        navigate("/userdashboard");
       })
       .catch((error) => {
-        alert("error===" + error);
+        //alert("error===" + error);
+        notifyError("Account creation failed");
       });
   };
 

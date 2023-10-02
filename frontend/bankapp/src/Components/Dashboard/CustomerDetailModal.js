@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import styled from 'styled-components';
-import { updateCustomerDetails } from '../../utils/GetRequests';
+import React, { useEffect, useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import { updateCustomerDetails } from "../../utils/GetRequests";
 
 const EditableField = styled.div`
   display: flex;
@@ -27,18 +27,31 @@ const FieldInput = styled(Form.Control)`
   flex-grow: 1;
 `;
 
-const CustomerDetailModal = ({ show, onHide, customerDetails }) => {
-  
+const CustomerDetailModal = ({
+  show,
+  onHide,
+  customerDetails,
+  globalRefresh,
+  setGlobalRefresh,
+}) => {
   const [editableName, setEditableName] = useState(customerDetails.name);
   const [editableEmail, setEditableEmail] = useState(customerDetails.email);
-  const [editablePassword, setEditablePassword] = useState(customerDetails.password);
+  const [editablePassword, setEditablePassword] = useState(
+    customerDetails.password
+  );
   const [editableMobile, setEditableMobile] = useState(customerDetails.mobile);
   const [editableAadhar, setEditableAadhar] = useState(customerDetails.aadhar);
   const [editableDob, setEditableDob] = useState(customerDetails.dob);
-  const [editableAddress, setEditableAddress] = useState(customerDetails.address);
-  const [editableFathername, setEditableFathername] = useState(customerDetails.fathername);
-  const [editableMothername, setEditableMothername] = useState(customerDetails.mothername);
-  
+  const [editableAddress, setEditableAddress] = useState(
+    customerDetails.address
+  );
+  const [editableFathername, setEditableFathername] = useState(
+    customerDetails.fathername
+  );
+  const [editableMothername, setEditableMothername] = useState(
+    customerDetails.mothername
+  );
+
   useEffect(() => {
     setEditableName(customerDetails.name);
     setEditableEmail(customerDetails.email);
@@ -49,8 +62,7 @@ const CustomerDetailModal = ({ show, onHide, customerDetails }) => {
     setEditableAddress(customerDetails.address);
     setEditableFathername(customerDetails.fathername);
     setEditableMothername(customerDetails.mothername);
-
-  },[customerDetails]);
+  }, [customerDetails]);
 
   const handleNameChange = (e) => {
     setEditableName(e.target.value);
@@ -101,10 +113,10 @@ const CustomerDetailModal = ({ show, onHide, customerDetails }) => {
       mothername: editableMothername,
     };
     console.log(data);
-    updateCustomerDetails(data)
+    updateCustomerDetails(data);
+    setGlobalRefresh(!globalRefresh);
     onHide();
-
-  }
+  };
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
