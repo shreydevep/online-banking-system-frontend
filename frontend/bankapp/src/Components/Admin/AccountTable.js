@@ -89,6 +89,15 @@ const AccountTable = () => {
     setToggleStatus(account.disabled);
   },[account])
   const handleSearch = () => {
+    if (!customerId.trim()) {
+        notifyError("Field cannot be empty.");
+        return;
+    }
+
+    if (isNaN(customerId)) {
+        notifyError("Field value must be a number.");
+        return;
+    }
     setAccount([]);
     getAccounts(customerId, setAccount);
   };

@@ -113,6 +113,15 @@ const CustomerDetails = () => {
   const [customerData, setCustomerData] = useState(null);
 
   const handleSearch = () => {
+    if (!customerId.trim()) {
+        notifyError("CustomerID cannot be empty.");
+        return;
+    }
+
+    if (isNaN(customerId)) {
+        notifyError("CustomerID must be a number.");
+        return;
+    }
     // Call the searchTransactions function with the customerId
     getCustomerDetails(customerId, setCustomerData);
   };
