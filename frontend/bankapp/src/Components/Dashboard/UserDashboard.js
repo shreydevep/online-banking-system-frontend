@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import RecentTransactionsCard from "./RecentTransactionsCard"; // Assuming you have a TransactionTable component
+import RecentTransactionsCard from "./RecentTransactionsCard";
 import AccountDetails from "./AccountDetails";
 import TransactionHistoryCard from "./TransactionHistoryCard";
 import AccountStatements from "./AccountStatements";

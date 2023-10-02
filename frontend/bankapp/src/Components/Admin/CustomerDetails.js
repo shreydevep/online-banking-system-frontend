@@ -5,13 +5,13 @@ import notifySuccess from "../../utils/toastify-services/notifySuccess";
 import notifyError from "../../utils/toastify-services/notifyError";
 import { getCustomerDetails } from "../../utils/adminRequests";
 
-// Styled component for the outer container
+
 const Container = styled.div`
   background-color: #f5f5f5;
   padding: 20px;
-  margin: 20px; /* Add margin to the container */
-  max-height: 400px; /* Add max-height for scrolling */
-  overflow-y: auto; /* Enable vertical scrolling */
+  margin: 20px;
+  max-height: 400px;
+  overflow-y: auto;
 `;
 
 const SearchContainer = styled.div`
@@ -56,18 +56,18 @@ const Header = styled.div`
 `;
 
 const CustomerDetailsDisplayContainer = styled.div`
-  background-color: #fff; /* White background */
+  background-color: #fff;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
-  display: flex; /* Use flex layout */
-  flex-wrap: wrap; /* Allow items to wrap to the next row if necessary */
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const FieldColumn = styled.div`
-  flex-basis: 20%; /* Decreased width for the first column */
+  flex-basis: 20%;
   padding: 5px;
-  box-sizing: border-box; /* Include padding in width calculation */
+  box-sizing: border-box;
 `;
 
 const BoldField = styled.span`
@@ -75,9 +75,8 @@ const BoldField = styled.span`
 `;
 
 const CustomerDetailsDisplay = ({ customerData }) => {
-  // This component displays customer details
   if (!customerData) {
-    return null; // Return nothing if customerData is not available
+    return null;
   }
 
   return (
@@ -113,7 +112,6 @@ const CustomerDetails = () => {
   const [customerData, setCustomerData] = useState(null);
 
   const handleSearch = () => {
-    // Call the searchTransactions function with the customerId
     getCustomerDetails(customerId, setCustomerData);
   };
 
@@ -128,8 +126,8 @@ const CustomerDetails = () => {
         />
         <SearchButton onClick={handleSearch}>Search</SearchButton>
       </SearchContainer>
-      <Header>Customer Information</Header> {/* Header added here */}
-      <CustomerDetailsDisplay customerData={customerData} /> {/* Display customer details */}
+      <Header>Customer Information</Header>
+      <CustomerDetailsDisplay customerData={customerData} />
     </Container>
   );
 };

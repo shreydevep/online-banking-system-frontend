@@ -8,7 +8,6 @@ import Registration from "./Components/Registration";
 
 import Layout from "./Components/Dashboard/Layout";
 
-//import UserProfile from "./Components/Dashboard/UserProfile.js"
 import ForgotPassword from "./Components/ForgotPassword";
 
 import AdminLogin from "./Components/Admin/AdminLogin";

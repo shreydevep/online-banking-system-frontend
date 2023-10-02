@@ -5,7 +5,6 @@ import {
   Grid,
   Paper,
   Avatar,
-  TextField,
   Button,
   Typography,
   Link,
@@ -31,8 +30,7 @@ const AdminLogin = () => {
   const navigate = useNavigate();
 
   const userIdChangeHandler = (event) => {
-    //alert(event.target.value);
-    //console.log(regno);
+
     setUserId(event.target.value);
   };
 

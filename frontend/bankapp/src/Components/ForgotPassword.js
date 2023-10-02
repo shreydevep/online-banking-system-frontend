@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+
 import NavBar from "./NavBar"
 import { useNavigate } from 'react-router-dom';
 import { updatePassword } from "../utils/GetRequests.js"
@@ -9,8 +9,7 @@ import {
   Avatar,
   TextField,
   Button,
-  Typography,
-  Link,
+  Typography
 } from '@mui/material';
 
 const ForgotPasswordForm = () => {
@@ -47,14 +46,12 @@ const ForgotPasswordForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Add validation logic here
     if (!validateForm()) {
       return;
     }
 
     updatePassword(otp, customerId, newPassword)
-
-    // Simulate sending a password reset request to your backend
+    navigate("/login");
     setIsSubmitted(true);
   };
 

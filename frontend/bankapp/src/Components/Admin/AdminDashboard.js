@@ -4,21 +4,17 @@ import {
   Toolbar,
   Typography,
   Button,
-  Card,
-  CardContent,
-  Grid,
   Menu,
   MenuItem,
   Tabs,
   Tab,
   Box,
 } from '@mui/material';
-
 import AdminCreateAccount from './AdminCreateAccount';
 import TransactionTable from './TransactionTable';
 import AccountTable from "./AccountTable";
 import CustomerDetails from "./CustomerDetails";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { useNavigate } from 'react-router';
 
@@ -28,41 +24,19 @@ import UpdateBalanceModal from './UpdateBalanceModal';
 
 const StyledAppBar = styled(AppBar)`
   background-color: #0F053D;
-   /* Add margin to the bottom */
+
 `;
 
-const StyledButton = styled(Button)`
-  && {
-    color: white;
-  }
-`;
 
-const CardContainer = styled.div`
-  cursor: pointer;
-  bottom-margin: 5px; /* Add margin to the container */
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
 
-const CardTitle = styled(Typography)`
-  && {
-    font-size: 20px;
-  }
-`;
 
-const CardDescription = styled(Typography)`
-  && {
-    color: #555;
-  }
-`;
 
 const AdminDashboard = () => {
   const [showUpdateBalanceModal, setUpdateBalanceModal] = useState(false);
   const [showAdminCreateAccountModal, setShowAdminCreateAccountModal] = useState(false);
-  const [activeTab, setActiveTab] = useState(0); // State to manage active tab
+  const [activeTab, setActiveTab] = useState(0);
 
-  const [menuAnchorEl, setMenuAnchorEl] = useState(null); // State for the Menu dropdown
+  const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -72,9 +46,6 @@ const AdminDashboard = () => {
     navigate("/");
   };
 
-  const handleCardClick = (cardNumber) => {
-    console.log(`Clicked on Card ${cardNumber}`);
-  };
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
@@ -104,10 +75,10 @@ const AdminDashboard = () => {
               Admin Dashboard
             </Typography>
             <Button color="inherit"
-                    aria-controls="menu-dropdown"
-                    aria-haspopup="true"
-                    onClick={handleMenuOpen}
-                    >
+                     aria-controls="menu-dropdown"
+                     aria-haspopup="true"
+                     onClick={handleMenuOpen}
+                     >
                         Menu
             </Button>
             <Menu
@@ -120,14 +91,14 @@ const AdminDashboard = () => {
                         <MenuItem onClick={() => setShowAdminCreateAccountModal(true)}>Create Account</MenuItem>
                         <MenuItem onClick={() => setUpdateBalanceModal(true)}>Update Balance</MenuItem>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                        {/* Add more MenuItem components for other menu options */}
+
             </Menu>
 
           </Toolbar>
         </StyledAppBar>
 
 
-        {/* Tabs Panel */}
+
         <Tabs value={activeTab} onChange={handleTabChange}>
           <Tab label="Customer" />
           <Tab label="Accounts" />
@@ -137,11 +108,11 @@ const AdminDashboard = () => {
             <CustomerDetails />
         </TabPanel>
         <TabPanel value={activeTab} index={1}>
-          {/* Content for Tab 1 */}
+
           <AccountTable />
         </TabPanel>
         <TabPanel value={activeTab} index={2}>
-          {/* Content for Tab 2 */}
+
           <TransactionTable />
         </TabPanel>
       </div>
@@ -150,7 +121,7 @@ const AdminDashboard = () => {
 
 export default AdminDashboard;
 
-// TabPanel component to display content for each tab
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 

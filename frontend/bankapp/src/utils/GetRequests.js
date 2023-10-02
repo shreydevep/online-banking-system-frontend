@@ -117,7 +117,7 @@ export const transferFunds = async (
     })
     .catch((error) => {
       console.log(error);
-      //alert(error.response.data.message);
+
       if (error && error.response && error.response.data) {
         notifyError(error.response.data.message);
       } else notifyError("Server is down");

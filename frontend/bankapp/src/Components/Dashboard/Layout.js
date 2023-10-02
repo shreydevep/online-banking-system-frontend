@@ -1,26 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import Sidebar from "./SideBar"; // Import your Sidebar component
+import Sidebar from "./SideBar";
 import UserDashboard from "./UserDashboard";
-import NavBar from "../NavBar";
 import Appbar from "./Appbar";
 
 import {
-  getAccountDetails,
   getAllUserTransactions,
   getCustomerDetails,
-  getTransactions,
 } from "../../utils/GetRequests";
 import styled from "styled-components";
 
 const SidebarContainer = styled.div`
-  /* Sidebar styles for non-mobile screens (min-width: 768px) */
   @media (min-width: 768px) {
   }
 
-  /* Sidebar styles for mobile screens (max-width: 767px) */
   @media (max-width: 767px) {
-    display: none; /* Hide the sidebar by default on mobile screens */
+    display: none;
   }
 `;
 

@@ -6,16 +6,15 @@ import notifySuccess from "../../utils/toastify-services/notifySuccess";
 import notifyError from "../../utils/toastify-services/notifyError";
 import { getTransactions } from "../../utils/adminRequests";
 
-// Styled component for the outer container
 const Container = styled.div`
   background-color: #f5f5f5;
   padding: 20px;
-  margin: 20px; /* Add margin to the container */
-  max-height: 400px; /* Add max-height for scrolling */
-  overflow-y: auto; /* Enable vertical scrolling */
+  margin: 20px;
+  max-height: 400px;
+  overflow-y: auto;
 `;
 
-// Styled component for TransactionTable
+
 const StyledTransactionTable = styled(Table)`
   background-color: #fff;
   border: 1px solid #ddd;
@@ -67,8 +66,8 @@ const SearchButton = styled.button`
 `;
 
 const TransactionTable = () => {
-  const [customerId, setCustomerId] = useState(""); // State for customer ID input
-  const [transactions, setTransactions] = useState([]); // State for transactions [
+  const [customerId, setCustomerId] = useState("");
+  const [transactions, setTransactions] = useState([]);
 
   const handleSearch = () => {
     setTransactions([]);

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import {
   Grid,
   Paper,
   Avatar,
-  TextField,
   Button,
   Typography,
   Link,
@@ -52,7 +51,6 @@ const FormComponent = () => {
       return;
     }
 
-    // Check if the password length is between 8 and 15 characters
     if (password.length < 8 || password.length > 15) {
       notifyError("Password must be between 8 and 15 characters.");
       return;

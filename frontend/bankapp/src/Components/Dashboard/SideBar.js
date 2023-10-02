@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Button, Card, Nav, NavItem, NavLink } from "react-bootstrap";
+import { Card, NavItem, NavLink } from "react-bootstrap";
 import WithdrawalComponent from "./WithdrawalComponent";
 import FundsTransferComponent from "./FundsTransferComponent";
 import UserProfile from "./UserProfile";
@@ -28,7 +28,7 @@ const StyledSidebar = styled(Card)`
     text-decoration: none;
     color: #333;
     transition: color 0.3s;
-    font-weight: bold; /* Added this line to make links bold */
+    font-weight: bold;
 
     &:hover {
       color: #007bff;
@@ -45,11 +45,7 @@ const ProfileCardContainer = styled(Card)`
   padding: 20px;
 `;
 
-const ProfileCardTitle = styled.h4`
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
-`;
+
 
 const ProfileCardLink = styled.a`
   text-decoration: none;
@@ -57,13 +53,13 @@ const ProfileCardLink = styled.a`
 `;
 
 const ProfileName = styled.div`
-  font-size: 24px; /* Bigger font size for name */
-  color: #007bff; /* Same color as the balance */
+  font-size: 24px;
+  color: #007bff;
   margin-bottom: 10px;
 `;
 
 const ProfileEmail = styled.div`
-  font-size: 16px; /* Smaller font size for email */
+  font-size: 16px;
   color: #555;
 `;
 

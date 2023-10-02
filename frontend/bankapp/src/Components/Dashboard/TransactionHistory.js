@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import styled from "styled-components";
-import mockAccounts, {
-  mockAccounts2,
-  mockTransactionData,
-} from "../../utils/data";
 import { getTransactions } from "../../utils/GetRequests";
 
 const CustomModal = styled(Modal)`
   .custom-modal-content {
-    width: 1000px; /* Set a fixed width for the modal */
+    width: 1000px;
   }
 `;
 
-// Define styled components for the elements
 const TransactionHistoryContainer = styled.div`
-  max-height: 400px; /* Set the maximum height to enable scrolling */
-  overflow-y: auto; /* Enable vertical scrolling */
+  max-height: 400px;
+  overflow-y: auto;
   margin-top: 20px;
 `;
 

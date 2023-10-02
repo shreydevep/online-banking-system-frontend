@@ -3,44 +3,36 @@ import { Modal, Button, Form, Tab, Tabs } from "react-bootstrap";
 import styled from "styled-components";
 import { transferFunds } from "../../utils/GetRequests";
 
-// Define the styled component for the modal content
 const StyledModalContent = styled.div`
   padding: 20px;
 `;
 
-// Define a custom CSS class for centering the buttons
 const centerButtonStyle = {
   display: "flex",
   justifyContent: "center",
-  marginTop: "20px", // Add some spacing above the buttons
+  marginTop: "20px",
 };
 
 const FundsTransferComponent = ({ show, onHide, targetAccounts,globalRefresh,setGlobalRefresh }) => {
   const [transferAmount, setTransferAmount] = useState("");
   const [targetAccount, setTargetAccount] = useState("");
-  const [transferType, setTransferType] = useState("rtgs"); // Default to RTGS
+  const [transferType, setTransferType] = useState("rtgs");
   const [sourceAccount, setSourceAccount] = useState("");
 
   const handleTransfer = () => {
-    // Handle the transfer logic here based on the selected transfer type
     let transferData = {
       amount: transferAmount,
       accFrom: sourceAccount,
       accTo: targetAccount,
     };
     if (transferType === "rtgs") {
-      // Perform RTGS transfer
       transferData = { ...transferData, transType: "RTGS" };
     } else if (transferType === "neft") {
-      // Perform NEFT transfer
       transferData = { ...transferData, transType: "NEFT" };
     }
     console.log(transferData);
     transferFunds(transferData,globalRefresh,setGlobalRefresh);
 
-    // You can use the 'transferAmount' and 'targetAccount' state values
-    // for the transfer amount and target account.
-    // Don't forget to close the modal when the transfer is complete.
     onHide();
   };
 
@@ -53,7 +45,7 @@ const FundsTransferComponent = ({ show, onHide, targetAccounts,globalRefresh,set
         <StyledModalContent>
           <Tabs
             activeKey={transferType}
-            onSelect={(key) => setTransferType(key)} // Update transfer type
+            onSelect={(key) => setTransferType(key)}
           >
             <Tab eventKey="rtgs" title="RTGS">
               <Form>

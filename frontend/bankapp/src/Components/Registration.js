@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   Grid,
   Paper,
   Avatar,
-  TextField,
   Button,
   Typography,
   Link,
@@ -16,32 +15,22 @@ import notifyError from "../utils/toastify-services/notifyError";
 import notifySuccess from "../utils/toastify-services/notifySuccess";
 
 function reverseString(inputDate) {
-  // Split the input date by '-' to get day, month, and year
   console.log(inputDate);
   const dateParts = inputDate.split('-');
   console.log(dateParts);
-  // Check if the dateParts array has exactly 3 elements
   if (dateParts.length !== 3) {
     return "Invalid date format. Please use 'dd-mm-yyyy'.";
   }
 
-  // Rearrange the date parts to the 'yyyy-mm-dd' format
   const year = dateParts[2];
   const month = dateParts[1];
   const day = dateParts[0];
   console.log(year, month, day);
-  // Create the formatted date string
   const formattedDate = `${year}-${month}-${day}`;
   console.log(formattedDate);
 
   return formattedDate;
 }
-
-
-
-
-
-
 
 const Registration = () => {
   const paperStyle = {
@@ -94,13 +83,11 @@ const Registration = () => {
       return;
     }
 
-    // Check if the password length is between 8 and 15 characters
     if (password.length < 8 || password.length > 15) {
       notifyError("Password must be between 8 and 15 characters.");
       return;
     }
 
-    // Validate email format
     const isValidEmail = (email) => {
       const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       return emailRegex.test(email);
@@ -118,13 +105,11 @@ const Registration = () => {
   const submitActionHandler = (event) => {
     event.preventDefault();
   
-    // Check for empty fields
     if (!name || !email || !password || !mobile || !aadhar || !dob) {
       notifyError('Please fill in all fields.');
       return;
     }   
   
-    // Validate Aadhar number format
     const isValidAadhar = (aadhar) => {
       const aadharRegex = /^\d{12}$/;
       return aadharRegex.test(aadhar);
@@ -135,9 +120,7 @@ const Registration = () => {
       return;
     }
   
-    // Validate mobile number format
     const isValidMobileNumber = (mobileNumber) => {
-      // Define a regular expression for a 10-digit mobile number
       const mobileNumberRegex = /^\d{10}$/;
       return mobileNumberRegex.test(mobileNumber);
     };
@@ -147,8 +130,7 @@ const Registration = () => {
       return;
     }
   
-    // Additional validation for date of birth (DOB)
-  
+
     if (dob === "Invalid date format. Please use 'dd-mm-yyyy'.") {
       notifyError('Invalid date format for DOB. Please use "dd-mm-yyyy".');
       return;
@@ -173,7 +155,6 @@ const Registration = () => {
         return
     }
   
-    // Continue with the axios POST request
     axios
       .post(baseURL, {
         password: password,
@@ -181,7 +162,7 @@ const Registration = () => {
         mobile,
         aadhar,
         email,
-        dob: dob // Use the formatted DOB
+        dob: dob
       })
       .then((response) => {
 
@@ -203,8 +184,7 @@ const Registration = () => {
       })
       .catch((error) => {
         console.log(error);
-        //alert(error.response.data.message);
-        //alert("error===" + error);
+
       });
   };
 

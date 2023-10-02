@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Modal, Button, Form, Tab, Tabs } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 import { updatePassword } from "../../utils/GetRequests.js"
-import notifySuccess from "../../utils/toastify-services/notifySuccess";
 import notifyError from "../../utils/toastify-services/notifyError";
 
-// Define the styled component for the modal content
 const StyledModalContent = styled.div`
   padding: 20px;
 `;
@@ -28,7 +26,6 @@ const PasswordChange = ({ show, onHide }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if new password and confirm password match
     const customerId=sessionStorage.getItem("customerId");
     if (formData.newPassword !== formData.confirmPassword) {
       notifyError('New password and confirm password do not match');
@@ -36,11 +33,7 @@ const PasswordChange = ({ show, onHide }) => {
     }
 
     updatePassword(formData.otp, customerId, formData.newPassword)
-    // Here, you can send a request to your server to change the password
-    // using formData.currentPassword and formData.newPassword
-    // You can also add additional validation and error handling as needed
 
-    // Clear the form after submission
     setFormData({
       otp: '',
       newPassword: '',
@@ -48,7 +41,7 @@ const PasswordChange = ({ show, onHide }) => {
     });
 
 
-    onHide(); // Close the modal
+    onHide();
   };
 
   return (

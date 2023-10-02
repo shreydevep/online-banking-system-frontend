@@ -28,21 +28,12 @@ const AccountPage = () => {
   const navigate = useNavigate();
 
   const [accountType, setAccountType] = useState("");
-  //const [openingDate, setOpeningDate] = useState("");
-  //const [ifsc, setIfsc] = useState("");
+
   const [branch, setBranch] = useState("");
 
   const accountTypeHandler = (event) => {
     setAccountType(event.target.value);
   };
-
- /* const openingDateHandler = (event) => {
-    setOpeningDate(event.target.value);
-  };
-
-  const ifscHandler = (event) => {
-    setIfsc(event.target.value);
-  };*/
 
   const branchHandler = (event) => {
     setBranch(event.target.value);
@@ -59,7 +50,6 @@ const AccountPage = () => {
         console.log(response);
         alert(response.data.message);
 
-        //navigate("/account");
       })
       .catch((error) => {
         alert("error===" + error);

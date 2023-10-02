@@ -12,8 +12,6 @@ const TransactionHistory = styled(Card)`
   }
 `;
 
-
-
 const TransactionTable = styled(Table)`
   td.success {
     color: green;

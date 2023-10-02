@@ -4,7 +4,6 @@ import { Card } from "react-bootstrap";
 import { getAllAccountsBalance } from "../../utils/GetRequests";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
-import notifySuccess from "../../utils/toastify-services/notifySuccess";
 
 const CheckBalanceCardContainer = styled(Card)`
   background-color: #f9f9f9;
@@ -50,7 +49,6 @@ const CheckBalanceCard = ({globalRefresh}) => {
       refreshBalance();
     }, 1000);
 
-    // Return a cleanup function to cancel the timeout
     return () => {
       clearTimeout(timerId);
     };

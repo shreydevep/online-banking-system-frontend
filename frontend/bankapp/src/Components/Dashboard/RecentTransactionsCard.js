@@ -11,16 +11,16 @@ const RecentTransactionsCardComp = styled(Card)`
 `;
 
 const ScrollableTableContainer = styled.div`
-  max-height: 62vh; /* Adjust the height as needed */
+  max-height: 62vh;
   overflow-y: auto;
 `;
 
 const TransactionTable = styled(Table)`
   td.success {
-    color: green; /* Default font color for success */
+    color: green;
   }
   
-  /* Add style for fail (red) status cells */
+
   td.fail {
     color: red;
   }
@@ -52,7 +52,6 @@ const RecentTransactionsCard = ({ transactions }) => {
                   <td>{transaction.transType}</td>
                   <td>{transaction.transactionId}</td>
                   <td>{transaction.accTo}</td>
-                  {/* Add class "fail" for red font color on fail status */}
                   <td className={transaction.status === 'SUCCESS' ? 'success' : 'fail'}>
                     {transaction.status}
                   </td>

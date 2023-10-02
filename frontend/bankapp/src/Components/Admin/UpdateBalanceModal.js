@@ -19,14 +19,6 @@ const UpdateBalanceModal = ({ show, onHide, onUpdateBalance }) => {
     const updateObject={accno, amount};
     updateBalance(updateObject);
 
-
-
-
-    // You can perform validation and update the balance here
-    // For this example, we'll just call the provided onUpdateBalance function
-
-
-    // Close the modal
     onHide();
   };
 
