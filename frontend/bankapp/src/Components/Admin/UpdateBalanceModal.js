@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
-import { updateBalance } from '../../utils/adminRequests.js'
+import React, { useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import { updateBalance } from "../../utils/adminRequests.js";
 import notifySuccess from "../../utils/toastify-services/notifySuccess";
 import notifyError from "../../utils/toastify-services/notifyError";
 
 const UpdateBalanceModal = ({ show, onHide, onUpdateBalance }) => {
-  const [amount, setAmount] = useState('');
-  const [accno, setAccno] = useState('');
+  const [amount, setAmount] = useState("");
+  const [accno, setAccno] = useState("");
 
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
@@ -17,27 +17,18 @@ const UpdateBalanceModal = ({ show, onHide, onUpdateBalance }) => {
   };
 
   const handleSubmit = () => {
-
     if (!/^\d{1,12}$/.test(accno)) {
-        notifyError('Invalid account number');
-        return;
+      notifyError("Invalid account number");
+      return;
     }
     if (!/^\d{1,12}$/.test(amount)) {
-        notifyError('Invalid amount');
-        return;
+      notifyError("Invalid amount");
+      return;
     }
 
-    const updateObject={accno, amount};
+    const updateObject = { accno, amount };
     updateBalance(updateObject);
 
-
-
-
-    // You can perform validation and update the balance here
-    // For this example, we'll just call the provided onUpdateBalance function
-
-
-    // Close the modal
     onHide();
   };
 

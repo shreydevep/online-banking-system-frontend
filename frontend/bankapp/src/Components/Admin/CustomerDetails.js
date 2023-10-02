@@ -75,23 +75,40 @@ const BoldField = styled.span`
 `;
 
 const CustomerDetailsDisplay = ({ customerData }) => {
-  // This component displays customer details
   if (!customerData) {
-    return null; // Return nothing if customerData is not available
+    return null;
   }
 
   return (
     <CustomerDetailsDisplayContainer>
       <FieldColumn>
-        <p><BoldField>Customer ID:</BoldField></p>
-        <p><BoldField>Name:</BoldField></p>
-        <p><BoldField>Date of Birth:</BoldField></p>
-        <p><BoldField>Aadhar Number:</BoldField></p>
-        <p><BoldField>Mobile:</BoldField></p>
-        <p><BoldField>Email:</BoldField></p>
-        <p><BoldField>Address:</BoldField></p>
-        <p><BoldField>Father Name:</BoldField></p>
-        <p><BoldField>Mother Name:</BoldField></p>
+        <p>
+          <BoldField>Customer ID:</BoldField>
+        </p>
+        <p>
+          <BoldField>Name:</BoldField>
+        </p>
+        <p>
+          <BoldField>Date of Birth:</BoldField>
+        </p>
+        <p>
+          <BoldField>Aadhar Number:</BoldField>
+        </p>
+        <p>
+          <BoldField>Mobile:</BoldField>
+        </p>
+        <p>
+          <BoldField>Email:</BoldField>
+        </p>
+        <p>
+          <BoldField>Address:</BoldField>
+        </p>
+        <p>
+          <BoldField>Father Name:</BoldField>
+        </p>
+        <p>
+          <BoldField>Mother Name:</BoldField>
+        </p>
       </FieldColumn>
       <FieldColumn>
         <p>{customerData.customerId}</p>
@@ -114,15 +131,15 @@ const CustomerDetails = () => {
 
   const handleSearch = () => {
     if (!customerId.trim()) {
-        notifyError("CustomerID cannot be empty.");
-        return;
+      notifyError("CustomerID cannot be empty.");
+      return;
     }
 
     if (isNaN(customerId)) {
-        notifyError("CustomerID must be a number.");
-        return;
+      notifyError("CustomerID must be a number.");
+      return;
     }
-    // Call the searchTransactions function with the customerId
+
     getCustomerDetails(customerId, setCustomerData);
   };
 
@@ -137,8 +154,8 @@ const CustomerDetails = () => {
         />
         <SearchButton onClick={handleSearch}>Search</SearchButton>
       </SearchContainer>
-      <Header>Customer Information</Header> {/* Header added here */}
-      <CustomerDetailsDisplay customerData={customerData} /> {/* Display customer details */}
+      <Header>Customer Information</Header>
+      <CustomerDetailsDisplay customerData={customerData} />{" "}
     </Container>
   );
 };

@@ -50,7 +50,6 @@ const CheckBalanceCard = ({globalRefresh}) => {
       refreshBalance();
     }, 1000);
 
-    // Return a cleanup function to cancel the timeout
     return () => {
       clearTimeout(timerId);
     };

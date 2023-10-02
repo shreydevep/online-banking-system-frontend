@@ -15,14 +15,19 @@ const centerButtonStyle = {
   marginTop: "20px", // Add some spacing above the buttons
 };
 
-const FundsTransferComponent = ({ show, onHide, targetAccounts,globalRefresh,setGlobalRefresh }) => {
+const FundsTransferComponent = ({
+  show,
+  onHide,
+  targetAccounts,
+  globalRefresh,
+  setGlobalRefresh,
+}) => {
   const [transferAmount, setTransferAmount] = useState("");
   const [targetAccount, setTargetAccount] = useState("");
   const [transferType, setTransferType] = useState("rtgs"); // Default to RTGS
   const [sourceAccount, setSourceAccount] = useState("");
 
   const handleTransfer = () => {
-    // Handle the transfer logic here based on the selected transfer type
     let transferData = {
       amount: transferAmount,
       accFrom: sourceAccount,
@@ -36,11 +41,8 @@ const FundsTransferComponent = ({ show, onHide, targetAccounts,globalRefresh,set
       transferData = { ...transferData, transType: "NEFT" };
     }
     console.log(transferData);
-    transferFunds(transferData,globalRefresh,setGlobalRefresh);
+    transferFunds(transferData, globalRefresh, setGlobalRefresh);
 
-    // You can use the 'transferAmount' and 'targetAccount' state values
-    // for the transfer amount and target account.
-    // Don't forget to close the modal when the transfer is complete.
     onHide();
   };
 

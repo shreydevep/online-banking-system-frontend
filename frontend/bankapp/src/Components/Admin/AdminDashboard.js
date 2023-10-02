@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -12,23 +12,21 @@ import {
   Tabs,
   Tab,
   Box,
-} from '@mui/material';
+} from "@mui/material";
 
-import AdminCreateAccount from './AdminCreateAccount';
-import TransactionTable from './TransactionTable';
+import AdminCreateAccount from "./AdminCreateAccount";
+import TransactionTable from "./TransactionTable";
 import AccountTable from "./AccountTable";
 import CustomerDetails from "./CustomerDetails";
-import styled, { css } from 'styled-components';
+import styled, { css } from "styled-components";
 
-import { useNavigate } from 'react-router';
+import { useNavigate } from "react-router";
 
-import UpdateBalanceModal from './UpdateBalanceModal';
-
-
+import UpdateBalanceModal from "./UpdateBalanceModal";
 
 const StyledAppBar = styled(AppBar)`
-  background-color: #0F053D;
-   /* Add margin to the bottom */
+  background-color: #0f053d;
+  /* Add margin to the bottom */
 `;
 
 const StyledButton = styled(Button)`
@@ -58,16 +56,16 @@ const CardDescription = styled(Typography)`
 `;
 
 const AdminDashboard = () => {
-
   const [showUpdateBalanceModal, setUpdateBalanceModal] = useState(false);
-  const [showAdminCreateAccountModal, setShowAdminCreateAccountModal] = useState(false);
+  const [showAdminCreateAccountModal, setShowAdminCreateAccountModal] =
+    useState(false);
   const [activeTab, setActiveTab] = useState(0); // State to manage active tab
 
   const [menuAnchorEl, setMenuAnchorEl] = useState(null); // State for the Menu dropdown
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    console.log('Logged out');
+    console.log("Logged out");
     sessionStorage.clear();
 
     navigate("/");
@@ -90,84 +88,79 @@ const AdminDashboard = () => {
   };
 
   return (
+    <div>
+      <AdminCreateAccount
+        show={showAdminCreateAccountModal}
+        onHide={() => setShowAdminCreateAccountModal(false)}
+      />
+      <UpdateBalanceModal
+        show={showUpdateBalanceModal}
+        onHide={() => setUpdateBalanceModal(false)}
+      />
+      <StyledAppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Admin Dashboard
+          </Typography>
+          <Button
+            color="inherit"
+            aria-controls="menu-dropdown"
+            aria-haspopup="true"
+            onClick={handleMenuOpen}
+          >
+            Menu
+          </Button>
+          <Menu
+            id="menu-dropdown"
+            anchorEl={menuAnchorEl}
+            keepMounted
+            open={Boolean(menuAnchorEl)}
+            onClose={handleMenuClose}
+          >
+            <MenuItem onClick={() => setShowAdminCreateAccountModal(true)}>
+              Create Account
+            </MenuItem>
+            <MenuItem onClick={() => setUpdateBalanceModal(true)}>
+              Update Balance
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+          </Menu>
+        </Toolbar>
+      </StyledAppBar>
 
-      <div>
-        <AdminCreateAccount
-            show={showAdminCreateAccountModal}
-            onHide={() => setShowAdminCreateAccountModal(false)}
-        />
-        <UpdateBalanceModal
-            show={showUpdateBalanceModal}
-            onHide={() => setUpdateBalanceModal(false)}
-        />
-        <StyledAppBar position="static">
-          <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Admin Dashboard
-            </Typography>
-            <Button color="inherit"
-                    aria-controls="menu-dropdown"
-                    aria-haspopup="true"
-                    onClick={handleMenuOpen}
-                    >
-                        Menu
-            </Button>
-            <Menu
-                    id="menu-dropdown"
-                    anchorEl={menuAnchorEl}
-                    keepMounted
-                    open={Boolean(menuAnchorEl)}
-                    onClose={handleMenuClose}
-                    >
-                        <MenuItem onClick={() => setShowAdminCreateAccountModal(true)}>Create Account</MenuItem>
-                        <MenuItem onClick={() => setUpdateBalanceModal(true)}>Update Balance</MenuItem>
-                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                        {/* Add more MenuItem components for other menu options */}
-            </Menu>
-
-          </Toolbar>
-        </StyledAppBar>
-
-
-        {/* Tabs Panel */}
-        <Tabs value={activeTab} onChange={handleTabChange}>
-          <Tab label="Customer" />
-          <Tab label="Accounts" />
-          <Tab label="Transactions" />
-        </Tabs>
-        <TabPanel value={activeTab} index={0}>
-            <CustomerDetails />
-        </TabPanel>
-        <TabPanel value={activeTab} index={1}>
-          {/* Content for Tab 1 */}
-          <AccountTable />
-        </TabPanel>
-        <TabPanel value={activeTab} index={2}>
-          {/* Content for Tab 2 */}
-          <TransactionTable />
-        </TabPanel>
-      </div>
+      {/* Tabs Panel */}
+      <Tabs value={activeTab} onChange={handleTabChange}>
+        <Tab label="Customer" />
+        <Tab label="Accounts" />
+        <Tab label="Transactions" />
+      </Tabs>
+      <TabPanel value={activeTab} index={0}>
+        <CustomerDetails />
+      </TabPanel>
+      <TabPanel value={activeTab} index={1}>
+        <AccountTable />
+      </TabPanel>
+      <TabPanel value={activeTab} index={2}>
+        <TransactionTable />
+      </TabPanel>
+    </div>
   );
 };
 
 export default AdminDashboard;
 
-// TabPanel component to display content for each tab
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
   return (
-      <div
-          role="tabpanel"
-          hidden={value !== index}
-          id={`tabpanel-${index}`}
-          {...other}
-      >
-        {value === index && (
-            <Box p={3}>
-              {children}
-            </Box>
-        )}
-      </div>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`tabpanel-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </div>
   );
 }

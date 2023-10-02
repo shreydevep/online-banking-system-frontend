@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form, Tab, Tabs } from 'react-bootstrap';
-import styled from 'styled-components';
-import { updatePassword } from "../../utils/GetRequests.js"
+import React, { useState } from "react";
+import { Modal, Button, Form, Tab, Tabs } from "react-bootstrap";
+import styled from "styled-components";
+import { updatePassword } from "../../utils/GetRequests.js";
 import notifySuccess from "../../utils/toastify-services/notifySuccess";
 import notifyError from "../../utils/toastify-services/notifyError";
 
@@ -12,9 +12,9 @@ const StyledModalContent = styled.div`
 
 const PasswordChange = ({ show, onHide }) => {
   const [formData, setFormData] = useState({
-    otp: '101010',
-    newPassword: '',
-    confirmPassword: '',
+    otp: "101010",
+    newPassword: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -29,26 +29,21 @@ const PasswordChange = ({ show, onHide }) => {
     e.preventDefault();
 
     // Check if new password and confirm password match
-    const customerId=sessionStorage.getItem("customerId");
+    const customerId = sessionStorage.getItem("customerId");
     if (formData.newPassword !== formData.confirmPassword) {
-      notifyError('New password and confirm password do not match');
+      notifyError("New password and confirm password do not match");
       return;
     }
 
-    updatePassword(formData.otp, customerId, formData.newPassword)
-    // Here, you can send a request to your server to change the password
-    // using formData.currentPassword and formData.newPassword
-    // You can also add additional validation and error handling as needed
+    updatePassword(formData.otp, customerId, formData.newPassword);
 
-    // Clear the form after submission
     setFormData({
-      otp: '',
-      newPassword: '',
-      confirmPassword: '',
+      otp: "",
+      newPassword: "",
+      confirmPassword: "",
     });
 
-
-    onHide(); // Close the modal
+    onHide();
   };
 
   return (
@@ -89,7 +84,7 @@ const PasswordChange = ({ show, onHide }) => {
                 required
               />
             </Form.Group>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <Button variant="primary" type="submit">
                 Change Password
               </Button>
@@ -107,4 +102,3 @@ const PasswordChange = ({ show, onHide }) => {
 };
 
 export default PasswordChange;
-

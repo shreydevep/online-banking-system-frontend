@@ -30,21 +30,11 @@ const AccountPage = () => {
   const navigate = useNavigate();
 
   const [accountType, setAccountType] = useState("");
-  //const [openingDate, setOpeningDate] = useState("");
-  //const [ifsc, setIfsc] = useState("");
   const [branch, setBranch] = useState("");
 
   const accountTypeHandler = (event) => {
     setAccountType(event.target.value);
   };
-
- /* const openingDateHandler = (event) => {
-    setOpeningDate(event.target.value);
-  };
-
-  const ifscHandler = (event) => {
-    setIfsc(event.target.value);
-  };*/
 
   const branchHandler = (event) => {
     setBranch(event.target.value);
@@ -60,7 +50,7 @@ const AccountPage = () => {
       .then((response) => {
         console.log(response);
         //alert(response.data.message);
-        
+
         notifySuccess(response.data);
 
         navigate("/userdashboard");
@@ -84,9 +74,8 @@ const AccountPage = () => {
             _value={accountType}
             _changeHandler={accountTypeHandler}
           />
-         
         </Grid>
-        
+
         <Grid item xs={12}>
           <InputComponent
             _id={"Branch"}
@@ -95,8 +84,6 @@ const AccountPage = () => {
             _changeHandler={branchHandler}
           />
         </Grid>
-
-       
 
         <Button
           type="submit"

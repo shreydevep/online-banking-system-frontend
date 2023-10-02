@@ -16,11 +16,8 @@ import notifyError from "../utils/toastify-services/notifyError";
 import notifySuccess from "../utils/toastify-services/notifySuccess";
 
 function reverseString(inputDate) {
-  // Split the input date by '-' to get day, month, and year
-  console.log(inputDate);
   const dateParts = inputDate.split('-');
-  console.log(dateParts);
-  // Check if the dateParts array has exactly 3 elements
+  
   if (dateParts.length !== 3) {
     return "Invalid date format. Please use 'dd-mm-yyyy'.";
   }
