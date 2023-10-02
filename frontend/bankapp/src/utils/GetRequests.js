@@ -203,3 +203,17 @@ export const postAccountStatements = async (
     } else notifyError("Server is down");
   }
 };
+
+export const updateCustomerDetails = async (customerObject) => {
+  try {
+    const response = await axios.put(
+      `http://localhost:8080/changeDetails`,
+      customerObject
+    );
+    console.log(response);
+    notifySuccess(response.data);
+  } catch (error) {
+    console.log(error);
+    notifyError(error.response.data.message);
+  }
+}

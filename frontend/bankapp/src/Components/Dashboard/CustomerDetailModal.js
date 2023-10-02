@@ -3,6 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import { updateCustomerDetails } from '../../utils/GetRequests';
 
 const EditableField = styled.div`
   display: flex;
@@ -86,7 +87,24 @@ const CustomerDetailModal = ({ show, onHide, customerDetails }) => {
   const handleMothernameChange = (e) => {
     setEditableMothername(e.target.value);
   };
+  const handleSubmitButton = () => {
+    const data = {
+      customerId: customerDetails.customerId,
+      name: editableName,
+      email: editableEmail,
+      password: editablePassword,
+      mobile: editableMobile,
+      aadhar: editableAadhar,
+      dob: editableDob,
+      address: editableAddress,
+      fathername: editableFathername,
+      mothername: editableMothername,
+    };
+    console.log(data);
+    updateCustomerDetails(data)
+    onHide();
 
+  }
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Header closeButton>
@@ -188,7 +206,7 @@ const CustomerDetailModal = ({ show, onHide, customerDetails }) => {
         <Button variant="secondary" onClick={onHide}>
           Close
         </Button>
-        <Button variant="primary" onClick={() => {}}>
+        <Button variant="primary" onClick={handleSubmitButton}>
           Save Changes
         </Button>
       </Modal.Footer>
