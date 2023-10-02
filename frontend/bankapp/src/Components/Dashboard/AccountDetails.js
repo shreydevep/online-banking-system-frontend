@@ -5,7 +5,6 @@ import styled from "styled-components";
 import AccountDetailsModal from "./AccountDetailsModal";
 import { mockAccountData } from "../../utils/data";
 
-// Styled component for AccountDetailsCard
 const StyledAccountDetailsCard = styled(Card)`
   .bg-primary.text-white {
     border-bottom: 0;
@@ -38,7 +37,7 @@ const AccountTable = styled(Table)`
 `;
 
 const AccountDetails = ({ accounts }) => {
-  // Assuming 'accounts' is an array of account objects, each containing account details.
+  
   const [selectedAccount, setSelectedAccount] = useState("");
   const [showAccountDetails, setShowAccountDetails] = useState(false);
   const handleToggle = () => {

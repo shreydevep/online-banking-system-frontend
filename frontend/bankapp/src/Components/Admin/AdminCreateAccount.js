@@ -1,21 +1,19 @@
-import React, { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
-import {useNavigate} from 'react-router-dom';
-
+import React, { useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const AdminCreateAccount = ({ show, onHide }) => {
-  const [customerId, setCustomerId] = useState('');
+  const [customerId, setCustomerId] = useState("");
 
   const handleInputChange = (e) => {
     setCustomerId(e.target.value);
   };
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     sessionStorage.setItem("customerId", customerId);
 
-    // Handle form submission here, e.g., send the customer ID to your server or perform any other action.
-    console.log('Customer ID:', customerId);
+    console.log("Customer ID:", customerId);
     navigate("/account");
 
     // Close the modal

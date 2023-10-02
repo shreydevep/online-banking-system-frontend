@@ -3,19 +3,23 @@ import { Modal, Button, Form, Tab, Tabs } from "react-bootstrap";
 import styled from "styled-components";
 import { withdrawRequest } from "../../utils/GetRequests";
 
-// Define the styled component for the modal content
 const StyledModalContent = styled.div`
   padding: 20px;
 `;
 
-// Define a custom CSS class for centering the buttons
 const centerButtonStyle = {
   display: "flex",
   justifyContent: "center",
-  marginTop: "20px", // Add some spacing above the buttons
+  marginTop: "20px",
 };
 
-const WithdrawalComponent = ({ show, onHide, accounts,globalRefresh, setGlobalRefresh }) => {
+const WithdrawalComponent = ({
+  show,
+  onHide,
+  accounts,
+  globalRefresh,
+  setGlobalRefresh,
+}) => {
   const [withdrawalAmount, setWithdrawalAmount] = useState("");
   const [selfTransferAmount, setSelfTransferAmount] = useState("");
   const [sourceAccount, setSourceAccount] = useState(""); // Manage source account
@@ -23,30 +27,30 @@ const WithdrawalComponent = ({ show, onHide, accounts,globalRefresh, setGlobalRe
   const [activeTab, setActiveTab] = useState("withdrawal"); // Manage active tab
 
   const handleWithdraw = () => {
-    // Handle the withdrawal logic here
-    // You can use the 'withdrawalAmount' and 'withdrawalBankAccount' state values
-    // to send the withdrawal request to your backend.
-    // Don't forget to close the modal when the withdrawal is complete.
-    withdrawRequest({
-      transType: "WITHDRAW",
-      amount: withdrawalAmount,
-      accFrom: sourceAccount,
-      accTo: sourceAccount,
-    },globalRefresh,setGlobalRefresh);
+    withdrawRequest(
+      {
+        transType: "WITHDRAW",
+        amount: withdrawalAmount,
+        accFrom: sourceAccount,
+        accTo: sourceAccount,
+      },
+      globalRefresh,
+      setGlobalRefresh
+    );
     onHide();
   };
 
   const handleSelfTransfer = () => {
-    // Handle self-transfer logic here
-    // You can use the 'selfTransferAmount' and 'selfTransferAccount' state values
-    // for the transfer amount and target account.
-    // Don't forget to close the modal when the transfer is complete.
-    withdrawRequest({
-      transType: "SELF",
-      amount: withdrawalAmount,
-      accFrom: sourceAccount,
-      accTo: targetAccount,
-    },globalRefresh,setGlobalRefresh);
+    withdrawRequest(
+      {
+        transType: "SELF",
+        amount: withdrawalAmount,
+        accFrom: sourceAccount,
+        accTo: targetAccount,
+      },
+      globalRefresh,
+      setGlobalRefresh
+    );
     onHide();
   };
 

@@ -3,7 +3,6 @@ import { Modal, Button } from "react-bootstrap";
 import styled from "styled-components";
 import { getAccountDetails } from "../../utils/GetRequests";
 
-// Define the styled component for the modal content
 const StyledModalContent = styled.div`
   padding: 20px;
 `;
